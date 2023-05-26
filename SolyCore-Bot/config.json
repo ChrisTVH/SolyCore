@@ -1,0 +1,134 @@
+module.exports = {
+    "OWNER_IDS": [], // ID de los propietarios del bot
+    "SUPPORT_SERVER": "", // El servidor de soporte del bot
+    "PREFIX_COMMANDS": {
+        "DEFAULT_PREFIX": "!", // El prefijo por defecto del bot
+        "ENABLED": true // Habilita/Deshabilita los comandos por prefijo
+    },
+    "INTERACTIONS": {
+        "CONTEXT": false, // Los contextos deben estar habilitados
+        "GLOBAL": false, // ¿Deben registrarse globalmente las interacciones?
+        "SLASH": false, // En caso de que se activen las interacciones
+        "TEST_GUILD_ID": "xxxxxxxxxxx" // Guild ID donde se deben registrar las interacciones. [** Pruebe sus comandos aquí primero **]
+    },
+    "EMBED_COLORS": {
+        "BOT_EMBED": "#068ADD",
+        "ERROR": "#D61A3C",
+        "SUCCESS": "#00A56A",
+        "TRANSPARENT": "#36393F",
+        "WARNING": "#F7E919"
+    },
+    "CACHE_SIZE": {
+        "GUILDS": 100,
+        "MEMBERS": 10000,
+        "USERS": 10000
+    },
+    "MESSAGES": {
+        "API_ERROR": "¡Error de back-end inesperado! Vuelva a intentarlo más tarde o póngase en contacto con el servidor de asistencia"
+    },
+
+    // PLUGINS
+
+    "AUTOMOD": {
+        "DM_EMBED": "#36393F",
+        "ENABLED": false,
+        "LOG_EMBED": "#36393F"
+    },
+
+    "DASHBOARD": {
+        "baseURL": "http://localhost:8080", // url base
+        "enabled": false, // habilitar o deshabilitar el dashboard
+        "failureURL": "http://localhost:8080", // fallo redireccionamiento url
+        "port": "8080" // puerto para ejecutar el bot
+    },
+
+    "ECONOMY": {
+        "CURRENCY": "₪",
+        "DAILY_COINS": 100, // monedas a recibir por orden diaria
+        "ENABLED": false,
+        "MAX_BEG_AMOUNT": 2500, // monedas máximas a recibir cuando se utiliza el comando beg
+        "MIN_BEG_AMOUNT": 100 // monedas mínimas a recibir cuando se utiliza el comando beg
+    },
+
+    "MUSIC": {
+        "DEFAULT_SOURCE": "SC", // YT = Youtube, YTM = Youtube Music, SC = SoundCloud
+        "ENABLED": false,
+        "IDLE_TIME": 60, // Tiempo en segundos antes de que el bot se desconecte de un canal de voz inactivo
+        // Añade aquí cualquier número de nodos lavalink
+        // Consulte https://github.com/freyacodes/Lavalink para alojar su propio servidor lavalink
+        "LAVALINK_NODES": [
+            {
+                "host": "localhost",
+                "port": 2333,
+                "password": "password",
+                "id": "Nodo Local",
+                "secure": false
+            }
+        ],
+        "MAX_SEARCH_RESULTS": 5
+    },
+
+    "GIVEAWAYS": {
+        "ENABLED": false,
+        "END_EMBED": "#FF468A",
+        "REACTION": "🎁",
+        "START_EMBED": "#FF468A"
+    },
+
+    "IMAGE": {
+        "BASE_API": "https://strangeapi.fun/api",
+        "ENABLED": false
+    },
+
+    "INVITE": {
+        "ENABLED": false
+    },
+
+    "MODERATION": {
+        "EMBED_COLORS": {
+            "BAN": "#D32F2F",
+            "DEAFEN": "#102027",
+            "DISCONNECT": "RANDOM",
+            "KICK": "#FF7961",
+            "MOVE": "RANDOM",
+            "SOFTBAN": "#AF4448",
+            "TIMEOUT": "#102027",
+            "UNBAN": "#00C853",
+            "UNDEAFEN": "#4B636E",
+            "UNTIMEOUT": "#4B636E",
+            "VMUTE": "#102027",
+            "VUNMUTE": "#4B636E"
+        },
+        "ENABLED": false
+    },
+
+    "PRESENCE": {
+        "ENABLED": false, // Si el bot debe o no actualizar su estado
+        "MESSAGE": "Miembros {members} Servidores {servers}", // Tu mensaje de estado del bot
+        "STATUS": "online", // Los estados del bot [online, idle, dnd, invisible]
+        "TYPE": "WATCHING" // Tipo de estado del bot [PLAYING | LISTENING | WATCHING | COMPETING]
+    },
+
+    "STATS": {
+        "DEFAULT_LVL_UP_MSG": "{member:tag}, Acabas de avanzar al **Nivel {level}**",
+        "ENABLED": false,
+        "XP_COOLDOWN": 5 // Enfriamiento en segundos entre mensajes
+    },
+
+    "SUGGESTIONS": {
+        "APPROVED_EMBED": "#43B581",
+        "DEFAULT_EMBED": "#4F545C",
+        "DENIED_EMBED": "#F04747",
+        "EMOJI": {
+            "DOWN_VOTE": "⬇️",
+            "UP_VOTE": "⬆️"
+        },
+        "ENABLED": false // En caso de que quieras activar el sistema de sugerencias
+    },
+
+    "TICKET": {
+        "CLOSE_EMBED": "#068ADD",
+        "CREATE_EMBED": "#068ADD",
+        "ENABLED": false
+    }
+};

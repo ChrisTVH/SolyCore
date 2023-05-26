@@ -1,0 +1,140 @@
+const { EmbedBuilder, escapeInlineCode, ApplicationCommandOptionType } = require("discord.js");
+const { EMBED_COLORS } = require("@root/config");
+const { getInvitesLb } = require("@schemas/Member");
+const { getXpLb } = require("@schemas/MemberStats");
+const { getReputationLb } = require("@schemas/User");
+
+/**
+ * @type {import("@structures/Command")}
+ */
+module.exports = {
+  name: "leaderboard",
+    description: "mostrar la clasificación de EXP",
+  category: "INFORMATION",
+  botPermissions: ["EmbedLinks"],
+  command: {
+    enabled: true,
+    aliases: ["lb"],
+    minArgsCount: 1,
+    usage: "<xp|invite|rep>",
+  },
+  slashCommand: {
+    enabled: true,
+    options: [
+      {
+        name: "type",
+        description: "tipo de clasificación que se mostrará",
+        required: true,
+        type: ApplicationCommandOptionType.String,
+        choices: [
+          {
+            name: "xp",
+            value: "xp",
+          },
+          {
+            name: "invite",
+            value: "invite",
+          },
+          {
+            name: "rep",
+            value: "rep",
+          },
+        ],
+      },
+    ],
+  },
+
+  async messageRun(message, args, data) {
+    const type = args[0].toLowerCase();
+    let response;
+
+    if (type === "xp") response = await getXpLeaderboard(message, message.author, data.settings);
+    else if (type === "invite") response = await getInviteLeaderboard(message, message.author, data.settings);
+    else if (type === "rep") response = await getRepLeaderboard(message.author);
+    else response = "Tipo de clasificación no válido. Elige `xp` o `invite`.";
+    await message.safeReply(response);
+  },
+
+  async interactionRun(interaction, data) {
+    const type = interaction.options.getString("type");
+    let response;
+
+    if (type === "xp") response = await getXpLeaderboard(interaction, interaction.user, data.settings);
+    else if (type === "invite") response = await getInviteLeaderboard(interaction, interaction.user, data.settings);
+    else if (type === "rep") response = await getRepLeaderboard(interaction.user);
+    else response = "Tipo de clasificación no válido. Elige `xp` o `invite`.";
+
+    await interaction.followUp(response);
+  },
+};
+
+async function getXpLeaderboard({ guild }, author, settings) {
+  if (!settings.stats.enabled) return "La clasificación está desactivada en este servidor";
+
+  const lb = await getXpLb(guild.id, 10);
+  if (lb.length === 0) return "No hay usuarios en la clasificación";
+
+  let collector = "";
+  for (let i = 0; i < lb.length; i++) {
+    try {
+      const user = await author.client.users.fetch(lb[i].member_id);
+      collector += `**#${(i + 1).toString()}** - ${escapeInlineCode(user.tag)}\n`;
+    } catch (ex) {
+      // Ignora
+    }
+  }
+
+  const embed = new EmbedBuilder()
+    .setAuthor({ name: "Clasificación de EXP" })
+    .setColor(EMBED_COLORS.BOT_EMBED)
+    .setDescription(collector)
+    .setFooter({ text: `Solicitado por ${author.tag}` });
+
+  return { embeds: [embed] };
+}
+
+async function getInviteLeaderboard({ guild }, author, settings) {
+  if (!settings.invite.tracking) return "El seguimiento de invitaciones está desactivado en este servidor";
+
+  const lb = await getInvitesLb(guild.id, 10);
+  if (lb.length === 0) return "No hay usuarios en la clasificación";
+
+  let collector = "";
+  for (let i = 0; i < lb.length; i++) {
+    try {
+      const memberId = lb[i].member_id;
+      if (memberId === "VANITY") collector += `**#${(i + 1).toString()}** - URL de vanidad [${lb[i].invites}]\n`;
+      else {
+        const user = await author.client.users.fetch(lb[i].member_id);
+        collector += `**#${(i + 1).toString()}** - ${escapeInlineCode(user.tag)} [${lb[i].invites}]\n`;
+      }
+    } catch (ex) {
+      collector += `**#${(i + 1).toString()}** - DeletedUser#0000 [${lb[i].invites}]\n`;
+    }
+  }
+
+  const embed = new EmbedBuilder()
+    .setAuthor({ name: "Tabla de clasificación por invitación" })
+    .setColor(EMBED_COLORS.BOT_EMBED)
+    .setDescription(collector)
+    .setFooter({ text: `Solicitado por ${author.tag}` });
+
+  return { embeds: [embed] };
+}
+
+async function getRepLeaderboard(author) {
+  const lb = await getReputationLb(10);
+  if (lb.length === 0) return "No hay usuarios en la clasificación";
+
+  const collector = lb
+    .map((user, i) => `**#${(i + 1).toString()}** - ${escapeInlineCode(user.username)} (${user.reputation?.received})`)
+    .join("\n");
+
+  const embed = new EmbedBuilder()
+    .setAuthor({ name: "Tabla de reputación" })
+    .setColor(EMBED_COLORS.BOT_EMBED)
+    .setDescription(collector)
+    .setFooter({ text: `Solicitado por ${author.tag}` });
+
+  return { embeds: [embed] };
+}

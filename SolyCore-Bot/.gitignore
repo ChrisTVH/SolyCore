@@ -1,0 +1,11 @@
+.DS_Store
+.vscode/
+node_modules/
+*.log
+*.tar.gz
+.env
+bin/
+obj/
+docs/
+.gitbook.yaml
+SolyCore-Bot.njsproj
