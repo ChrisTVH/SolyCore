@@ -6,6 +6,9 @@ node_modules/
 .env
 bin/
 obj/
-docs/
+docs/additional
+docs/commands
+docs/contexts.md
+docs/SUMMARY.md
 .gitbook.yaml
 SolyCore-Bot.njsproj
