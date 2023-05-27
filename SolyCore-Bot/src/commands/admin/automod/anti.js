@@ -22,7 +22,8 @@ module.exports = {
       },
       {
         trigger: "mención masiva <on|off> [umbral]",
-        description: "activar o desactivar la detección de menciones masivas [el umbral por defecto es de 3 menciones].",
+        description:
+          "activar o desactivar la detección de menciones masivas [el umbral por defecto es de 3 menciones].",
       },
     ],
   },

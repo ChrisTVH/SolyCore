@@ -248,7 +248,12 @@ module.exports = class ModUtils {
 
       // comprobar si se ha alcanzado el máximo de advertencias
       if (memberDb.warnings >= settings.max_warn.limit) {
-        await ModUtils.addModAction(issuer.guild.members.me, target, "Advertencias máximas alcanzadas", settings.max_warn.action); // moderate
+        await ModUtils.addModAction(
+          issuer.guild.members.me,
+          target,
+          "Advertencias máximas alcanzadas",
+          settings.max_warn.action
+        ); // moderate
         memberDb.warnings = 0; // restablecer advertencias
       }
 

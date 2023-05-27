@@ -173,7 +173,8 @@ async function handleTicketOpen(interaction) {
 
   // verificación del límite
   const existing = getTicketChannels(guild).size;
-  if (existing > settings.ticket.limit) return interaction.followUp("Hay demasiados tickets abiertos. Vuelva a intentarlo más tarde");
+  if (existing > settings.ticket.limit)
+    return interaction.followUp("Hay demasiados tickets abiertos. Vuelva a intentarlo más tarde");
 
   // comprobar categorías
   let catName = null;
@@ -290,7 +291,9 @@ async function handleTicketClose(interaction) {
   await interaction.deferReply({ ephemeral: true });
   const status = await closeTicket(interaction.channel, interaction.user);
   if (status === "MISSING_PERMISSIONS") {
-    return interaction.followUp("No se puede cerrar el ticket, faltan permisos. Póngase en contacto con el administrador del servidor para obtener ayuda.");
+    return interaction.followUp(
+      "No se puede cerrar el ticket, faltan permisos. Póngase en contacto con el administrador del servidor para obtener ayuda."
+    );
   } else if (status == "ERROR") {
     return interaction.followUp("No se ha podido cerrar el ticket, ¡se ha producido un error!");
   }

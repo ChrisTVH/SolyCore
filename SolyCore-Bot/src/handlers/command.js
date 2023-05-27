@@ -62,7 +62,9 @@ module.exports = {
     if (cmd.cooldown > 0) {
       const remaining = getRemainingCooldown(message.author.id, cmd);
       if (remaining > 0) {
-        return message.safeReply(`Estás en enfriamiento. Puedes volver a utilizar el comando en \`${timeformat(remaining)}\``);
+        return message.safeReply(
+          `Estás en enfriamiento. Puedes volver a utilizar el comando en \`${timeformat(remaining)}\``
+        );
       }
     }
 

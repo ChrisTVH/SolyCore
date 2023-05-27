@@ -214,7 +214,8 @@ module.exports = {
     // color
     else if (type === "color") {
       const color = args[1];
-      if (!color || !isHex(color)) return message.safeReply("Color no válido. El valor debe ser un color hexadecimal válido");
+      if (!color || !isHex(color))
+        return message.safeReply("Color no válido. El valor debe ser un color hexadecimal válido");
       response = await setColor(settings, color);
     }
 

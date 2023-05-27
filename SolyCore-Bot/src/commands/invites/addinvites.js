@@ -8,7 +8,7 @@ const { getMember } = require("@schemas/Member");
  */
 module.exports = {
   name: "addinvites",
-    description: "añadir invitaciones a un miembro",
+  description: "añadir invitaciones a un miembro",
   category: "INVITE",
   userPermissions: ["ManageGuild"],
   botPermissions: ["EmbedLinks"],

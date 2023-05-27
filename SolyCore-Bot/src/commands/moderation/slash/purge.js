@@ -58,7 +58,7 @@ module.exports = {
       },
       {
         name: "bots",
-          description: "purgar todos los mensajes de bots",
+        description: "purgar todos los mensajes de bots",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -208,7 +208,9 @@ module.exports = {
 
     // Permisos faltantes del bot
     else if (response === "BOT_PERM") {
-      return interaction.followUp(`No tengo permisos para Leer Historial de Mensajes y Gestionar Mensajes en ${channel}`);
+      return interaction.followUp(
+        `No tengo permisos para Leer Historial de Mensajes y Gestionar Mensajes en ${channel}`
+      );
     }
 
     // Sin mensajes

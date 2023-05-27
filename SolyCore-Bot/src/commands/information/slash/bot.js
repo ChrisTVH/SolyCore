@@ -74,14 +74,20 @@ function botInvite(client) {
     .setAuthor({ name: "Invitación" })
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setThumbnail(client.user.displayAvatarURL())
-    .setDescription("Gracias por invitarme. Gracias por considerar invitarme\nUtiliza el botón de abajo para navegar donde quieras");
+    .setDescription(
+      "Gracias por invitarme. Gracias por considerar invitarme\nUtiliza el botón de abajo para navegar donde quieras"
+    );
 
   // Botones
   let components = [];
-  components.push(new ButtonBuilder().setLabel("Enlace de invitación").setURL(client.getInvite()).setStyle(ButtonStyle.Link));
+  components.push(
+    new ButtonBuilder().setLabel("Enlace de invitación").setURL(client.getInvite()).setStyle(ButtonStyle.Link)
+  );
 
   if (SUPPORT_SERVER) {
-    components.push(new ButtonBuilder().setLabel("Servidor de asistencia").setURL(SUPPORT_SERVER).setStyle(ButtonStyle.Link));
+    components.push(
+      new ButtonBuilder().setLabel("Servidor de asistencia").setURL(SUPPORT_SERVER).setStyle(ButtonStyle.Link)
+    );
   }
 
   if (DASHBOARD.enabled) {

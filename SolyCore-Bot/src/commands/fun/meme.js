@@ -14,7 +14,7 @@ const { getRandomInt } = require("@helpers/Utils");
  */
 module.exports = {
   name: "meme",
-    description: "consigue un meme al azar",
+  description: "consigue un meme al azar",
   category: "FUN",
   botPermissions: ["EmbedLinks"],
   cooldown: 20,
@@ -119,12 +119,16 @@ async function getRandomEmbed(choice) {
 
   const response = await getJson(`https://www.reddit.com/r/${rand}/random/.json`);
   if (!response.success) {
-    return new EmbedBuilder().setColor(EMBED_COLORS.ERROR).setDescription("No se ha podido recuperar el meme. Inténtalo de nuevo.");
+    return new EmbedBuilder()
+      .setColor(EMBED_COLORS.ERROR)
+      .setDescription("No se ha podido recuperar el meme. Inténtalo de nuevo.");
   }
 
   const json = response.data;
   if (!Array.isArray(json) || json.length === 0) {
-    return new EmbedBuilder().setColor(EMBED_COLORS.ERROR).setDescription(`No se ha encontrado ningún meme que coincida ${choice}`);
+    return new EmbedBuilder()
+      .setColor(EMBED_COLORS.ERROR)
+      .setDescription(`No se ha encontrado ningún meme que coincida ${choice}`);
   }
 
   try {
@@ -141,6 +145,8 @@ async function getRandomEmbed(choice) {
       .setColor("ff0088")
       .setFooter({ text: `👍 ${memeUpvotes} | 💬 ${memeNumComments}` });
   } catch (error) {
-    return new EmbedBuilder().setColor(EMBED_COLORS.ERROR).setDescription("No se ha podido recuperar el meme. Inténtalo de nuevo.");
+    return new EmbedBuilder()
+      .setColor(EMBED_COLORS.ERROR)
+      .setDescription("No se ha podido recuperar el meme. Inténtalo de nuevo.");
   }
 }

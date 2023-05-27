@@ -205,7 +205,7 @@ module.exports = {
 
     // Entrada no válida
     else {
-        return message.safeReply("Uso incorrecto de comandos");
+      return message.safeReply("Uso incorrecto de comandos");
     }
 
     if (response) await message.safeReply(response);
@@ -272,7 +272,10 @@ module.exports = {
  */
 async function ticketModalSetup({ guild, channel, member }, targetChannel, settings) {
   const buttonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("ticket_btnSetup").setLabel("Configuración de mensaje").setStyle(ButtonStyle.Primary)
+    new ButtonBuilder()
+      .setCustomId("ticket_btnSetup")
+      .setLabel("Configuración de mensaje")
+      .setStyle(ButtonStyle.Primary)
   );
 
   const sentMsg = await channel.safeSend({
@@ -290,7 +293,8 @@ async function ticketModalSetup({ guild, channel, member }, targetChannel, setti
     })
     .catch((ex) => {});
 
-  if (!btnInteraction) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
+  if (!btnInteraction)
+    return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
 
   // modo de visualización
   await btnInteraction.showModal(

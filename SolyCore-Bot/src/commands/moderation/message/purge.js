@@ -29,7 +29,10 @@ module.exports = {
     } else if (response === "BOT_PERM") {
       return message.safeReply("No tengo `Leer historial de mensajes` y `Gestión de mensajes` para borrar mensajes", 5);
     } else if (response === "MEMBER_PERM") {
-      return message.safeReply("No tienes el permiso `Lectura del historial de mensajes` y `Gestión de mensajes` para borrar mensajes", 5);
+      return message.safeReply(
+        "No tienes el permiso `Lectura del historial de mensajes` y `Gestión de mensajes` para borrar mensajes",
+        5
+      );
     } else if (response === "NO_MESSAGES") {
       return channel.safeSend("No se han encontrado mensajes que se puedan limpiar", 5);
     } else {

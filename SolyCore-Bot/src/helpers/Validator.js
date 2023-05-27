@@ -154,7 +154,7 @@ module.exports = class Validator {
         }
       }
       if (cmd.command.enabled && typeof cmd.messageRun !== "function") {
-          throw new TypeError("Falta la función 'messageRun'");
+        throw new TypeError("Falta la función 'messageRun'");
       }
     }
 
@@ -179,7 +179,7 @@ module.exports = class Validator {
         throw new TypeError("Las opciones de Command.slashCommand deben ser un array");
       }
       if (cmd.slashCommand.enabled && typeof cmd.interactionRun !== "function") {
-          throw new TypeError("Falta la función 'interactionRun'");
+        throw new TypeError("Falta la función 'interactionRun'");
       }
     }
   }
@@ -198,7 +198,7 @@ module.exports = class Validator {
       throw new TypeError("La descripción del contexto debe ser una cadena.");
     }
     if (context.type !== ApplicationCommandType.User && context.type !== ApplicationCommandType.Message) {
-        throw new TypeError("El tipo de contexto debe ser Usuario/Mensaje.");
+      throw new TypeError("El tipo de contexto debe ser Usuario/Mensaje.");
     }
     if (Object.prototype.hasOwnProperty.call(context, "enabled") && typeof context.enabled !== "boolean") {
       throw new TypeError("Context enabled debe ser un valor booleano");

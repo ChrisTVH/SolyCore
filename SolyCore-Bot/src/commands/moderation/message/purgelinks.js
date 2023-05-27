@@ -29,9 +29,15 @@ module.exports = {
     if (typeof response === "number") {
       return channel.safeSend(`${response} mensajes eliminados con éxito`, 5);
     } else if (response === "BOT_PERM") {
-      return message.safeReply("No tengo permiso para `Leer el historial de mensajes` y `Gestión de mensajes` para borrar mensajes", 5);
+      return message.safeReply(
+        "No tengo permiso para `Leer el historial de mensajes` y `Gestión de mensajes` para borrar mensajes",
+        5
+      );
     } else if (response === "MEMBER_PERM") {
-      return message.safeReply("No tienes el permiso de `Lectura del historial de mensajes` y `Gestión de mensajes` para borrar mensajes", 5);
+      return message.safeReply(
+        "No tienes el permiso de `Lectura del historial de mensajes` y `Gestión de mensajes` para borrar mensajes",
+        5
+      );
     } else if (response === "NO_MESSAGES") {
       return channel.safeSend("No se han encontrado mensajes que se puedan limpiar", 5);
     } else {

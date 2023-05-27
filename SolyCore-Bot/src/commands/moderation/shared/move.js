@@ -9,13 +9,13 @@ module.exports = async ({ member }, target, reason, channel) => {
     return `No tienes permiso para desconectar ${target.user.tag}`;
   }
   if (response === "BOT_PERM") {
-      return `No tengo permiso para desconectar ${target.user.tag}`;
+    return `No tengo permiso para desconectar ${target.user.tag}`;
   }
   if (response === "NO_VOICE") {
     return `${target.user.tag} no está en ningún canal de voz`;
   }
   if (response === "TARGET_PERM") {
-      return `${target.user.tag} no tiene permiso para unirse ${channel}`;
+    return `${target.user.tag} no tiene permiso para unirse ${channel}`;
   }
   if (response === "ALREADY_IN_CHANNEL") {
     return `${target.user.tag} ya está conectado a ${channel}`;

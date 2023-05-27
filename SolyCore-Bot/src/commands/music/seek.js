@@ -49,7 +49,7 @@ function seekTo({ client, guildId }, time) {
   const seekTo = durationToMillis(time);
 
   if (seekTo > player.queue.current.length) {
-      return "La duración indicada supera la duración de la pista actual.";
+    return "La duración indicada supera la duración de la pista actual.";
   }
 
   player.seek(seekTo);

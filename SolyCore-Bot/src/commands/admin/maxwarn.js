@@ -76,7 +76,8 @@ module.exports = {
     let response;
     if (input === "limit") {
       const max = parseInt(args[1]);
-      if (isNaN(max) || max < 1) return message.safeReply("Las advertencias máximas deben ser un número válido mayor que 0");
+      if (isNaN(max) || max < 1)
+        return message.safeReply("Las advertencias máximas deben ser un número válido mayor que 0");
       response = await setLimit(max, data.settings);
     }
 

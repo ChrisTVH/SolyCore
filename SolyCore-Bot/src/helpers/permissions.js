@@ -33,7 +33,7 @@ module.exports = {
   Speak: "Hablar",
   Stream: "Vídeo",
   UseApplicationCommands: "Usar comandos de Aplicación",
-    UseEmbeddedActivities: "Utilizar actividades integradas",
+  UseEmbeddedActivities: "Utilizar actividades integradas",
   UseExternalEmojis: "Usar emoticonos externos",
   UseExternalStickers: "Usar pegatinas externas",
   UseVAD: "Usar actividad de voz",

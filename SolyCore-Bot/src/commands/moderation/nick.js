@@ -96,16 +96,18 @@ module.exports = {
 
 async function nickname({ member, guild }, target, name) {
   if (!canModerate(member, target)) {
-      return `¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
+    return `¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
   }
   if (!canModerate(guild.members.me, target)) {
-      return `¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
+    return `¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
   }
 
   try {
     await target.setNickname(name);
     return `Con éxito se ${name ? "cambio" : "restablecio"} el apodo de ${target.user.tag}`;
   } catch (ex) {
-    return `Fallo al ${name ? "cambiar" : "restablecer"} el apodo de ${target.displayName}. ¿Ha indicado un nombre válido?`;
+    return `Fallo al ${name ? "cambiar" : "restablecer"} el apodo de ${
+      target.displayName
+    }. ¿Ha indicado un nombre válido?`;
   }
 }

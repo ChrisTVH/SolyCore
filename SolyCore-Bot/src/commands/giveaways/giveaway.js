@@ -177,7 +177,8 @@ module.exports = {
 
     //
     if (sub === "start") {
-      if (!args[1]) return message.safeReply("¡Uso incorrecto! Por favor, proporcione un canal para iniciar el sorteo en");
+      if (!args[1])
+        return message.safeReply("¡Uso incorrecto! Por favor, proporcione un canal para iniciar el sorteo en");
       const match = message.guild.findMatchingChannels(args[1]);
       if (!match.length) return message.safeReply(`No se ha encontrado ningún canal que coincida ${args[1]}`);
       return await runModalSetup(message, match[0]);
@@ -301,7 +302,10 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
   }
 
   const buttonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("giveaway_btnSetup").setLabel("Configuración de Sorteo").setStyle(ButtonStyle.Primary)
+    new ButtonBuilder()
+      .setCustomId("giveaway_btnSetup")
+      .setLabel("Configuración de Sorteo")
+      .setStyle(ButtonStyle.Primary)
   );
 
   const sentMsg = await channel.safeSend({
@@ -319,7 +323,8 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
     })
     .catch((ex) => {});
 
-  if (!btnInteraction) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
+  if (!btnInteraction)
+    return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
 
   // display modal
   await btnInteraction.showModal(
@@ -345,14 +350,14 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("winners")
-                .setLabel("¿Número de ganadores?")
+            .setLabel("¿Número de ganadores?")
             .setStyle(TextInputStyle.Short)
             .setRequired(true)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("roles")
-                .setLabel("Rol-Id que pueden participar en el sorteo")
+            .setLabel("Rol-Id que pueden participar en el sorteo")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
         ),
@@ -389,7 +394,8 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
 
   // contador de ganadores
   const winners = parseInt(modal.fields.getTextInputValue("winners"));
-  if (isNaN(winners)) return modal.editReply("La configuración se ha cancelado. No ha especificado un recuento de ganadores válido");
+  if (isNaN(winners))
+    return modal.editReply("La configuración se ha cancelado. No ha especificado un recuento de ganadores válido");
 
   // roles
   const allowedRoles =
@@ -405,7 +411,9 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
     try {
       host = await guild.client.users.fetch(hostId);
     } catch (ex) {
-      return modal.editReply("La instalación se ha cancelado. Debe proporcionar un ID de usuario válido para el anfitrión");
+      return modal.editReply(
+        "La instalación se ha cancelado. Debe proporcionar un ID de usuario válido para el anfitrión"
+      );
     }
   }
 
@@ -438,7 +446,8 @@ async function runModalEdit(message, messageId) {
     })
     .catch((ex) => {});
 
-  if (!btnInteraction) return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualización", components: [] });
+  if (!btnInteraction)
+    return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualización", components: [] });
 
   // modo de visualización
   await btnInteraction.showModal(
@@ -480,14 +489,16 @@ async function runModalEdit(message, messageId) {
     })
     .catch((ex) => {});
 
-  if (!modal) return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualización", components: [] });
+  if (!modal)
+    return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualización", components: [] });
 
   sentMsg.delete().catch(() => {});
   await modal.reply("Actualizando el sorteo...");
 
   // duración
   const addDuration = ems(modal.fields.getTextInputValue("duration"));
-  if (isNaN(addDuration)) return modal.editReply("Se ha cancelado la actualización. No ha especificado una duración válida de la adición");
+  if (isNaN(addDuration))
+    return modal.editReply("Se ha cancelado la actualización. No ha especificado una duración válida de la adición");
 
   // premios
   const newPrize = modal.fields.getTextInputValue("prize");

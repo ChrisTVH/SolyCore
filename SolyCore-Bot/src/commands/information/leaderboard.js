@@ -9,7 +9,7 @@ const { getReputationLb } = require("@schemas/User");
  */
 module.exports = {
   name: "leaderboard",
-    description: "mostrar la clasificación de EXP",
+  description: "mostrar la clasificación de EXP",
   category: "INFORMATION",
   botPermissions: ["EmbedLinks"],
   command: {

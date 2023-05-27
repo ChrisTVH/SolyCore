@@ -336,7 +336,9 @@ function getMsgCategoryEmbeds(client, category, prefix) {
       .setAuthor({ name: `${category} Comandos` })
       .setDescription(item.join("\n"))
       .setFooter({
-        text: `página ${index + 1} de ${arrSplitted.length} | Escribe ${prefix}help <comando> para más información sobre comandos`,
+        text: `página ${index + 1} de ${
+          arrSplitted.length
+        } | Escribe ${prefix}help <comando> para más información sobre comandos`,
       });
     arrEmbeds.push(embed);
   });

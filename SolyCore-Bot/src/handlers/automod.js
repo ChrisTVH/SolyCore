@@ -145,7 +145,7 @@ async function performAutomod(message, settings) {
   // Anti Invitaciones
   if (!automod.anti_links && automod.anti_invites) {
     if (containsDiscordInvite(content)) {
-        fields.push({ name: "Invitaciones de discord", value: "✓", inline: true });
+      fields.push({ name: "Invitaciones de discord", value: "✓", inline: true });
       shouldDelete = true;
       strikesTotal += 1;
     }
@@ -204,7 +204,9 @@ async function performAutomod(message, settings) {
       memberDb.strikes = 0;
 
       // Añadir acción de moderación
-      await addModAction(guild.members.me, member, "Automod: Máximo de strikes recibidos", automod.action).catch(() => {});
+      await addModAction(guild.members.me, member, "Automod: Máximo de strikes recibidos", automod.action).catch(
+        () => {}
+      );
     }
 
     await memberDb.save();

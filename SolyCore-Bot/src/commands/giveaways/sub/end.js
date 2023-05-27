@@ -3,7 +3,7 @@
  * @param {string} messageId
  */
 module.exports = async (member, messageId) => {
-    if (!messageId) return "Debe proporcionar un ID de mensaje válido.";
+  if (!messageId) return "Debe proporcionar un ID de mensaje válido.";
 
   // Permisos
   if (!member.permissions.has("ManageMessages")) {
@@ -25,7 +25,7 @@ module.exports = async (member, messageId) => {
     await giveaway.end();
     return "¡Éxito! El sorteo ha terminado.";
   } catch (error) {
-      member.client.logger.error("Fin del sorteo", error);
+    member.client.logger.error("Fin del sorteo", error);
     return `Se ha producido un error al finalizar el sorteo: ${error.message}`;
   }
 };

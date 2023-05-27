@@ -56,7 +56,8 @@ async function untimeout(issuer, target, reason) {
   const response = await unTimeoutTarget(issuer, target, reason);
   if (typeof response === "boolean") return `¡Se elimina el tiempo de espera de ${target.user.tag}!`;
   if (response === "BOT_PERM") return `No tengo permiso para eliminar el tiempo de espera de ${target.user.tag}`;
-  else if (response === "MEMBER_PERM") return `Usted no tiene permiso para eliminar el tiempo de espera de ${target.user.tag}`;
+  else if (response === "MEMBER_PERM")
+    return `Usted no tiene permiso para eliminar el tiempo de espera de ${target.user.tag}`;
   else if (response === "NO_TIMEOUT") return `${target.user.tag} ¡no se ha agotado el tiempo!`;
   else return `Error al eliminar el tiempo de espera de ${target.user.tag}`;
 }

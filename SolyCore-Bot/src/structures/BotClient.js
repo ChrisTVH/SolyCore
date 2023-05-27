@@ -43,7 +43,7 @@ module.exports = class BotClient extends Client {
     /**
      * @type {import('@structures/Command')[]}
      */
-      this.commands = []; // almacenar comando actual
+    this.commands = []; // almacenar comando actual
     this.commandIndex = new Collection(); // almacenar (alias, arrayIndex) par
 
     /**
@@ -186,7 +186,7 @@ module.exports = class BotClient extends Client {
 
     this.logger.success(`Comandos cargados ${this.commands.length}`);
     this.logger.success(`Comandos de slash cargados ${this.slashCommands.size}`);
-      if (this.slashCommands.size > 100) throw new Error("Se puede activar un máximo de 100 comandos de slash");
+    if (this.slashCommands.size > 100) throw new Error("Se puede activar un máximo de 100 comandos de slash");
   }
 
   /**
@@ -214,7 +214,7 @@ module.exports = class BotClient extends Client {
 
     if (userContexts > 3) throw new Error("Se puede habilitar un máximo de 3 contextos de USUARIO");
     if (messageContexts > 3) throw new Error("Se puede habilitar un máximo de 3 contextos de MENSAJE");
-    
+
     this.logger.success(`Cargado contextos de USUARIO ${userContexts}`);
     this.logger.success(`Cargado contextos de MENSAJE ${messageContexts}`);
   }
@@ -257,7 +257,10 @@ module.exports = class BotClient extends Client {
     else if (guildId && typeof guildId === "string") {
       const guild = this.guilds.cache.get(guildId);
       if (!guild) {
-          this.logger.error(`Error al registrar interacciones en el servidor ${guildId}`, new Error("No hay ningún servidor"));
+        this.logger.error(
+          `Error al registrar interacciones en el servidor ${guildId}`,
+          new Error("No hay ningún servidor")
+        );
         return;
       }
       await guild.commands.set(toRegister);

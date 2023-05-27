@@ -23,7 +23,7 @@ module.exports = async (member, messageId) => {
 
   try {
     await giveaway.pause();
-      return "¡Éxito! ¡Sorteo en pausa!";
+    return "¡Éxito! ¡Sorteo en pausa!";
   } catch (error) {
     member.client.logger.error("Pausa del sorteo", error);
     return `Se ha producido un error al pausar el sorteo: ${error.message}`;

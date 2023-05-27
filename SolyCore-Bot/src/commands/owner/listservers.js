@@ -65,7 +65,9 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor(client.config.EMBED_COLORS.BOT_EMBED)
         .setAuthor({ name: "Lista de servidores" })
-        .setFooter({ text: `${match ? "Matched" : "Total"} Servidores: ${total} • Página ${currentPage} de ${totalPages}` });
+        .setFooter({
+          text: `${match ? "Matched" : "Total"} Servidores: ${total} • Página ${currentPage} de ${totalPages}`,
+        });
 
       const fields = [];
       for (let i = start; i < end; i++) {

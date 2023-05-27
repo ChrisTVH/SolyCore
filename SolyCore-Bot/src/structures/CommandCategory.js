@@ -74,13 +74,13 @@ module.exports = {
     emoji: "🫂",
   },
   STATS: {
-      name: "Estadísticas",
+    name: "Estadísticas",
     enabled: config.STATS.ENABLED,
     image: "https://cdn.discordapp.com/attachments/1038077615275266108/1111651227688779786/Stats.png",
     emoji: "📈",
   },
   SUGGESTION: {
-      name: "Sistema de Sugerencias",
+    name: "Sistema de Sugerencias",
     enabled: config.SUGGESTIONS.ENABLED,
     image: "https://cdn.discordapp.com/attachments/1038077615275266108/1111651311335784478/Suggestions.png",
     emoji: "📝",
@@ -92,7 +92,7 @@ module.exports = {
     emoji: "🎫",
   },
   UTILITY: {
-      name: "Utilidades",
+    name: "Utilidades",
     image: "https://cdn.discordapp.com/attachments/1038077615275266108/1111651428075839569/Utility.png",
     emoji: "🛠",
   },

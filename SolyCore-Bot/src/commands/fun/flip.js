@@ -31,7 +31,7 @@ module.exports = {
     options: [
       {
         name: "coin",
-            description: "lanzar una moneda",
+        description: "lanzar una moneda",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
@@ -107,14 +107,20 @@ module.exports = {
 };
 
 const firstEmbed = (user) =>
-  new EmbedBuilder().setColor(EMBED_COLORS.TRANSPARENT).setDescription(`${user.username}, comenzó el lanzamiento de la moneda`);
+  new EmbedBuilder()
+    .setColor(EMBED_COLORS.TRANSPARENT)
+    .setDescription(`${user.username}, comenzó el lanzamiento de la moneda`);
 
 const secondEmbed = () => new EmbedBuilder().setDescription("¡La moneda está en el aire!");
 
 const resultEmbed = (toss) =>
   new EmbedBuilder()
     .setDescription(`>> **Ha salido la ${toss}** <<`)
-    .setImage(toss === "Corona" ? "https://cdn.discordapp.com/attachments/1038077615275266108/1111701932822761644/coin1.png" : "https://cdn.discordapp.com/attachments/1038077615275266108/1111701955987902534/coin2.png");
+    .setImage(
+      toss === "Corona"
+        ? "https://cdn.discordapp.com/attachments/1038077615275266108/1111701932822761644/coin1.png"
+        : "https://cdn.discordapp.com/attachments/1038077615275266108/1111701955987902534/coin2.png"
+    );
 
 async function flipText(text) {
   let builder = "";

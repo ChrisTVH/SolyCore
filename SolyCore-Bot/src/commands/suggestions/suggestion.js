@@ -46,7 +46,7 @@ module.exports = {
       },
       {
         trigger: "staffremove <rolId>",
-          description: "eliminar una función del personal",
+        description: "eliminar una función del personal",
       },
     ],
   },
@@ -61,7 +61,7 @@ module.exports = {
         options: [
           {
             name: "status",
-                description: "activado o desactivado",
+            description: "activado o desactivado",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -165,7 +165,7 @@ module.exports = {
           },
           {
             name: "reason",
-              description: "el motivo del rechazo",
+            description: "el motivo del rechazo",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
@@ -217,7 +217,8 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
       if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
       else response = await setChannel(data.settings, matched[0]);
     }
 
@@ -226,7 +227,8 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
       if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
       else response = await setApprovedChannel(data.settings, matched[0]);
     }
 
@@ -234,8 +236,9 @@ module.exports = {
     else if (sub == "rejch") {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
-        if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
+      if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
       else response = await setRejectedChannel(data.settings, matched[0]);
     }
 
@@ -243,8 +246,9 @@ module.exports = {
     else if (sub == "approve") {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
-        if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
+      if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
       else {
         const messageId = args[2];
         const reason = args.slice(3).join(" ");
@@ -256,8 +260,9 @@ module.exports = {
     else if (sub == "reject") {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
-        if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
+      if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios canales para ${input}. Por favor, sea más específico.`;
       else {
         const messageId = args[2];
         const reason = args.slice(3).join(" ");
@@ -270,7 +275,8 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingRoles(input);
       if (matched.length == 0) response = `No se han encontrado roles coincidentes para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios roles para ${input}. Por favor, sea más específico.`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios roles para ${input}. Por favor, sea más específico.`;
       else response = await addStaffRole(data.settings, matched[0]);
     }
 
@@ -279,7 +285,8 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingRoles(input);
       if (matched.length == 0) response = `No se han encontrado roles coincidentes para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios roles para ${input}. Por favor, sea más específico.`;
+      else if (matched.length > 1)
+        response = `Se han encontrado varios roles para ${input}. Por favor, sea más específico.`;
       else response = await removeStaffRole(data.settings, matched[0]);
     }
 

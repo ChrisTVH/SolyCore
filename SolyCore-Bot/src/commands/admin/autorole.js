@@ -99,8 +99,7 @@ async function setAutoRole({ guild }, role, settings) {
   if (role) {
     if (role.id === guild.roles.everyone.id) return "No se puede establecer `@everyone` como autorol";
     if (!guild.members.me.permissions.has("ManageRoles")) return "No tengo el permiso `ManageRoles`.";
-    if (guild.members.me.roles.highest.position < role.position)
-      return "No tengo permisos para asignar este rol";
+    if (guild.members.me.roles.highest.position < role.position) return "No tengo permisos para asignar este rol";
     if (role.managed) return "¡Uy! Esta función está gestionada por una integración";
   }
 

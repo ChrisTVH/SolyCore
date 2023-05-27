@@ -10,7 +10,7 @@ module.exports = async (member, messageId, addDuration, newPrize, newWinnerCount
 
   // Permisos
   if (!member.permissions.has("ManageMessages")) {
-      return "Necesitas tener permisos de gestión de mensajes para iniciar sorteos.";
+    return "Necesitas tener permisos de gestión de mensajes para iniciar sorteos.";
   }
 
   // Buscar con mensajeId

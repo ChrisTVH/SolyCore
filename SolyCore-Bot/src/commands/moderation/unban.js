@@ -89,7 +89,10 @@ async function getMatchingBans(guild, match) {
   }
 
   const menuRow = new ActionRowBuilder().addComponents(
-    new StringSelectMenuBuilder().setCustomId("unban-menu").setPlaceholder("Elegir un usuario para desbanear").addOptions(options)
+    new StringSelectMenuBuilder()
+      .setCustomId("unban-menu")
+      .setPlaceholder("Elegir un usuario para desbanear")
+      .addOptions(options)
   );
 
   return { content: "Seleccione el usuario que desea expulsar", components: [menuRow] };

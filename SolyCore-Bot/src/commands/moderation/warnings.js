@@ -100,7 +100,7 @@ module.exports = {
 
     // else
     else {
-        response = `Subcomando no válido ${sub}`;
+      response = `Subcomando no válido ${sub}`;
     }
 
     await interaction.followUp(response);

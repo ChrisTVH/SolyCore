@@ -58,7 +58,7 @@ module.exports = {
 
 async function removeRR(guild, channel, messageId) {
   if (!channel.permissionsFor(guild.members.me).has(channelPerms)) {
-      return `Necesita los siguientes permisos en ${channel.toString()}\n${parsePermissions(channelPerms)}`;
+    return `Necesita los siguientes permisos en ${channel.toString()}\n${parsePermissions(channelPerms)}`;
   }
 
   let targetMessage;

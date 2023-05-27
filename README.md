@@ -62,7 +62,7 @@ Si necesita ayuda adicional, no deje de leer nuestras guías [aquí](SolyCore-Bo
 - **Interacciones con el contexto del usuario**
 - **Información avanzada** Obtenga información detallada sobre un usuario, canal, función, etc.
 
-### 🎵 **La música:**
+### 🎵 **Reproductor de Música:**
 
 - **Música sin pérdidas** Disfruta de música sin pérdidas de alta calidad.
 - **Multiplataforma** Reproduce música de YouTube, SoundCloud, Spotify, etc.
@@ -108,7 +108,7 @@ Si necesita ayuda adicional, no deje de leer nuestras guías [aquí](SolyCore-Bo
 ### 🪙 **Sistema económico:**
 
 - **¿Quieres Ser Más Rico? ¡Utiliza los Comandos de Economía!** <br /> _Comandos:_ `bank`, `daily`, `beg`, `gamble`...
-- **Dar dinero a la gente, comprobar su saldo o simplemente flexionar.** <br /> _Comandos:_ `bank balance`, `bank deposit`, `bank withdraw`, `bank transfer`, ...
+- **Dar dinero a la gente, comprobar su saldo o simplemente reflexionar.** <br /> _Comandos:_ `bank balance`, `bank deposit`, `bank withdraw`, `bank transfer`, ...
 
 ### 😁 **Comandos divertidos:**
 

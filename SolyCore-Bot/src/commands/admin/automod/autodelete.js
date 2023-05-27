@@ -148,7 +148,7 @@ module.exports = {
     else if (sub === "maxlines") {
       const max = args[1];
       if (isNaN(max) || Number.parseInt(max) < 1) {
-          return message.safeReply("Líneas maximas debe ser un número válido mayor que 0");
+        return message.safeReply("Líneas maximas debe ser un número válido mayor que 0");
       }
       response = await maxLines(settings, max);
     }
@@ -188,7 +188,9 @@ async function antiInvites(settings, input) {
   settings.automod.anti_invites = status;
   await settings.save();
   return `Messages ${
-    status ? "con invitaciones de discord ahora se eliminarán automáticamente" : "ahora no se filtrarán las invitaciones de discord"
+    status
+      ? "con invitaciones de discord ahora se eliminarán automáticamente"
+      : "ahora no se filtrarán las invitaciones de discord"
   }`;
 }
 

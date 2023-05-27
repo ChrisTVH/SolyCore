@@ -7,7 +7,7 @@ const { stripIndent } = require("common-tags");
  */
 module.exports = {
   name: "automod",
-    description: "varias configuraciones de automoderación",
+  description: "varias configuraciones de automoderación",
   category: "AUTOMOD",
   userPermissions: ["ManageGuild"],
   command: {
@@ -95,7 +95,8 @@ module.exports = {
       },
       {
         name: "debug",
-        description: "activar/desactivar la automoderación de los mensajes enviados por los administradores y moderadores",
+        description:
+          "activar/desactivar la automoderación de los mensajes enviados por los administradores y moderadores",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {

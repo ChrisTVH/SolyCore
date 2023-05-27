@@ -42,12 +42,12 @@ module.exports = {
 
   async messageRun(message, args) {
     const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
-      if (!channel) return message.reply("Indique un canal válido");
-      if (channel.type !== ChannelType.GuildText) return message.reply("Indique un canal válido");
+    if (!channel) return message.reply("Indique un canal válido");
+    if (channel.type !== ChannelType.GuildText) return message.reply("Indique un canal válido");
     if (!channel.canSendEmbeds()) {
       return message.reply("No tengo permiso para enviar embeds en ese canal");
     }
-      message.reply(`La configuración del Embed se inició en ${channel}`);
+    message.reply(`La configuración del Embed se inició en ${channel}`);
     await embedSetup(channel, message.member);
   },
 
@@ -137,7 +137,7 @@ async function embedSetup(channel, member) {
     })
     .catch((ex) => {});
 
-    if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
+  if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
 
   modal.reply({ content: "Embed enviado", ephemeral: true }).catch((ex) => {});
 

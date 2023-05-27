@@ -6,7 +6,7 @@ const { EMBED_COLORS } = require("@root/config");
 module.exports = async (member) => {
   // Permisos
   if (!member.permissions.has("ManageMessages")) {
-      return "Necesitas tener permisos de gestión de mensajes para gestionar sorteos.";
+    return "Necesitas tener permisos de gestión de mensajes para gestionar sorteos.";
   }
 
   // Buscar en todos los sorteos
@@ -16,7 +16,7 @@ module.exports = async (member) => {
 
   // No hay sorteos
   if (giveaways.length === 0) {
-      return "En este servidor no se realizan sorteos.";
+    return "En este servidor no se realizan sorteos.";
   }
 
   const description = giveaways.map((g, i) => `${i + 1}. ${g.prize} in <#${g.channelId}>`).join("\n");
