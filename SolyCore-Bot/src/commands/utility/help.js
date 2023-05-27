@@ -217,12 +217,12 @@ function getSlashCategoryEmbeds(client, category) {
       .join(", ");
 
     collector +=
-      "**Available Filters:**\n" + `${availableFilters}` + `*\n\n**Generadores disponibles**\n` + `${availableGens}`;
+      "**Filtros disponibles:**\n" + `${availableFilters}` + `*\n\n**Generadores disponibles**\n` + `${availableGens}`;
 
     const embed = new EmbedBuilder()
       .setColor(EMBED_COLORS.BOT_EMBED)
       .setThumbnail(CommandCategory[category]?.image)
-      .setAuthor({ name: `${category} Comandos` })
+      .setAuthor({ name: `ID:${category}. Lista de comandos:` })
       .setDescription(collector);
 
     return [embed];
@@ -235,7 +235,7 @@ function getSlashCategoryEmbeds(client, category) {
     const embed = new EmbedBuilder()
       .setColor(EMBED_COLORS.BOT_EMBED)
       .setThumbnail(CommandCategory[category]?.image)
-      .setAuthor({ name: `${category} Comandos` })
+      .setAuthor({ name: `ID:${category}. Lista de comandos:` })
       .setDescription("No hay comandos en esta categoría");
 
     return [embed];
@@ -263,7 +263,7 @@ function getSlashCategoryEmbeds(client, category) {
     const embed = new EmbedBuilder()
       .setColor(EMBED_COLORS.BOT_EMBED)
       .setThumbnail(CommandCategory[category]?.image)
-      .setAuthor({ name: `${category} Comandos` })
+      .setAuthor({ name: `ID:${category}. Lista de comandos:` })
       .setDescription(item.join("\n"))
       .setFooter({ text: `página ${index + 1} de ${arrSplitted.length}` });
     arrEmbeds.push(embed);
@@ -301,7 +301,7 @@ function getMsgCategoryEmbeds(client, category, prefix) {
     const embed = new EmbedBuilder()
       .setColor(EMBED_COLORS.BOT_EMBED)
       .setThumbnail(CommandCategory[category]?.image)
-      .setAuthor({ name: `${category} Comandos` })
+      .setAuthor({ name: `ID:${category}. Lista de comandos:` })
       .setDescription(collector);
 
     return [embed];
@@ -314,7 +314,7 @@ function getMsgCategoryEmbeds(client, category, prefix) {
     const embed = new EmbedBuilder()
       .setColor(EMBED_COLORS.BOT_EMBED)
       .setThumbnail(CommandCategory[category]?.image)
-      .setAuthor({ name: `${category} Comandos` })
+      .setAuthor({ name: `ID:${category}. Lista de comandos:` })
       .setDescription("No hay comandos en esta categoría");
 
     return [embed];
@@ -333,7 +333,7 @@ function getMsgCategoryEmbeds(client, category, prefix) {
     const embed = new EmbedBuilder()
       .setColor(EMBED_COLORS.BOT_EMBED)
       .setThumbnail(CommandCategory[category]?.image)
-      .setAuthor({ name: `${category} Comandos` })
+      .setAuthor({ name: `ID:${category}. Lista de comandos:` })
       .setDescription(item.join("\n"))
       .setFooter({
         text: `página ${index + 1} de ${

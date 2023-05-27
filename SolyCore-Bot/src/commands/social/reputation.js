@@ -117,12 +117,12 @@ async function viewReputation(target) {
     .setThumbnail(target.displayAvatarURL())
     .addFields(
       {
-        name: "Given",
+        name: "Obtenida",
         value: userData.reputation?.given.toString(),
         inline: true,
       },
       {
-        name: "Received",
+        name: "Recibida",
         value: userData.reputation?.received.toString(),
         inline: true,
       }

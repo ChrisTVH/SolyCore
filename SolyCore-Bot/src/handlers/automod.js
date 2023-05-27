@@ -191,9 +191,9 @@ async function performAutomod(message, settings) {
       .setAuthor({ name: "Moderación automática" })
       .addFields(fields)
       .setDescription(
-        `Has recibido ${strikesTotal} strikes!\n\n` +
+        `Has recibido ${strikesTotal} advertencias!\n\n` +
           `**Servidor:** ${guild.name}\n` +
-          `**Strikes totales:** ${memberDb.strikes} fuera de ${automod.strikes}`
+          `**Advertencias totales:** ${memberDb.strikes} fuera de ${automod.strikes}`
       );
 
     author.send({ embeds: [strikeEmbed] }).catch((ex) => {});
@@ -204,7 +204,7 @@ async function performAutomod(message, settings) {
       memberDb.strikes = 0;
 
       // Añadir acción de moderación
-      await addModAction(guild.members.me, member, "Automod: Máximo de strikes recibidos", automod.action).catch(
+      await addModAction(guild.members.me, member, "AutoMod: Máximo de advertencias recibidas", automod.action).catch(
         () => {}
       );
     }

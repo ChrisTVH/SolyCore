@@ -19,7 +19,7 @@ module.exports = async (member) => {
     return "En este servidor no se realizan sorteos.";
   }
 
-  const description = giveaways.map((g, i) => `${i + 1}. ${g.prize} in <#${g.channelId}>`).join("\n");
+  const description = giveaways.map((g, i) => `${i + 1}. ${g.prize} en <#${g.channelId}>`).join("\n");
 
   try {
     return { embeds: [{ description, color: EMBED_COLORS.GIVEAWAYS }] };

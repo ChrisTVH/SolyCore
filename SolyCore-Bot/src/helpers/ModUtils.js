@@ -36,7 +36,7 @@ const logModeration = async (issuer, target, reason, type, data = {}) => {
   if (settings.modlog_channel) logChannel = guild.channels.cache.get(settings.modlog_channel);
 
   const embed = new EmbedBuilder().setFooter({
-    text: `By ${issuer.displayName} • ${issuer.id}`,
+    text: `Por ${issuer.displayName} • ${issuer.id}`,
     iconURL: issuer.displayAvatarURL(),
   });
 
@@ -45,7 +45,7 @@ const logModeration = async (issuer, target, reason, type, data = {}) => {
     case "PURGE":
       embed.setAuthor({ name: `Moderación - ${type}` });
       fields.push(
-        { name: "Tipo de purga", value: data.purgeType, inline: true },
+        { name: "Tipo de Purga", value: data.purgeType, inline: true },
         { name: "Mensajes", value: data.deletedCount.toString(), inline: true },
         { name: "Canal", value: `#${data.channel.name} [${data.channel.id}]`, inline: false }
       );
@@ -113,7 +113,7 @@ const logModeration = async (issuer, target, reason, type, data = {}) => {
 
     if (type.toUpperCase() === "TIMEOUT") {
       fields.push({
-        name: "Expira en",
+        name: "Expirado",
         value: `<t:${Math.round(target.communicationDisabledUntilTimestamp / 1000)}:R>`,
         inline: true,
       });
@@ -159,7 +159,7 @@ module.exports = class ModUtils {
     }
   }
   /**
-   * Eliminar el número especificado de mensajes que coincidan con el tipo
+   * Delete the specified number of messages matching the type
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').BaseGuildTextChannel} channel
    * @param {"ATTACHMENT"|"BOT"|"LINK"|"TOKEN"|"USER"|"ALL"} type
@@ -183,7 +183,7 @@ module.exports = class ModUtils {
       for (const message of messages.values()) {
         if (toDelete.size >= amount) break;
         if (!message.deletable) continue;
-        if (message.createdTimestamp < Date.now() - 1209600000) continue; // omitir los mensajes de más de 14 días
+        if (message.createdTimestamp < Date.now() - 1209600000) continue; // skip messages older than 14 days
 
         if (type === "ALL") {
           toDelete.set(message.id, message);
@@ -225,7 +225,7 @@ module.exports = class ModUtils {
 
       return deletedMessages.size;
     } catch (ex) {
-      error("purgarMensaje", ex);
+      error("purgeMessages", ex);
       return "ERROR";
     }
   }
@@ -248,25 +248,20 @@ module.exports = class ModUtils {
 
       // comprobar si se ha alcanzado el máximo de advertencias
       if (memberDb.warnings >= settings.max_warn.limit) {
-        await ModUtils.addModAction(
-          issuer.guild.members.me,
-          target,
-          "Advertencias máximas alcanzadas",
-          settings.max_warn.action
-        ); // moderate
-        memberDb.warnings = 0; // restablecer advertencias
+        await ModUtils.addModAction(issuer.guild.members.me, target, "Advertencias máximas alcanzadas", settings.max_warn.action); // moderado
+        memberDb.warnings = 0; // reset warnings
       }
 
       await memberDb.save();
       return true;
     } catch (ex) {
-      error("advertirObjetivo", ex);
+      error("warnTarget", ex);
       return "ERROR";
     }
   }
 
   /**
-   * Tiempos de espera (también conocidos como silenciadores) del objetivo y registros en la base de datos, canal
+   * Timeouts(aka mutes) the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {number} ms
@@ -279,16 +274,16 @@ module.exports = class ModUtils {
 
     try {
       await target.timeout(ms, reason);
-      logModeration(issuer, target, reason, "Tiempo de espera");
+      logModeration(issuer, target, reason, "Timeout");
       return true;
     } catch (ex) {
-      error("tiempoDeEsperaObjetivo", ex);
+      error("timeoutTarget", ex);
       return "ERROR";
     }
   }
 
   /**
-   * Tiempos de espera (también conocidos como silenciadores) del objetivo y registros en la base de datos, canal
+   * UnTimeouts(aka mutes) the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -300,16 +295,16 @@ module.exports = class ModUtils {
 
     try {
       await target.timeout(null, reason);
-      logModeration(issuer, target, reason, "Desactivar tiempo de espera");
+      logModeration(issuer, target, reason, "UnTimeout");
       return true;
     } catch (ex) {
-      error("quitarTiempoDeEsperaObjetivo", ex);
+      error("unTimeoutTarget", ex);
       return "ERROR";
     }
   }
 
   /**
-   * expulsa el objetivo y lo registra en la base de datos, canal
+   * kicks the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -320,16 +315,16 @@ module.exports = class ModUtils {
 
     try {
       await target.kick(reason);
-      logModeration(issuer, target, reason, "Expulsar");
+      logModeration(issuer, target, reason, "Kick");
       return true;
     } catch (ex) {
-      error("expulsarObjetivo", ex);
+      error("kickTarget", ex);
       return "ERROR";
     }
   }
 
   /**
-   * Softbans el objetivo y los registros a la base de datos, canal
+   * Softbans the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -341,16 +336,16 @@ module.exports = class ModUtils {
     try {
       await target.ban({ deleteMessageDays: 7, reason });
       await issuer.guild.members.unban(target.user);
-      logModeration(issuer, target, reason, "Prohibición suave");
+      logModeration(issuer, target, reason, "Softban");
       return true;
     } catch (ex) {
-      error("prohibiciónSuaveObjetivo", ex);
+      error("softbanTarget", ex);
       return "ERROR";
     }
   }
 
   /**
-   * Prohíbe el objetivo y se registra en la base de datos, canal
+   * Bans the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').User} target
    * @param {string} reason
@@ -366,13 +361,13 @@ module.exports = class ModUtils {
       logModeration(issuer, target, reason, "Ban");
       return true;
     } catch (ex) {
-      error(`prohibirObjetivo`, ex);
+      error(`banTarget`, ex);
       return "ERROR";
     }
   }
 
   /**
-   * Prohíbe el objetivo y se registra en la base de datos, canal
+   * Bans the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').User} target
    * @param {string} reason
@@ -380,16 +375,16 @@ module.exports = class ModUtils {
   static async unBanTarget(issuer, target, reason) {
     try {
       await issuer.guild.bans.remove(target, reason);
-      logModeration(issuer, target, reason, "Quitar Prohibición");
+      logModeration(issuer, target, reason, "UnBan");
       return true;
     } catch (ex) {
-      error(`quitarProhibiciónObjetivo`, ex);
+      error(`unBanTarget`, ex);
       return "ERROR";
     }
   }
 
   /**
-   * Silencio de voz hacia el objetivo y se registra en la base de datos, canal
+   * Voice mutes the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -412,7 +407,7 @@ module.exports = class ModUtils {
   }
 
   /**
-   * Anula el silencio de voz del objetivo y se registra en la base de datos, canal
+   * Voice unmutes the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -435,7 +430,7 @@ module.exports = class ModUtils {
   }
 
   /**
-   * Ensordece el objetivo y se registra en la base de datos, canal
+   * Deafens the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -449,16 +444,16 @@ module.exports = class ModUtils {
 
     try {
       await target.voice.setDeaf(true, reason);
-      logModeration(issuer, target, reason, "Ensordecer");
+      logModeration(issuer, target, reason, "Deafen");
       return true;
     } catch (ex) {
-      error(`ensordecerObjetivo`, ex);
-      return `Failed to deafen ${target.user.tag}`;
+      error(`deafenTarget`, ex);
+      return `Falló al ensordecer ${target.user.tag}`;
     }
   }
 
   /**
-   * Desensibiliza al objetivo y se registra en la base de datos, canal
+   * UnDeafens the target and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -472,16 +467,16 @@ module.exports = class ModUtils {
 
     try {
       await target.voice.setDeaf(false, reason);
-      logModeration(issuer, target, reason, "quitarEnsordecer");
+      logModeration(issuer, target, reason, "unDeafen");
       return true;
     } catch (ex) {
-      error(`quitarEnsordecerObjetivo`, ex);
+      error(`unDeafenTarget`, ex);
       return "ERROR";
     }
   }
 
   /**
-   * Desconecta el objetivo del canal de voz y se registra en la base de datos, canal
+   * Disconnects the target from voice channel and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason
@@ -494,16 +489,16 @@ module.exports = class ModUtils {
 
     try {
       await target.voice.disconnect(reason);
-      logModeration(issuer, target, reason, "Desconectado");
+      logModeration(issuer, target, reason, "Disconnect");
       return true;
     } catch (ex) {
-      error(`quitarEnsordecerObjetivo`, ex);
+      error(`unDeafenTarget`, ex);
       return "ERROR";
     }
   }
 
   /**
-   * Mueve el objetivo a otro canal de voz y se registra en la base de datos, canal
+   * Moves the target to another voice channel and logs to the database, channel
    * @param {import('discord.js').GuildMember} issuer
    * @param {import('discord.js').GuildMember} target
    * @param {string} reason

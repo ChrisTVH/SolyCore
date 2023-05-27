@@ -14,7 +14,7 @@ module.exports = class BotUtils {
       ) {
         success("Comprobación de versión: Tu bot de discord está actualizado");
       } else {
-        warn(`VersionCheck: ${response.data.tag_name} actualización disponible`);
+        warn(`ComprobarVersión: ${response.data.tag_name} actualización disponible`);
         warn("descarga: https://github.com/saiteja-madha/discord-js-bot/releases/latest");
       }
     }

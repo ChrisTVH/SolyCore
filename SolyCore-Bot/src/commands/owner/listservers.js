@@ -8,7 +8,7 @@ const MAX_PER_PAGE = 10; // max number of embed fields per page
  */
 module.exports = {
   name: "listservers",
-  description: "enumera todos/los servidores coincidentes",
+  description: "enumera o busca a todos los servidores que coinciden",
   category: "OWNER",
   botPermissions: ["EmbedLinks"],
   command: {

@@ -7,13 +7,13 @@ module.exports = {
     emoji: "⚙️",
   },
   AUTOMOD: {
-    name: "Automoderación Avanzada",
+    name: "Automoderación",
     enabled: config.AUTOMOD.ENABLED,
     image: "https://cdn.discordapp.com/attachments/1038077615275266108/1111649946060456069/automod.png",
     emoji: "🤖",
   },
   ANIME: {
-    name: "Anime Básica",
+    name: "Anime Básico",
     image: "https://cdn.discordapp.com/attachments/1038077615275266108/1111650001970544680/Anime.png",
     emoji: "🎨",
   },
@@ -24,7 +24,7 @@ module.exports = {
     emoji: "🪙",
   },
   FUN: {
-    name: "Entretenimiento Básica",
+    name: "Entretenimiento Básicp",
     image: "https://cdn.discordapp.com/attachments/1038077615275266108/1111650170141155378/Fun.png",
     emoji: "😂",
   },

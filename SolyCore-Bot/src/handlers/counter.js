@@ -26,10 +26,10 @@ async function updateCounterChannels(client) {
         if (config.counter_type.toUpperCase() === "MEMBERS") channelName = `${config.name} : ${members}`;
         if (config.counter_type.toUpperCase() === "BOTS") channelName = `${config.name} : ${bots}`;
 
-        if (vc.manageable) vc.setName(channelName).catch((err) => vc.client.logger.log("Set Name error: ", err));
+        if (vc.manageable) vc.setName(channelName).catch((err) => vc.client.logger.log("Error en el nombre seleccionado: ", err));
       }
     } catch (ex) {
-      client.logger.error(`Error updating counter channels for guildId: ${guildId}`, ex);
+      client.logger.error(`Error al actualizar los canales del contador para guildId: ${guildId}`, ex);
     } finally {
       // eliminar guildId de la caché
       const i = client.counterUpdateQueue.indexOf(guild.id);

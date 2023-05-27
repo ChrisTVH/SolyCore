@@ -13,7 +13,7 @@ module.exports = {
     minArgsCount: 1,
     subcommands: [
       {
-        trigger: "limite <number>",
+        trigger: "limite <número>",
         description: "establecer el máximo de advertencias que puede recibir un miembro antes de emprender una acción",
       },
       {
@@ -33,7 +33,7 @@ module.exports = {
         options: [
           {
             name: "amount",
-            description: "número máximo de strikes",
+            description: "número máximo de advertencias",
             type: ApplicationCommandOptionType.Integer,
             required: true,
           },

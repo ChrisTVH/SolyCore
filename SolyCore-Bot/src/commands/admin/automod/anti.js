@@ -163,14 +163,14 @@ async function antiGhostPing(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_ghostping = status;
   await settings.save();
-  return `¡Configuración guardada! Anti-MenciónFantasma es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `¡Configuración Guardada! Anti-MenciónFantasma esta ahora ${status ? "habilitada" : "deshabilitada"}`;
 }
 
 async function antiSpam(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_spam = status;
   await settings.save();
-  return `La detección antispam es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `La detección antispam esta ahora ${status ? "habilitada" : "deshabilitada"}`;
 }
 
 async function antiMassMention(settings, input, threshold) {
@@ -181,5 +181,5 @@ async function antiMassMention(settings, input, threshold) {
     settings.automod.anti_massmention = threshold;
   }
   await settings.save();
-  return `La detección de menciones masivas es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `La detección de menciones masivas esta ahora ${status ? "habilitada" : "deshabilitada"}`;
 }

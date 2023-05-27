@@ -14,7 +14,7 @@ module.exports = {
       const remaining = getRemainingCooldown(interaction.user.id, context);
       if (remaining > 0) {
         return interaction.reply({
-          content: `Enfriamiento. Puedes volver a utilizar el comando después de ${timeformat(remaining)}`,
+          content: `En enfriamiento. Puedes volver a utilizar el comando después de ${timeformat(remaining)}`,
           ephemeral: true,
         });
       }

@@ -357,14 +357,14 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("roles")
-            .setLabel("Rol-Id que pueden participar en el sorteo")
+            .setLabel("Rol-Id de los participantes del sorteo")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("host")
-            .setLabel("Id de usuario que organiza el sorteo")
+            .setLabel("Id del usuario que organiza el sorteo")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
         ),

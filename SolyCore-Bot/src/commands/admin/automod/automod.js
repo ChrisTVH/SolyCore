@@ -20,11 +20,11 @@ module.exports = {
       },
       {
         trigger: "strikes <número>",
-        description: "número máximo de strikes que puede recibir un miembro antes de emprender una acción",
+        description: "número máximo de advertencias que puede recibir un miembro antes de emprender una acción",
       },
       {
         trigger: "acción <TIEMPO DE ESPERA|KICK|BAN>",
-        description: "establecer la acción a realizar tras recibir el máximo de strikes",
+        description: "establecer la acción a realizar tras recibir el máximo de advertencias",
       },
       {
         trigger: "depurar <on|off>",
@@ -55,12 +55,12 @@ module.exports = {
       },
       {
         name: "strikes",
-        description: "fijar el número máximo de strikes antes de emprender una acción",
+        description: "fijar el número máximo de advertencias antes de emprender una acción",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "amount",
-            description: "número de strikes (por defecto 5)",
+            description: "número de advertencias (por defecto 5)",
             required: true,
             type: ApplicationCommandOptionType.Integer,
           },
@@ -68,7 +68,7 @@ module.exports = {
       },
       {
         name: "action",
-        description: "establecer la acción a realizar tras recibir el máximo de strikes",
+        description: "establecer la acción a realizar tras recibir el máximo de advertencias",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -163,7 +163,7 @@ module.exports = {
     } else if (input === "strikes") {
       const strikes = args[1];
       if (isNaN(strikes) || Number.parseInt(strikes) < 1) {
-        return message.safeReply("Los strikes deben ser un número válido mayor que 0");
+        return message.safeReply("Las advertencias deben ser un número válido mayor que 0");
       }
       response = await setStrikes(settings, strikes);
     } else if (input === "action") {
@@ -255,7 +255,7 @@ async function getStatus(settings, guild) {
         inline: true,
       },
       {
-        name: "Strikes máximos",
+        name: "Advertencias máximas",
         value: automod.strikes.toString(),
         inline: true,
       },
@@ -277,13 +277,13 @@ async function getStatus(settings, guild) {
 async function setStrikes(settings, strikes) {
   settings.automod.strikes = strikes;
   await settings.save();
-  return `¡Configuración guardada! Los strikes máximos se fijan en ${strikes}`;
+  return `¡Configuración guardada! Las cantidad de advertencias máximas se fijan en ${strikes}`;
 }
 
 async function setAction(settings, guild, action) {
   if (action === "TIMEOUT") {
     if (!guild.members.me.permissions.has("ModerateMembers")) {
-      return "No tengo permiso con los miembros con el tiempo de espera";
+      return "No tengo permiso con los miembros que estan en tiempo de espera";
     }
   }
 
@@ -308,7 +308,7 @@ async function setDebug(settings, input) {
   const status = input.toLowerCase() === "on" ? true : false;
   settings.automod.debug = status;
   await settings.save();
-  return `¡Configuración guardada! La depuración de automoderación es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `¡Configuración guardada! La depuración de automoderación es ahora ${status ? "habilitada" : "deshabilitada"}`;
 }
 
 function getWhitelist(guild, settings) {

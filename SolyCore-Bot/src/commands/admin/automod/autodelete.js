@@ -178,8 +178,8 @@ async function antiAttachments(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_attachments = status;
   await settings.save();
-  return `Messages ${
-    status ? "con archivos adjuntos se eliminarán automáticamente" : "ahora no se filtrarán los archivos adjuntos"
+  return `Los mensajes ${
+    status ? "con archivos adjuntos se eliminarán automáticamente" : "ahora no filtrarán los archivos adjuntos"
   }`;
 }
 
@@ -187,10 +187,10 @@ async function antiInvites(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_invites = status;
   await settings.save();
-  return `Messages ${
+  return `Los mensajes ${
     status
       ? "con invitaciones de discord ahora se eliminarán automáticamente"
-      : "ahora no se filtrarán las invitaciones de discord"
+      : "ahora no filtrarán las invitaciones de discord"
   }`;
 }
 
@@ -198,7 +198,7 @@ async function antilinks(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_links = status;
   await settings.save();
-  return `Messages ${status ? "con los enlaces se eliminarán automáticamente" : "ahora no se filtrarán los enlaces"}`;
+  return `Los mensajes ${status ? "con enlaces se eliminarán automáticamente" : "ya no se filtrarán los enlaces"}`;
 }
 
 async function maxLines(settings, input) {

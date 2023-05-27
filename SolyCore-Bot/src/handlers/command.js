@@ -33,32 +33,32 @@ module.exports = {
       }
     }
 
-    // Owner commands
+    // Comandos del propietario
     if (cmd.category === "OWNER" && !OWNER_IDS.includes(message.author.id)) {
       return message.safeReply("Este comando sólo es accesible para los propietarios del bot");
     }
 
-    // check user permissions
+    // comprobar los permisos de usuario
     if (cmd.userPermissions && cmd.userPermissions?.length > 0) {
       if (!message.channel.permissionsFor(message.member).has(cmd.userPermissions)) {
         return message.safeReply(`Tu necesitas ${parsePermissions(cmd.userPermissions)} para este comando`);
       }
     }
 
-    // check bot permissions
+    // comprobar los permisos del bot
     if (cmd.botPermissions && cmd.botPermissions.length > 0) {
       if (!message.channel.permissionsFor(message.guild.members.me).has(cmd.botPermissions)) {
         return message.safeReply(`Yo necesito ${parsePermissions(cmd.botPermissions)} para este comando`);
       }
     }
 
-    // minArgs count
+    // minArgs recuento
     if (cmd.command.minArgsCount > args.length) {
       const usageEmbed = this.getCommandUsage(cmd, prefix, invoke);
       return message.safeReply({ embeds: [usageEmbed] });
     }
 
-    // cooldown check
+    // control de enfriamiento
     if (cmd.cooldown > 0) {
       const remaining = getRemainingCooldown(message.author.id, cmd);
       if (remaining > 0) {

@@ -267,7 +267,7 @@ async function handleApproveBtn(interaction) {
         new ActionRowBuilder().addComponents([
           new TextInputBuilder()
             .setCustomId("reason")
-            .setLabel("reason")
+            .setLabel("razón")
             .setStyle(TextInputStyle.Paragraph)
             .setMinLength(4),
         ]),
@@ -298,7 +298,7 @@ async function handleRejectBtn(interaction) {
         new ActionRowBuilder().addComponents([
           new TextInputBuilder()
             .setCustomId("reason")
-            .setLabel("reason")
+            .setLabel("razón")
             .setStyle(TextInputStyle.Paragraph)
             .setMinLength(4),
         ]),
@@ -329,7 +329,7 @@ async function handleDeleteBtn(interaction) {
         new ActionRowBuilder().addComponents([
           new TextInputBuilder()
             .setCustomId("reason")
-            .setLabel("reason")
+            .setLabel("razón")
             .setStyle(TextInputStyle.Paragraph)
             .setMinLength(4),
         ]),

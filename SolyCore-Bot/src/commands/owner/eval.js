@@ -9,7 +9,7 @@ const DUMMY_TOKEN = "MY_TOKEN_IS_SECRET";
  */
 module.exports = {
   name: "eval",
-  description: "evalúa algo",
+  description: "evalúa un trozo de código",
   category: "OWNER",
   botPermissions: ["EmbedLinks"],
   command: {

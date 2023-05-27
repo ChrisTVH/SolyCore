@@ -72,7 +72,7 @@ async function stats(member, settings) {
         value: stripIndents`
       ❯ Mensajes enviados: ${memberStats.messages}
       ❯ Prefijo de Comandos: ${memberStats.commands.prefix}
-      ❯ Comandos de BArra: ${memberStats.commands.slash}
+      ❯ Comandos de Slash: ${memberStats.commands.slash}
       ❯ EXP Ganada: ${memberStats.xp}
       ❯ Nivel Actual: ${memberStats.level}
     `,

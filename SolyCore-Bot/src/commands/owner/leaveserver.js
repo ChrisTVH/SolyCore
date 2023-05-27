@@ -3,7 +3,7 @@
  */
 module.exports = {
   name: "leaveserver",
-  description: "abandonar un servidor.",
+  description: "hacer que el bot abandone un servidor.",
   category: "OWNER",
   botPermissions: ["EmbedLinks"],
   command: {
