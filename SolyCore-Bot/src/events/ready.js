@@ -6,12 +6,12 @@ const { getSettings } = require("@schemas/Guild");
  * @param {import('@src/structures').BotClient} client
  */
 module.exports = async (client) => {
-  client.logger.success(`Conectado como ${client.user.tag}! (${client.user.id})`);
+  client.logger.success(`Conectado como: ${client.user.tag}! (${client.user.id})`);
 
   // Inicializar Music Manager
   if (client.config.MUSIC.ENABLED) {
     client.musicManager.connect(client.user.id);
-    client.logger.success("Gestor de música inicializado");
+    client.logger.success("Gestor de mÃºsica inicializado");
   }
 
   // Inicializar Giveaways Manager
@@ -31,7 +31,7 @@ module.exports = async (client) => {
     else await client.registerInteractions(client.config.INTERACTIONS.TEST_GUILD_ID);
   }
 
-  // Cargar funciones de reacción en la caché
+  // Cargar funciones de reacciÃ³n en la cachÃ©
   await cacheReactionRoles(client);
 
   for (const guild of client.guilds.cache.values()) {
@@ -42,7 +42,7 @@ module.exports = async (client) => {
       await counterHandler.init(guild, settings);
     }
 
-    // caché de invitaciones
+    // cachÃ© de invitaciones
     if (settings.invite.tracking) {
       inviteHandler.cacheGuildInvites(guild);
     }

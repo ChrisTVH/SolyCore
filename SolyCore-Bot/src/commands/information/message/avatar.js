@@ -5,7 +5,7 @@ const avatarInfo = require("../shared/avatar");
  */
 module.exports = {
   name: "avatar",
-  description: "muestra la información del avatar de un usuario",
+  description: "muestra la informaciÃ³n del avatar de un usuario",
   category: "INFORMATION",
   botPermissions: ["EmbedLinks"],
   command: {

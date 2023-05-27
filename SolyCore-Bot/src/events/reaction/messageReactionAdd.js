@@ -19,12 +19,12 @@ module.exports = async (client, reaction, user) => {
   const { message, emoji } = reaction;
   if (user.bot) return;
 
-  // Funciones de reacción
+  // Funciones de reacciÃ³n
   reactionRoleHandler.handleReactionAdd(reaction, user);
 
-  // Emojis de reacción
+  // Emojis de reacciÃ³n
   if (!emoji.id) {
-    // Traducción por banderas
+    // TraducciÃ³n por banderas
     if (message.content && (await getSettings(message.guild)).flag_translation.enabled) {
       if (isValidEmoji(emoji.name)) {
         translationHandler.handleFlagReaction(emoji.name, message, user);

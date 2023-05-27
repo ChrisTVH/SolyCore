@@ -18,7 +18,7 @@
 
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
-                    <h3> B醩ico </h3>
+                    <h3> B谩sico </h3>
 					<ol class="breadcrumb">
                         <li><a href="/"><i class="fa fa-home"></i>Selector</a></li>
                         <li><a href="<%=`/manage/${guild.id}/`%>"><%=guild.name%></a></li>
@@ -44,9 +44,9 @@
                                             <div class="checkbox">
                                                 <label>
                                                     <% if(guild.flag_translation?.enabled) { %>
-                                                    <input type="checkbox" name="flag_translation" checked>Bandera de Traducci髇
+                                                    <input type="checkbox" name="flag_translation" checked>Bandera de Traducci贸n
                                                     <% } else { %>
-                                                    <input type="checkbox" name="flag_translation">Bandera de Traducci髇
+                                                    <input type="checkbox" name="flag_translation">Bandera de Traducci贸n
                                                     <% } %>
                                                 </label>
                                             </div>
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="box-footer">
-                                        <button type="submit" name="basicUpdate" class="btn btn-primary">Actualizaci髇</button>
+                                        <button type="submit" name="basicUpdate" class="btn btn-primary">Actualizaci贸n</button>
                                     </div>
                                 </form>
                             </div>
@@ -73,7 +73,7 @@
                             <!-- STATISTICS CONFIGURATION -->
                             <div class="box box-warning">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Estad韘ticas</h3>
+                                    <h3 class="box-title">Estad铆sticas</h3>
                                 </div>
                                 <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST">
                                     <div class="box-body">
@@ -102,7 +102,7 @@
                                                     <% }); %>
                                                         <option>Sin canal</option>
                                                 <% } else { %>
-                                                    <option disabled selected value> -- seleccione una opci髇 -- </option>
+                                                    <option disabled selected value> -- seleccione una opci贸n -- </option>
                                                     <% guild.channels.cache.filter((ch) => ch.type === 0).forEach((ch) => { %>
                                                         <option>#<%= ch.name %></option>
                                                     <% }); %>
@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                     <div class="box-footer">
-                                        <button type="submit" name="statsUpdate" class="btn btn-primary">Actualizaci髇</button>
+                                        <button type="submit" name="statsUpdate" class="btn btn-primary">Actualizaci贸n</button>
                                     </div>
                                 </form>
                             </div>
@@ -125,7 +125,7 @@
                                 <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST">
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label>L韒ite de tickets</label>
+                                            <label>L铆mite de tickets</label>
                                             <input type="number" name="limit" class="form-control" placeholder="<%= guild.ticket.limit %>">
                                         </div>
                                         <div class="form-group">
@@ -138,7 +138,7 @@
                                                     <% }); %>
                                                         <option>Sin canal</option>
                                                 <% } else { %>
-                                                        <option disabled selected value> -- seleccione una opci髇 -- </option>
+                                                        <option disabled selected value> -- seleccione una opci贸n -- </option>
                                                     <% guild.channels.cache.filter((ch) => ch.type === 0).forEach((ch) => { %>
                                                         <option>#<%= ch.name %></option>
                                                     <% }); %>
@@ -160,16 +160,16 @@
                             <!-- MODERATION CONFIGURATION -->
                             <div class="box box-warning">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Moderaci髇</h3>
+                                    <h3 class="box-title">Moderaci贸n</h3>
                                 </div>
                                 <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST">
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label>Advertencias M醲imas</label>
+                                            <label>Advertencias M谩ximas</label>
                                             <input type="number" name="max_warnings" class="form-control" placeholder="<%= guild.max_warn.limit %>">
                                         </div>
                                         <div class="form-group">
-                                            <label>Acci髇 de advertencia m醲ima</label>
+                                            <label>Acci贸n de advertencia m谩xima</label>
                                             <select class="form-control" name="max_warn_action">
                                                 <option selected="selected"><%= guild.max_warn.action %></option>
                                                 <% if(guild.max_warn.action !== "TIMEOUT") { %>
@@ -184,7 +184,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Registros de moderaci髇</label>
+                                            <label>Registros de moderaci贸n</label>
                                             <select class="form-control" name="modlog_channel">
                                                 <% if(guild.modlog_channel && bot.channels.cache.has(guild.modlog_channel)){ %>
                                                     <option selected="selected">#<%= bot.channels.cache.get(guild.modlog_channel).name %></option>
@@ -193,7 +193,7 @@
                                                     <% }); %>
                                                         <option>Sin canal</option>
                                                 <% } else { %>
-                                                    <option disabled selected value> -- seleccione una opci髇 -- </option>
+                                                    <option disabled selected value> -- seleccione una opci贸n -- </option>
                                                     <% guild.channels.cache.filter((ch) => ch.type === 0).forEach((ch) => { %>
                                                         <option>#<%= ch.name %></option>
                                                     <% }); %>
@@ -202,7 +202,7 @@
                                         </div>
                                     </div>
                                     <div class="box-footer">
-                                        <button type="submit" name="modUpdate" class="btn btn-primary">Actualizaci髇</button>
+                                        <button type="submit" name="modUpdate" class="btn btn-primary">Actualizaci贸n</button>
                                     </div>
                                 </form>
                             </div>
@@ -211,16 +211,16 @@
                             <!-- AUTOMOD CONFIGURATION -->
                             <div class="box box-warning">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Moderaci髇 autom醫ica</h3>
+                                    <h3 class="box-title">Moderaci贸n autom谩tica</h3>
                                 </div>
                                 <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST">
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label>Strikes m醲imos</label>
+                                            <label>Strikes m谩ximos</label>
                                             <input type="number" name="max_strikes" class="form-control" placeholder="<%= guild.automod.strikes %>">
                                         </div>
                                         <div class="form-group">
-                                            <label>Acciones de Strikes m醲imos</label>
+                                            <label>Acciones de Strikes m谩ximos</label>
                                             <select class="form-control" name="automod_action">
                                                 <option selected="selected"><%= guild.automod.action %></option>
                                                 <% if(guild.automod.action !== "TIMEOUT") { %>
@@ -235,7 +235,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>L韓eas m醲imas</label>
+                                            <label>L铆neas m谩ximas</label>
                                             <input type="number" name="max_lines" class="form-control" placeholder="<%= guild.automod.max_lines %>">
                                         </div>
                                         <div class="form-group">
@@ -278,9 +278,9 @@
                                             <div class="checkbox">
                                                 <label>
                                                     <% if(guild.automod.anti_ghostping) { %>
-                                                        <input type="checkbox" name="anti_ghostping" checked>Anti Menci髇 Fantasma
+                                                        <input type="checkbox" name="anti_ghostping" checked>Anti Menci贸n Fantasma
                                                     <% } else { %>
-                                                        <input type="checkbox" name="anti_ghostping">Anti Menci髇 Fantasma
+                                                        <input type="checkbox" name="anti_ghostping">Anti Menci贸n Fantasma
                                                     <% } %>
                                                 </label>
                                             </div>
@@ -308,7 +308,7 @@
                                         </div>
                                     </div>
                                     <div class="box-footer">
-                                        <button type="submit" name="automodUpdate" class="btn btn-primary">Actualizaci髇</button>
+                                        <button type="submit" name="automodUpdate" class="btn btn-primary">Actualizaci贸n</button>
                                     </div>
                                 </form>
                             </div>

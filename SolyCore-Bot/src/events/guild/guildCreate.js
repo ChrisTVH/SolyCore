@@ -29,7 +29,7 @@ module.exports = async (client, guild) => {
         inline: false,
       },
       {
-        name: "Dueño",
+        name: "DueÃ±o",
         value: `${client.users.cache.get(guild.ownerId).tag} [\`${guild.ownerId}\`]`,
         inline: false,
       },

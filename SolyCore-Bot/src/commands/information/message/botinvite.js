@@ -5,7 +5,7 @@ const botinvite = require("../shared/botinvite");
  */
 module.exports = {
   name: "botinvite",
-  description: "te da una invitación del bot",
+  description: "te da una invitaciÃ³n del bot",
   category: "INFORMATION",
   botPermissions: ["EmbedLinks"],
   command: {
@@ -16,9 +16,9 @@ module.exports = {
     const response = botinvite(message.client);
     try {
       await message.author.send(response);
-      return message.safeReply("¡Comprueba tu DM para ver mi información! :envelope_with_arrow:");
+      return message.safeReply("Â¡Comprueba tu DM para ver mi informaciÃ³n! :envelope_with_arrow:");
     } catch (ex) {
-      return message.safeReply("No puedo enviarte mis datos. ¿Está abierto su DM?");
+      return message.safeReply("No puedo enviarte mis datos. Â¿EstÃ¡ abierto su DM?");
     }
   },
 };

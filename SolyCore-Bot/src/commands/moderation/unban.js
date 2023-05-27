@@ -17,7 +17,7 @@ module.exports = {
   userPermissions: ["BanMembers"],
   command: {
     enabled: true,
-    usage: "<ID|@miembro> [razón]",
+    usage: "<ID|@miembro> [razÃ³n]",
     minArgsCount: 1,
   },
   slashCommand: {
@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         name: "reason",
-        description: "motivo de la prohibición",
+        description: "motivo de la prohibiciÃ³n",
         type: ApplicationCommandOptionType.String,
         required: false,
       },
@@ -81,7 +81,7 @@ async function getMatchingBans(guild, match) {
     }
   }
 
-  if (matched.length === 0) return `No se ha encontrado ningún usuario que coincida ${match}`;
+  if (matched.length === 0) return `No se ha encontrado ningÃºn usuario que coincida ${match}`;
 
   const options = [];
   for (const user of matched) {
@@ -120,6 +120,6 @@ async function waitForBan(issuer, reason, sent) {
 
   // recolectar usuario y desbanear
   collector.on("end", async (collected) => {
-    if (collected.size === 0) return sent.edit("¡Uy! Se ha agotado el tiempo. Vuelva a intentarlo más tarde.");
+    if (collected.size === 0) return sent.edit("Â¡Uy! Se ha agotado el tiempo. Vuelva a intentarlo mÃ¡s tarde.");
   });
 }

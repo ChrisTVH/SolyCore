@@ -43,11 +43,11 @@ const logModeration = async (issuer, target, reason, type, data = {}) => {
   const fields = [];
   switch (type.toUpperCase()) {
     case "PURGE":
-      embed.setAuthor({ name: `Moderation - ${type}` });
+      embed.setAuthor({ name: `Moderación - ${type}` });
       fields.push(
-        { name: "Purge Type", value: data.purgeType, inline: true },
-        { name: "Messages", value: data.deletedCount.toString(), inline: true },
-        { name: "Channel", value: `#${data.channel.name} [${data.channel.id}]`, inline: false }
+        { name: "Tipo de purga", value: data.purgeType, inline: true },
+        { name: "Mensajes", value: data.deletedCount.toString(), inline: true },
+        { name: "Canal", value: `#${data.channel.name} [${data.channel.id}]`, inline: false }
       );
       break;
 
@@ -101,25 +101,25 @@ const logModeration = async (issuer, target, reason, type, data = {}) => {
   }
 
   if (type.toUpperCase() !== "PURGE") {
-    embed.setAuthor({ name: `Moderation - ${type}` }).setThumbnail(target.displayAvatarURL());
+    embed.setAuthor({ name: `Moderación - ${type}` }).setThumbnail(target.displayAvatarURL());
 
     if (target instanceof GuildMember) {
-      fields.push({ name: "Member", value: `${target.displayName} [${target.id}]`, inline: false });
+      fields.push({ name: "Miembro", value: `${target.displayName} [${target.id}]`, inline: false });
     } else {
-      fields.push({ name: "User", value: `${target.tag} [${target.id}]`, inline: false });
+      fields.push({ name: "Usuario", value: `${target.tag} [${target.id}]`, inline: false });
     }
 
-    fields.push({ name: "Reason", value: reason || "No reason provided", inline: false });
+    fields.push({ name: "Razón", value: reason || "No se da ninguna razón", inline: false });
 
     if (type.toUpperCase() === "TIMEOUT") {
       fields.push({
-        name: "Expires",
+        name: "Expira en",
         value: `<t:${Math.round(target.communicationDisabledUntilTimestamp / 1000)}:R>`,
         inline: true,
       });
     }
     if (type.toUpperCase() === "MOVE") {
-      fields.push({ name: "Moved to", value: data.channel.name, inline: true });
+      fields.push({ name: "Movido a", value: data.channel.name, inline: true });
     }
   }
 
@@ -183,7 +183,7 @@ module.exports = class ModUtils {
       for (const message of messages.values()) {
         if (toDelete.size >= amount) break;
         if (!message.deletable) continue;
-        if (message.createdTimestamp < Date.now() - 1209600000) continue; // skip messages older than 14 days
+        if (message.createdTimestamp < Date.now() - 1209600000) continue; // omitir los mensajes de más de 14 días
 
         if (type === "ALL") {
           toDelete.set(message.id, message);
@@ -225,7 +225,7 @@ module.exports = class ModUtils {
 
       return deletedMessages.size;
     } catch (ex) {
-      error("purgeMessages", ex);
+      error("purgarMensaje", ex);
       return "ERROR";
     }
   }
@@ -248,14 +248,14 @@ module.exports = class ModUtils {
 
       // comprobar si se ha alcanzado el máximo de advertencias
       if (memberDb.warnings >= settings.max_warn.limit) {
-        await ModUtils.addModAction(issuer.guild.members.me, target, "Max warnings reached", settings.max_warn.action); // moderate
+        await ModUtils.addModAction(issuer.guild.members.me, target, "Advertencias máximas alcanzadas", settings.max_warn.action); // moderate
         memberDb.warnings = 0; // restablecer advertencias
       }
 
       await memberDb.save();
       return true;
     } catch (ex) {
-      error("warnTarget", ex);
+      error("advertirObjetivo", ex);
       return "ERROR";
     }
   }
@@ -274,10 +274,10 @@ module.exports = class ModUtils {
 
     try {
       await target.timeout(ms, reason);
-      logModeration(issuer, target, reason, "Timeout");
+      logModeration(issuer, target, reason, "Tiempo de espera");
       return true;
     } catch (ex) {
-      error("timeoutTarget", ex);
+      error("tiempoDeEsperaObjetivo", ex);
       return "ERROR";
     }
   }
@@ -295,10 +295,10 @@ module.exports = class ModUtils {
 
     try {
       await target.timeout(null, reason);
-      logModeration(issuer, target, reason, "UnTimeout");
+      logModeration(issuer, target, reason, "Desactivar tiempo de espera");
       return true;
     } catch (ex) {
-      error("unTimeoutTarget", ex);
+      error("quitarTiempoDeEsperaObjetivo", ex);
       return "ERROR";
     }
   }
@@ -315,10 +315,10 @@ module.exports = class ModUtils {
 
     try {
       await target.kick(reason);
-      logModeration(issuer, target, reason, "Kick");
+      logModeration(issuer, target, reason, "Expulsar");
       return true;
     } catch (ex) {
-      error("kickTarget", ex);
+      error("expulsarObjetivo", ex);
       return "ERROR";
     }
   }
@@ -336,10 +336,10 @@ module.exports = class ModUtils {
     try {
       await target.ban({ deleteMessageDays: 7, reason });
       await issuer.guild.members.unban(target.user);
-      logModeration(issuer, target, reason, "Softban");
+      logModeration(issuer, target, reason, "Prohibición suave");
       return true;
     } catch (ex) {
-      error("softbanTarget", ex);
+      error("prohibiciónSuaveObjetivo", ex);
       return "ERROR";
     }
   }
@@ -361,7 +361,7 @@ module.exports = class ModUtils {
       logModeration(issuer, target, reason, "Ban");
       return true;
     } catch (ex) {
-      error(`banTarget`, ex);
+      error(`prohibirObjetivo`, ex);
       return "ERROR";
     }
   }
@@ -375,10 +375,10 @@ module.exports = class ModUtils {
   static async unBanTarget(issuer, target, reason) {
     try {
       await issuer.guild.bans.remove(target, reason);
-      logModeration(issuer, target, reason, "UnBan");
+      logModeration(issuer, target, reason, "Quitar Prohibición");
       return true;
     } catch (ex) {
-      error(`unBanTarget`, ex);
+      error(`quitarProhibiciónObjetivo`, ex);
       return "ERROR";
     }
   }
@@ -444,10 +444,10 @@ module.exports = class ModUtils {
 
     try {
       await target.voice.setDeaf(true, reason);
-      logModeration(issuer, target, reason, "Deafen");
+      logModeration(issuer, target, reason, "Ensordecer");
       return true;
     } catch (ex) {
-      error(`deafenTarget`, ex);
+      error(`ensordecerObjetivo`, ex);
       return `Failed to deafen ${target.user.tag}`;
     }
   }
@@ -467,10 +467,10 @@ module.exports = class ModUtils {
 
     try {
       await target.voice.setDeaf(false, reason);
-      logModeration(issuer, target, reason, "unDeafen");
+      logModeration(issuer, target, reason, "quitarEnsordecer");
       return true;
     } catch (ex) {
-      error(`unDeafenTarget`, ex);
+      error(`quitarEnsordecerObjetivo`, ex);
       return "ERROR";
     }
   }
@@ -489,10 +489,10 @@ module.exports = class ModUtils {
 
     try {
       await target.voice.disconnect(reason);
-      logModeration(issuer, target, reason, "Disconnect");
+      logModeration(issuer, target, reason, "Desconectado");
       return true;
     } catch (ex) {
-      error(`unDeafenTarget`, ex);
+      error(`quitarEnsordecerObjetivo`, ex);
       return "ERROR";
     }
   }

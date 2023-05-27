@@ -9,7 +9,7 @@ const { getReputationLb } = require("@schemas/User");
  */
 module.exports = {
   name: "leaderboard",
-    description: "mostrar la clasificaciÛn de EXP",
+    description: "mostrar la clasificaci√≥n de EXP",
   category: "INFORMATION",
   botPermissions: ["EmbedLinks"],
   command: {
@@ -23,7 +23,7 @@ module.exports = {
     options: [
       {
         name: "type",
-        description: "tipo de clasificaciÛn que se mostrar·",
+        description: "tipo de clasificaci√≥n que se mostrar√°",
         required: true,
         type: ApplicationCommandOptionType.String,
         choices: [
@@ -51,7 +51,7 @@ module.exports = {
     if (type === "xp") response = await getXpLeaderboard(message, message.author, data.settings);
     else if (type === "invite") response = await getInviteLeaderboard(message, message.author, data.settings);
     else if (type === "rep") response = await getRepLeaderboard(message.author);
-    else response = "Tipo de clasificaciÛn no v·lido. Elige `xp` o `invite`.";
+    else response = "Tipo de clasificaci√≥n no v√°lido. Elige `xp` o `invite`.";
     await message.safeReply(response);
   },
 
@@ -62,17 +62,17 @@ module.exports = {
     if (type === "xp") response = await getXpLeaderboard(interaction, interaction.user, data.settings);
     else if (type === "invite") response = await getInviteLeaderboard(interaction, interaction.user, data.settings);
     else if (type === "rep") response = await getRepLeaderboard(interaction.user);
-    else response = "Tipo de clasificaciÛn no v·lido. Elige `xp` o `invite`.";
+    else response = "Tipo de clasificaci√≥n no v√°lido. Elige `xp` o `invite`.";
 
     await interaction.followUp(response);
   },
 };
 
 async function getXpLeaderboard({ guild }, author, settings) {
-  if (!settings.stats.enabled) return "La clasificaciÛn est· desactivada en este servidor";
+  if (!settings.stats.enabled) return "La clasificaci√≥n est√° desactivada en este servidor";
 
   const lb = await getXpLb(guild.id, 10);
-  if (lb.length === 0) return "No hay usuarios en la clasificaciÛn";
+  if (lb.length === 0) return "No hay usuarios en la clasificaci√≥n";
 
   let collector = "";
   for (let i = 0; i < lb.length; i++) {
@@ -85,7 +85,7 @@ async function getXpLeaderboard({ guild }, author, settings) {
   }
 
   const embed = new EmbedBuilder()
-    .setAuthor({ name: "ClasificaciÛn de EXP" })
+    .setAuthor({ name: "Clasificaci√≥n de EXP" })
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setDescription(collector)
     .setFooter({ text: `Solicitado por ${author.tag}` });
@@ -94,10 +94,10 @@ async function getXpLeaderboard({ guild }, author, settings) {
 }
 
 async function getInviteLeaderboard({ guild }, author, settings) {
-  if (!settings.invite.tracking) return "El seguimiento de invitaciones est· desactivado en este servidor";
+  if (!settings.invite.tracking) return "El seguimiento de invitaciones est√° desactivado en este servidor";
 
   const lb = await getInvitesLb(guild.id, 10);
-  if (lb.length === 0) return "No hay usuarios en la clasificaciÛn";
+  if (lb.length === 0) return "No hay usuarios en la clasificaci√≥n";
 
   let collector = "";
   for (let i = 0; i < lb.length; i++) {
@@ -114,7 +114,7 @@ async function getInviteLeaderboard({ guild }, author, settings) {
   }
 
   const embed = new EmbedBuilder()
-    .setAuthor({ name: "Tabla de clasificaciÛn por invitaciÛn" })
+    .setAuthor({ name: "Tabla de clasificaci√≥n por invitaci√≥n" })
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setDescription(collector)
     .setFooter({ text: `Solicitado por ${author.tag}` });
@@ -124,14 +124,14 @@ async function getInviteLeaderboard({ guild }, author, settings) {
 
 async function getRepLeaderboard(author) {
   const lb = await getReputationLb(10);
-  if (lb.length === 0) return "No hay usuarios en la clasificaciÛn";
+  if (lb.length === 0) return "No hay usuarios en la clasificaci√≥n";
 
   const collector = lb
     .map((user, i) => `**#${(i + 1).toString()}** - ${escapeInlineCode(user.username)} (${user.reputation?.received})`)
     .join("\n");
 
   const embed = new EmbedBuilder()
-    .setAuthor({ name: "Tabla de reputaciÛn" })
+    .setAuthor({ name: "Tabla de reputaci√≥n" })
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setDescription(collector)
     .setFooter({ text: `Solicitado por ${author.tag}` });

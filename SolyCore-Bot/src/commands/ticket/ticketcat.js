@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
  */
 module.exports = {
   name: "ticketcat",
-  description: "gestionar categorías de tickets",
+  description: "gestionar categorÃ­as de tickets",
   category: "TICKET",
   userPermissions: ["ManageGuild"],
   command: {
@@ -14,15 +14,15 @@ module.exports = {
     subcommands: [
       {
         trigger: "list",
-        description: "lista de todas las categorías de entradas",
+        description: "lista de todas las categorÃ­as de entradas",
       },
       {
-        trigger: "add <categoría> | <staff_rol>",
-        description: "añadir una categoría de ticket",
+        trigger: "add <categorÃ­a> | <staff_rol>",
+        description: "aÃ±adir una categorÃ­a de ticket",
       },
       {
-        trigger: "remove <categoría>",
-        description: "eliminar una categoría de ticket",
+        trigger: "remove <categorÃ­a>",
+        description: "eliminar una categorÃ­a de ticket",
       },
     ],
   },
@@ -32,17 +32,17 @@ module.exports = {
     options: [
       {
         name: "list",
-        description: "lista de todas las categorías de ticket",
+        description: "lista de todas las categorÃ­as de ticket",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
         name: "add",
-        description: "añadir una categoría de ticket",
+        description: "aÃ±adir una categorÃ­a de ticket",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "category",
-            description: "el nombre de la categoría",
+            description: "el nombre de la categorÃ­a",
             type: ApplicationCommandOptionType.String,
             required: true,
           },
@@ -56,12 +56,12 @@ module.exports = {
       },
       {
         name: "remove",
-        description: "eliminar una categoría de ticket",
+        description: "eliminar una categorÃ­a de ticket",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "category",
-            description: "el nombre de la categoría",
+            description: "el nombre de la categorÃ­a",
             type: ApplicationCommandOptionType.String,
             required: true,
           },
@@ -93,9 +93,9 @@ module.exports = {
       response = await removeCategory(data, category);
     }
 
-    // subcomando no válido
+    // subcomando no vÃ¡lido
     else {
-      response = "Subcomando no válido.";
+      response = "Subcomando no vÃ¡lido.";
     }
 
     await message.safeReply(response);
@@ -124,30 +124,30 @@ module.exports = {
     }
 
     //
-    else response = "Subcomando no válido";
+    else response = "Subcomando no vÃ¡lido";
     await interaction.followUp(response);
   },
 };
 
 function listCategories(data) {
   const categories = data.settings.ticket.categories;
-  if (categories?.length === 0) return "No se han encontrado categorías de entradas.";
+  if (categories?.length === 0) return "No se han encontrado categorÃ­as de entradas.";
 
   const fields = [];
   for (const category of categories) {
     const roleNames = category.staff_roles.map((r) => `<@&${r}>`).join(", ");
     fields.push({ name: category.name, value: `**Staff:** ${roleNames || "Nada"}` });
   }
-  const embed = new EmbedBuilder().setAuthor({ name: "Categorías de tickets" }).addFields(fields);
+  const embed = new EmbedBuilder().setAuthor({ name: "CategorÃ­as de tickets" }).addFields(fields);
   return { embeds: [embed] };
 }
 
 async function addCategory(guild, data, category, staff_roles) {
-  if (!category) return "Uso no válido. Falta el nombre de la categoría.";
+  if (!category) return "Uso no vÃ¡lido. Falta el nombre de la categorÃ­a.";
 
-  // comprobar si la categoría ya existe
+  // comprobar si la categorÃ­a ya existe
   if (data.settings.ticket.categories.find((c) => c.name === category)) {
-    return `Categoría \`${category}\` ya existe.`;
+    return `CategorÃ­a \`${category}\` ya existe.`;
   }
 
   const staffRoles = (staff_roles?.split(",")?.map((r) => r.trim()) || []).filter((r) => guild.roles.cache.has(r));
@@ -155,18 +155,18 @@ async function addCategory(guild, data, category, staff_roles) {
   data.settings.ticket.categories.push({ name: category, staff_roles: staffRoles });
   await data.settings.save();
 
-  return `La Categoría \`${category}\` fue añadida.`;
+  return `La CategorÃ­a \`${category}\` fue aÃ±adida.`;
 }
 
 async function removeCategory(data, category) {
   const categories = data.settings.ticket.categories;
-  // comprobar si existe la categoría
+  // comprobar si existe la categorÃ­a
   if (!categories.find((c) => c.name === category)) {
-    return `La categoría \`${category}\` no existe.`;
+    return `La categorÃ­a \`${category}\` no existe.`;
   }
 
   data.settings.ticket.categories = categories.filter((c) => c.name !== category);
   await data.settings.save();
 
-  return `La categoría \`${category}\` fue borrada.`;
+  return `La categorÃ­a \`${category}\` fue borrada.`;
 }

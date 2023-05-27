@@ -36,7 +36,7 @@ module.exports = (client) => {
   desc += "\n";
 
   const embed = new EmbedBuilder()
-    .setTitle("Información sobre bots")
+    .setTitle("Información sobre el bot")
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setThumbnail(client.user.displayAvatarURL())
     .setDescription(desc)

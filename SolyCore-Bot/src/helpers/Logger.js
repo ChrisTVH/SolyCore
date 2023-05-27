@@ -45,7 +45,7 @@ function sendWebhook(content, err) {
       "```js\n" + (errString.length > 4096 ? `${errString.substr(0, 4000)}...` : errString) + "\n```"
     );
 
-  embed.addFields({ name: "Description", value: content || err?.message || "NA" });
+  embed.addFields({ name: "Descripción", value: content || err?.message || "NA" });
   webhookLogger.send({ username: "Logs", embeds: [embed] }).catch((ex) => {});
 }
 

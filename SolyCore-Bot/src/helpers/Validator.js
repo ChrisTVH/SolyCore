@@ -6,46 +6,46 @@ const { ApplicationCommandType } = require("discord.js");
 
 module.exports = class Validator {
   static validateConfiguration() {
-    log("Validación del archivo de configuración y las variables de entorno");
+    log("ValidaciÃ³n del archivo de configuraciÃ³n y las variables de entorno");
 
     // Bot Token
     if (!process.env.BOT_TOKEN) {
-      error("env: BOT_TOKEN no puede estar vacío");
+      error("env: BOT_TOKEN no puede estar vacÃ­o");
       process.exit(1);
     }
 
-    // Validar la configuración de la base de datos
+    // Validar la configuraciÃ³n de la base de datos
     if (!process.env.MONGO_CONNECTION) {
-      error("env: MONGO_CONNECTION no puede estar vacío");
+      error("env: MONGO_CONNECTION no puede estar vacÃ­o");
       process.exit(1);
     }
 
-    // Validar la configuración del panel de control
+    // Validar la configuraciÃ³n del panel de control
     if (config.DASHBOARD.enabled) {
       if (!process.env.BOT_SECRET) {
-        error("env: BOT_SECRET no puede estar vacío");
+        error("env: BOT_SECRET no puede estar vacÃ­o");
         process.exit(1);
       }
       if (!process.env.SESSION_PASSWORD) {
-        error("env: SESSION_PASSWORD no puede estar vacío");
+        error("env: SESSION_PASSWORD no puede estar vacÃ­o");
         process.exit(1);
       }
       if (!config.DASHBOARD.baseURL || !config.DASHBOARD.failureURL || !config.DASHBOARD.port) {
-        error("config.js: Los detalles del DASHBOARD no pueden estar vacíos");
+        error("config.js: Los detalles del DASHBOARD no pueden estar vacÃ­os");
         process.exit(1);
       }
     }
 
-    // Tamaño de la caché
+    // TamaÃ±o de la cachÃ©
     if (isNaN(config.CACHE_SIZE.GUILDS) || isNaN(config.CACHE_SIZE.USERS) || isNaN(config.CACHE_SIZE.MEMBERS)) {
       error("config.js: CACHE_SIZE debe ser un entero positivo");
       process.exit(1);
     }
 
-    // Música
+    // MÃºsica
     if (config.MUSIC.ENABLED) {
       if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
-        warn("env: Falta SPOTIFY_CLIENT_ID o SPOTIFY_CLIENT_SECRET. Los enlaces de música de Spotify no funcionan");
+        warn("env: Falta SPOTIFY_CLIENT_ID o SPOTIFY_CLIENT_SECRET. Los enlaces de mÃºsica de Spotify no funcionan");
       }
       if (config.MUSIC.LAVALINK_NODES.length == 0) {
         warn("config.js: Debe haber al menos un nodo para Lavalink");
@@ -56,9 +56,9 @@ module.exports = class Validator {
     }
 
     // Advertencias
-    if (config.OWNER_IDS.length === 0) warn("config.js: OWNER_IDS están vacíos");
+    if (config.OWNER_IDS.length === 0) warn("config.js: OWNER_IDS estÃ¡n vacÃ­os");
     if (!config.SUPPORT_SERVER) warn("config.js: SUPPORT_SERVER no se proporciona");
-    if (!process.env.WEATHERSTACK_KEY) warn("env: WEATHERSTACK_KEY falta. El comando meteorológico no funciona");
+    if (!process.env.WEATHERSTACK_KEY) warn("env: WEATHERSTACK_KEY falta. El comando meteorolÃ³gico no funciona");
     if (!process.env.STRANGE_API_KEY) warn("env: STRANGE_API_KEY falta. Los comandos de imagen no funcionan");
   }
 
@@ -70,17 +70,17 @@ module.exports = class Validator {
       throw new TypeError("Los datos del comando deben ser un Objeto.");
     }
     if (typeof cmd.name !== "string" || cmd.name !== cmd.name.toLowerCase()) {
-      throw new Error("El nombre del comando debe ser una cadena en minúsculas.");
+      throw new Error("El nombre del comando debe ser una cadena en minÃºsculas.");
     }
     if (typeof cmd.description !== "string") {
-      throw new TypeError("La descripción del comando debe ser una cadena.");
+      throw new TypeError("La descripciÃ³n del comando debe ser una cadena.");
     }
     if (cmd.cooldown && typeof cmd.cooldown !== "number") {
-      throw new TypeError("El enfriamiento del comando debe ser un número");
+      throw new TypeError("El enfriamiento del comando debe ser un nÃºmero");
     }
     if (cmd.category) {
       if (!Object.prototype.hasOwnProperty.call(CommandCategory, cmd.category)) {
-        throw new Error(`No es una categoría válida ${cmd.category}`);
+        throw new Error(`No es una categorÃ­a vÃ¡lida ${cmd.category}`);
       }
     }
     if (cmd.userPermissions) {
@@ -88,7 +88,7 @@ module.exports = class Validator {
         throw new TypeError("El comando userPermissions debe ser un array de cadenas de claves de permisos.");
       }
       for (const perm of cmd.userPermissions) {
-        if (!permissions[perm]) throw new RangeError(`Comando no válido userPermission: ${perm}`);
+        if (!permissions[perm]) throw new RangeError(`Comando no vÃ¡lido userPermission: ${perm}`);
       }
     }
     if (cmd.botPermissions) {
@@ -96,22 +96,22 @@ module.exports = class Validator {
         throw new TypeError("El comando botPermissions debe ser un array de cadenas de claves de permisos.");
       }
       for (const perm of cmd.botPermissions) {
-        if (!permissions[perm]) throw new RangeError(`Comando inválido botPermission: ${perm}`);
+        if (!permissions[perm]) throw new RangeError(`Comando invÃ¡lido botPermission: ${perm}`);
       }
     }
     if (cmd.validations) {
       if (!Array.isArray(cmd.validations)) {
-        throw new TypeError("Las validaciones de comandos deben ser una Array de objetos de validación.");
+        throw new TypeError("Las validaciones de comandos deben ser una Array de objetos de validaciÃ³n.");
       }
       for (const validation of cmd.validations) {
         if (typeof validation !== "object") {
           throw new TypeError("Las validaciones de comandos deben ser un objeto.");
         }
         if (typeof validation.callback !== "function") {
-          throw new TypeError("El callback de validación del comando debe ser una función.");
+          throw new TypeError("El callback de validaciÃ³n del comando debe ser una funciÃ³n.");
         }
         if (typeof validation.message !== "string") {
-          throw new TypeError("El mensaje de validación del comando debe ser una cadena.");
+          throw new TypeError("El mensaje de validaciÃ³n del comando debe ser una cadena.");
         }
       }
     }
@@ -129,13 +129,13 @@ module.exports = class Validator {
         (!Array.isArray(cmd.command.aliases) ||
           cmd.command.aliases.some((ali) => typeof ali !== "string" || ali !== ali.toLowerCase()))
       ) {
-        throw new TypeError("Command.command aliases debe ser un Array de cadenas en minúsculas.");
+        throw new TypeError("Command.command aliases debe ser un Array de cadenas en minÃºsculas.");
       }
       if (cmd.command.usage && typeof cmd.command.usage !== "string") {
         throw new TypeError("El uso de command.command debe ser una cadena");
       }
       if (cmd.command.minArgsCount && typeof cmd.command.minArgsCount !== "number") {
-        throw new TypeError("Command.command minArgsCount debe ser un número");
+        throw new TypeError("Command.command minArgsCount debe ser un nÃºmero");
       }
       if (cmd.command.subcommands && !Array.isArray(cmd.command.subcommands)) {
         throw new TypeError("Los subcomandos de command.command deben ser una Array");
@@ -149,12 +149,12 @@ module.exports = class Validator {
             throw new TypeError("Command.command el subcomando trigger debe ser una cadena");
           }
           if (typeof sub.description !== "string") {
-            throw new TypeError("La descripción del subcomando Command.command debe ser una cadena");
+            throw new TypeError("La descripciÃ³n del subcomando Command.command debe ser una cadena");
           }
         }
       }
       if (cmd.command.enabled && typeof cmd.messageRun !== "function") {
-          throw new TypeError("Falta la función 'messageRun'");
+          throw new TypeError("Falta la funciÃ³n 'messageRun'");
       }
     }
 
@@ -179,7 +179,7 @@ module.exports = class Validator {
         throw new TypeError("Las opciones de Command.slashCommand deben ser un array");
       }
       if (cmd.slashCommand.enabled && typeof cmd.interactionRun !== "function") {
-          throw new TypeError("Falta la función 'interactionRun'");
+          throw new TypeError("Falta la funciÃ³n 'interactionRun'");
       }
     }
   }
@@ -192,10 +192,10 @@ module.exports = class Validator {
       throw new TypeError("El contexto debe ser un objeto");
     }
     if (typeof context.name !== "string" || context.name !== context.name.toLowerCase()) {
-      throw new Error("El nombre del contexto debe ser una cadena en minúsculas.");
+      throw new Error("El nombre del contexto debe ser una cadena en minÃºsculas.");
     }
     if (typeof context.description !== "string") {
-      throw new TypeError("La descripción del contexto debe ser una cadena.");
+      throw new TypeError("La descripciÃ³n del contexto debe ser una cadena.");
     }
     if (context.type !== ApplicationCommandType.User && context.type !== ApplicationCommandType.Message) {
         throw new TypeError("El tipo de contexto debe ser Usuario/Mensaje.");
@@ -213,14 +213,14 @@ module.exports = class Validator {
       throw new TypeError("Context defaultPermission debe ser un valor booleano");
     }
     if (Object.prototype.hasOwnProperty.call(context, "cooldown") && typeof context.cooldown !== "number") {
-      throw new TypeError("El enfriamiento del contexto debe ser un número");
+      throw new TypeError("El enfriamiento del contexto debe ser un nÃºmero");
     }
     if (context.userPermissions) {
       if (!Array.isArray(context.userPermissions)) {
         throw new TypeError("Context userPermissions debe ser una Array de cadenas de claves de permisos.");
       }
       for (const perm of context.userPermissions) {
-        if (!permissions[perm]) throw new RangeError(`Comando no válido userPermission: ${perm}`);
+        if (!permissions[perm]) throw new RangeError(`Comando no vÃ¡lido userPermission: ${perm}`);
       }
     }
   }

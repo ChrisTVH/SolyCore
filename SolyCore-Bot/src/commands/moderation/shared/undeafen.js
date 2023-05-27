@@ -12,10 +12,10 @@ module.exports = async ({ member }, target, reason) => {
     return `No tengo permiso para ensordecer ${target.user.tag}`;
   }
   if (response === "NO_VOICE") {
-    return `${target.user.tag} no está en ningún canal de voz`;
+    return `${target.user.tag} no estÃ¡ en ningÃºn canal de voz`;
   }
   if (response === "NOT_DEAFENED") {
-    return `${target.user.tag} no está ensordecido`;
+    return `${target.user.tag} no estÃ¡ ensordecido`;
   }
-  return `Falló al quitar el ensordecer ${target.user.tag}`;
+  return `FallÃ³ al quitar el ensordecer ${target.user.tag}`;
 };

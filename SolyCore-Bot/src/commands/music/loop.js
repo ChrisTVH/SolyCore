@@ -7,7 +7,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "loop",
-  description: "pone en bucle la canciÛn o la cola",
+  description: "pone en bucle la canci√≥n o la cola",
   category: "MUSIC",
   validations: musicValidations,
   command: {
@@ -61,7 +61,7 @@ function toggleLoop({ client, guildId }, type) {
   // pista
   if (type === "track") {
     player.queue.setLoop(LoopType.Song);
-    return "El modo bucle est· ajustado a `pista`";
+    return "El modo bucle est√° ajustado a `pista`";
   }
 
   // cola

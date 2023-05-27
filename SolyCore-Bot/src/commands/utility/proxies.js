@@ -58,7 +58,7 @@ async function getProxies(type) {
   );
 
   if (!response.success || !response.buffer) return "Fallo al buscar proxies";
-  if (response.buffer.length === 0) return "No se han podido buscar los datos. Vuelva a intentarlo m·s tarde";
+  if (response.buffer.length === 0) return "No se han podido buscar los datos. Vuelva a intentarlo m√°s tarde";
 
   const attachment = new AttachmentBuilder(response.buffer, { name: `${type.toLowerCase()}_proxies.txt` });
   return { content: `${type.toUpperCase()} Proxies buscados`, files: [attachment] };

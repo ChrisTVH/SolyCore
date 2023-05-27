@@ -11,7 +11,7 @@ module.exports = {
   userPermissions: ["KickMembers"],
   command: {
     enabled: true,
-    usage: "<ID|@miembro> [razón]",
+    usage: "<ID|@miembro> [razÃ³n]",
     minArgsCount: 1,
   },
   slashCommand: {
@@ -34,7 +34,7 @@ module.exports = {
 
   async messageRun(message, args) {
     const target = await message.guild.resolveMember(args[0], true);
-    if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[0]}`);
+    if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[0]}`);
     const reason = message.content.split(args[0])[1].trim();
     const response = await warn(message.member, target, reason);
     await message.safeReply(response);
@@ -52,7 +52,7 @@ module.exports = {
 
 async function warn(issuer, target, reason) {
   const response = await warnTarget(issuer, target, reason);
-  if (typeof response === "boolean") return `${target.user.tag} ¡está advertido!`;
+  if (typeof response === "boolean") return `${target.user.tag} Â¡estÃ¡ advertido!`;
   if (response === "BOT_PERM") return `No tengo permiso para advertir ${target.user.tag}`;
   else if (response === "MEMBER_PERM") return `No tienes permiso para avisar ${target.user.tag}`;
   else return `Fallo al avisar ${target.user.tag}`;

@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "anti",
-  description: "gestionar varios ajustes de moderaci髇 autom醫ica para el servidor",
+  description: "gestionar varios ajustes de moderaci贸n autom谩tica para el servidor",
   category: "AUTOMOD",
   userPermissions: ["ManageGuild"],
   command: {
@@ -13,16 +13,16 @@ module.exports = {
     minArgsCount: 2,
     subcommands: [
       {
-        trigger: "menci髇 fantasma <on|off>",
+        trigger: "menci贸n fantasma <on|off>",
         description: "detecta y registra menciones fantasma en tu servidor",
       },
       {
         trigger: "spam <on|off>",
-        description: "activar o desactivar la detecci髇 antispam",
+        description: "activar o desactivar la detecci贸n antispam",
       },
       {
-        trigger: "menci髇 masiva <on|off> [umbral]",
-        description: "activar o desactivar la detecci髇 de menciones masivas [el umbral por defecto es de 3 menciones].",
+        trigger: "menci贸n masiva <on|off> [umbral]",
+        description: "activar o desactivar la detecci贸n de menciones masivas [el umbral por defecto es de 3 menciones].",
       },
     ],
   },
@@ -37,7 +37,7 @@ module.exports = {
         options: [
           {
             name: "status",
-            description: "estado de la configuraci髇",
+            description: "estado de la configuraci贸n",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -55,12 +55,12 @@ module.exports = {
       },
       {
         name: "spam",
-        description: "activar o desactivar la detecci髇 antispam",
+        description: "activar o desactivar la detecci贸n antispam",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "status",
-            description: "estado de la configuraci髇",
+            description: "estado de la configuraci贸n",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -78,12 +78,12 @@ module.exports = {
       },
       {
         name: "massmention",
-        description: "activar o desactivar la detecci髇 de menciones masivas",
+        description: "activar o desactivar la detecci贸n de menciones masivas",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "status",
-            description: "estado de la configuraci髇",
+            description: "estado de la configuraci贸n",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -99,7 +99,7 @@ module.exports = {
           },
           {
             name: "threshold",
-            description: "umbral de configuraci髇 (por defecto, 3 menciones)",
+            description: "umbral de configuraci贸n (por defecto, 3 menciones)",
             required: false,
             type: ApplicationCommandOptionType.Integer,
           },
@@ -115,14 +115,14 @@ module.exports = {
     let response;
     if (sub == "ghostping") {
       const status = args[1].toLowerCase();
-      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v醠ido. El valor debe ser `on/off`");
+      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v谩lido. El valor debe ser `on/off`");
       response = await antiGhostPing(settings, status);
     }
 
     //
     else if (sub == "spam") {
       const status = args[1].toLowerCase();
-      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v醠ido. El valor debe ser `on/off`");
+      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v谩lido. El valor debe ser `on/off`");
       response = await antiSpam(settings, status);
     }
 
@@ -130,12 +130,12 @@ module.exports = {
     else if (sub === "massmention") {
       const status = args[1].toLowerCase();
       const threshold = args[2] || 3;
-      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v醠ido. El valor debe ser `on/off`");
+      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v谩lido. El valor debe ser `on/off`");
       response = await antiMassMention(settings, status, threshold);
     }
 
     //
-    else response = "so de comando no v醠ido!";
+    else response = "隆Uso de comando no v谩lido!";
     await message.safeReply(response);
   },
 
@@ -152,7 +152,7 @@ module.exports = {
         interaction.options.getString("status"),
         interaction.options.getInteger("amount")
       );
-    } else response = "so de comando no v醠ido!";
+    } else response = "隆Uso de comando no v谩lido!";
 
     await interaction.followUp(response);
   },
@@ -162,14 +162,14 @@ async function antiGhostPing(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_ghostping = status;
   await settings.save();
-  return `onfiguraci髇 guardada! Anti-Menci髇Fantasma es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `隆Configuraci贸n guardada! Anti-Menci贸nFantasma es ahora ${status ? "habilitado" : "deshabilitado"}`;
 }
 
 async function antiSpam(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_spam = status;
   await settings.save();
-  return `La detecci髇 antispam es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `La detecci贸n antispam es ahora ${status ? "habilitado" : "deshabilitado"}`;
 }
 
 async function antiMassMention(settings, input, threshold) {
@@ -180,5 +180,5 @@ async function antiMassMention(settings, input, threshold) {
     settings.automod.anti_massmention = threshold;
   }
   await settings.save();
-  return `La detecci髇 de menciones masivas es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `La detecci贸n de menciones masivas es ahora ${status ? "habilitado" : "deshabilitado"}`;
 }

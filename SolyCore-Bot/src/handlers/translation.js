@@ -39,11 +39,11 @@ async function handleFlagReaction(emoji, message, user) {
 
   const languages = getLanguagesFromEmoji(emoji);
 
-  // filtrar los idiomas para los que está disponible la traducción de google
+  // filtrar los idiomas para los que estÃ¡ disponible la traducciÃ³n de google
   const targetCodes = languages.filter((language) => data.GOOGLE_TRANSLATE[language] !== undefined);
   if (targetCodes.length === 0) return;
 
-  // eliminar el inglés si hay otros códigos de idioma
+  // eliminar el inglÃ©s si hay otros cÃ³digos de idioma
   if (targetCodes.length > 1 && targetCodes.includes("en")) {
     targetCodes.splice(targetCodes.indexOf("en"), 1);
   }
@@ -71,7 +71,7 @@ async function handleFlagReaction(emoji, message, user) {
 
   const embed = new EmbedBuilder()
     .setColor(message.client.config.EMBED_COLORS.BOT_EMBED)
-    .setAuthor({ name: `Traducción del ${src}` })
+    .setAuthor({ name: `TraducciÃ³n del ${src}` })
     .setDescription(desc)
     .setFooter({
       text: `Solicitado por ${user.tag}`,

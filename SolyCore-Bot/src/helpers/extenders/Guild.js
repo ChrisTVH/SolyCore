@@ -67,7 +67,7 @@ Guild.prototype.findMatchingRoles = function (query) {
 };
 
 /**
- * Resuelve un miembro del servidor a partir de una consulta de búsqueda
+ * Resuelve un miembro del servidor a partir de una consulta de bÃºsqueda
  * @param {string} query
  * @param {boolean} exact
  */
@@ -82,7 +82,7 @@ Guild.prototype.resolveMember = async function (query, exact = false) {
     if (fetched) return fetched;
   }
 
-  // Obtención y almacenamiento en caché de miembros de la API
+  // ObtenciÃ³n y almacenamiento en cachÃ© de miembros de la API
   await this.members.fetch({ query }).catch(() => {});
 
   // Comprobar si coincide la etiqueta exacta
@@ -101,7 +101,7 @@ Guild.prototype.resolveMember = async function (query, exact = false) {
 };
 
 /**
- * Obtener las estadísticas de los miembros
+ * Obtener las estadÃ­sticas de los miembros
  */
 Guild.prototype.fetchMemberStats = async function () {
   const all = await this.members.fetch({

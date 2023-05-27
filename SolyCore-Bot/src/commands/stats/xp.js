@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType, ChannelType } = require("discord.js");
  */
 module.exports = {
   name: "levelup",
-  description: "configurar el sistema de nivelación",
+  description: "configurar el sistema de nivelaciÃ³n",
   category: "STATS",
   userPermissions: ["ManageGuild"],
   command: {
@@ -74,14 +74,14 @@ module.exports = {
       if (input === "off") channel = "off";
       else {
         const match = message.guild.findMatchingChannels(input);
-        if (match.length === 0) return message.safeReply("Canal no válido. Por favor, introduzca un canal válido");
+        if (match.length === 0) return message.safeReply("Canal no vÃ¡lido. Por favor, introduzca un canal vÃ¡lido");
         channel = match[0];
       }
       response = await setChannel(channel, data.settings);
     }
 
     // invalido
-    else response = "Subcomando no válido";
+    else response = "Subcomando no vÃ¡lido";
     await message.safeReply(response);
   },
 
@@ -91,25 +91,25 @@ module.exports = {
 
     if (sub === "message") response = await setMessage(interaction.options.getString("message"), data.settings);
     else if (sub === "channel") response = await setChannel(interaction.options.getChannel("channel"), data.settings);
-    else response = "Subcomando no válido";
+    else response = "Subcomando no vÃ¡lido";
 
     await interaction.followUp(response);
   },
 };
 
 async function setMessage(message, settings) {
-  if (!message) return "Mensaje no válido. Por favor, introduzca un mensaje";
+  if (!message) return "Mensaje no vÃ¡lido. Por favor, introduzca un mensaje";
   settings.stats.xp.message = message;
   await settings.save();
-  return `Configuración guardada. Mensaje de subida de nivel actualizado.`;
+  return `ConfiguraciÃ³n guardada. Mensaje de subida de nivel actualizado.`;
 }
 
 async function setChannel(channel, settings) {
-  if (!channel) return "Canal no válido. Por favor, indique un canal";
+  if (!channel) return "Canal no vÃ¡lido. Por favor, indique un canal";
 
   if (channel === "off") settings.stats.xp.channel = null;
   else settings.stats.xp.channel = channel.id;
 
   await settings.save();
-  return `Configuración guardada. ¡Canal de subida de nivel actualizado!`;
+  return `ConfiguraciÃ³n guardada. Â¡Canal de subida de nivel actualizado!`;
 }

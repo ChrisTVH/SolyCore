@@ -7,7 +7,7 @@ const { getInviteCache } = require("@handlers/invite");
 module.exports = async (client, invite) => {
   const cachedInvites = getInviteCache(invite?.guild);
 
-  // Comprobar si el código de invitación existe en la caché
+  // Comprobar si el cÃ³digo de invitaciÃ³n existe en la cachÃ©
   if (cachedInvites && cachedInvites.get(invite.code)) {
     cachedInvites.get(invite.code).deletedTimestamp = Date.now();
   }

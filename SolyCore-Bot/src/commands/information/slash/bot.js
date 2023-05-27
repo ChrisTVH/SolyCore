@@ -25,12 +25,12 @@ module.exports = {
     options: [
       {
         name: "invite",
-        description: "obtener invitación del bot",
+        description: "obtener invitaciÃ³n del bot",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
         name: "stats",
-        description: "obtener estadísticas del bot",
+        description: "obtener estadÃ­sticas del bot",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
@@ -43,20 +43,20 @@ module.exports = {
 
   async interactionRun(interaction) {
     const sub = interaction.options.getSubcommand();
-    if (!sub) return interaction.followUp("No es un subcomando válido");
+    if (!sub) return interaction.followUp("No es un subcomando vÃ¡lido");
 
-    // Invitación
+    // InvitaciÃ³n
     if (sub === "invite") {
       const response = botInvite(interaction.client);
       try {
         await interaction.user.send(response);
-        return interaction.followUp("¡Compruebe su DM para mi información! :envelope_with_arrow:");
+        return interaction.followUp("Â¡Compruebe su DM para mi informaciÃ³n! :envelope_with_arrow:");
       } catch (ex) {
-        return interaction.followUp("No puedo enviarte mis datos. ¿Está abierto su DM?");
+        return interaction.followUp("No puedo enviarte mis datos. Â¿EstÃ¡ abierto su DM?");
       }
     }
 
-    // Estadísticas
+    // EstadÃ­sticas
     else if (sub === "stats") {
       const response = botstats(interaction.client);
       return interaction.followUp(response);
@@ -71,14 +71,14 @@ module.exports = {
 
 function botInvite(client) {
   const embed = new EmbedBuilder()
-    .setAuthor({ name: "Invitación" })
+    .setAuthor({ name: "InvitaciÃ³n" })
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setThumbnail(client.user.displayAvatarURL())
-    .setDescription("Gracias por invitarme. Gracias por considerar invitarme\nUtiliza el botón de abajo para navegar donde quieras");
+    .setDescription("Gracias por invitarme. Gracias por considerar invitarme\nUtiliza el botÃ³n de abajo para navegar donde quieras");
 
   // Botones
   let components = [];
-  components.push(new ButtonBuilder().setLabel("Enlace de invitación").setURL(client.getInvite()).setStyle(ButtonStyle.Link));
+  components.push(new ButtonBuilder().setLabel("Enlace de invitaciÃ³n").setURL(client.getInvite()).setStyle(ButtonStyle.Link));
 
   if (SUPPORT_SERVER) {
     components.push(new ButtonBuilder().setLabel("Servidor de asistencia").setURL(SUPPORT_SERVER).setStyle(ButtonStyle.Link));

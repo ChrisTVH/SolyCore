@@ -9,7 +9,7 @@ const { getMember } = require("@schemas/Member");
  */
 module.exports = {
   name: "inviter",
-  description: "muestra informaciÛn sobre el invitante",
+  description: "muestra informaci√≥n sobre el invitante",
   category: "INVITE",
   botPermissions: ["EmbedLinks"],
   command: {
@@ -21,7 +21,7 @@ module.exports = {
     options: [
       {
         name: "user",
-        description: "para que el usuario obtenga la informaciÛn del",
+        description: "para que el usuario obtenga la informaci√≥n del",
         type: ApplicationCommandOptionType.User,
         required: false,
       },
@@ -42,7 +42,7 @@ module.exports = {
 };
 
 async function getInviter({ guild }, user, settings) {
-  if (!settings.invite.tracking) return `El seguimiento de invitaciones est· desactivado en este servidor`;
+  if (!settings.invite.tracking) return `El seguimiento de invitaciones est√° desactivado en este servidor`;
 
   const inviteData = (await getMember(guild.id, user.id)).invite_data;
   if (!inviteData || !inviteData.inviter) return `Cannot track how \`${user.tag}\` joined`;
@@ -52,12 +52,12 @@ async function getInviter({ guild }, user, settings) {
 
   const embed = new EmbedBuilder()
     .setColor(EMBED_COLORS.BOT_EMBED)
-    .setAuthor({ name: `Solicitar datos de invitaciÛn para ${user.username}` })
+    .setAuthor({ name: `Solicitar datos de invitaci√≥n para ${user.username}` })
     .setDescription(
       stripIndent`
       Invitador: \`${inviter?.tag || "Usuario eliminado"}\`
       Invitador ID: \`${inviteData.inviter}\`
-      CÛdigo de invitaciÛn: \`${inviteData.code}\`
+      C√≥digo de invitaci√≥n: \`${inviteData.code}\`
       Invitaciones de invitador: \`${getEffectiveInvites(inviterData)}\`
       `
     );

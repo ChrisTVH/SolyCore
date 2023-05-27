@@ -8,12 +8,12 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "seek",
-  description: "fija la posici髇 de la pista en reproducci髇 en la posici髇 especificada",
+  description: "fija la posici贸n de la pista en reproducci贸n en la posici贸n especificada",
   category: "MUSIC",
   validations: musicValidations,
   command: {
     enabled: true,
-    usage: "<duraci髇>",
+    usage: "<duraci贸n>",
   },
   slashCommand: {
     enabled: true,
@@ -49,7 +49,7 @@ function seekTo({ client, guildId }, time) {
   const seekTo = durationToMillis(time);
 
   if (seekTo > player.queue.current.length) {
-      return "La duraci髇 indicada supera la duraci髇 de la pista actual.";
+      return "La duraci贸n indicada supera la duraci贸n de la pista actual.";
   }
 
   player.seek(seekTo);

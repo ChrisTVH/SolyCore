@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "statstracking",
-  description: "activar o desactivar las estadísticas de seguimiento en el servidor",
+  description: "activar o desactivar las estadÃ­sticas de seguimiento en el servidor",
   category: "STATS",
   userPermissions: ["ManageGuild"],
   command: {
@@ -39,7 +39,7 @@ module.exports = {
 
   async messageRun(message, args, data) {
     const input = args[0].toLowerCase();
-    if (!["on", "off"].includes(input)) return message.safeReply("Estado no válido. El valor debe ser `on/off`");
+    if (!["on", "off"].includes(input)) return message.safeReply("Estado no vÃ¡lido. El valor debe ser `on/off`");
     const response = await setStatus(input, data.settings);
     return message.safeReply(response);
   },
@@ -56,5 +56,5 @@ async function setStatus(input, settings) {
   settings.stats.enabled = status;
   await settings.save();
 
-  return `¡Configuración guardada! El seguimiento de estadísticas es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `Â¡ConfiguraciÃ³n guardada! El seguimiento de estadÃ­sticas es ahora ${status ? "habilitado" : "deshabilitado"}`;
 }

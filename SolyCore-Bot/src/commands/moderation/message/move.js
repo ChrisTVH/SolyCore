@@ -12,13 +12,13 @@ module.exports = {
   botPermissions: ["MoveMembers"],
   command: {
     enabled: true,
-    usage: "<ID|@miembro <canal> [razón]",
+    usage: "<ID|@miembro <canal> [razÃ³n]",
     minArgsCount: 1,
   },
 
   async messageRun(message, args) {
     const target = await message.guild.resolveMember(args[0], true);
-    if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[0]}`);
+    if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[0]}`);
 
     const channels = message.guild.findMatchingChannels(args[1]);
     if (!channels.length) return message.safeReply("No se han encontrado canales coincidentes");

@@ -43,7 +43,7 @@ const additionalParams = {
  */
 module.exports = {
   name: "filter",
-  description: "añadir filtro a la imagen proporcionada",
+  description: "aÃ±adir filtro a la imagen proporcionada",
   cooldown: 5,
   category: "IMAGE",
   botPermissions: ["EmbedLinks", "AttachFiles"],
@@ -132,7 +132,7 @@ function getFilter(filter, image) {
   const endpoint = new URL(`${IMAGE.BASE_API}/filters/${filter}`);
   endpoint.searchParams.append("image", image);
 
-  // añada parámetros adicionales si los hay
+  // aÃ±ada parÃ¡metros adicionales si los hay
   if (additionalParams[filter]) {
     additionalParams[filter].params.forEach((param) => {
       endpoint.searchParams.append(param.name, param.value);

@@ -14,7 +14,7 @@ const search_prefix = {
  */
 module.exports = {
   name: "play",
-  description: "reproduce una canción de youtube",
+  description: "reproduce una canción de varias plataformas",
   category: "MUSIC",
   botPermissions: ["EmbedLinks"],
   command: {

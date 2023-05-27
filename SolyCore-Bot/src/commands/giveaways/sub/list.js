@@ -6,7 +6,7 @@ const { EMBED_COLORS } = require("@root/config");
 module.exports = async (member) => {
   // Permisos
   if (!member.permissions.has("ManageMessages")) {
-      return "Necesitas tener permisos de gestión de mensajes para gestionar sorteos.";
+      return "Necesitas tener permisos de gestiÃ³n de mensajes para gestionar sorteos.";
   }
 
   // Buscar en todos los sorteos

@@ -12,7 +12,7 @@ module.exports = async (client, member) => {
   const { guild } = member;
   const settings = await getSettings(guild);
 
-  // Comprobación del canal contador
+  // ComprobaciÃ³n del canal contador
   if (settings.counters.find((doc) => ["MEMBERS", "BOTS", "USERS"].includes(doc.counter_type.toUpperCase()))) {
     if (member.user.bot) {
       settings.data.bots -= 1;

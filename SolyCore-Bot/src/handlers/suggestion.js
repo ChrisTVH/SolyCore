@@ -94,7 +94,7 @@ async function approveSuggestion(member, channel, messageId, reason) {
 
   const fields = [];
 
-  // aÒadir estadÌsticas si no existen
+  // a√±adir estad√≠sticas si no existen
   const statsField = message.embeds[0].fields.find((field) => field.name === "Stats");
   if (!statsField) {
     const [upVotes, downVotes] = getStats(message);
@@ -105,7 +105,7 @@ async function approveSuggestion(member, channel, messageId, reason) {
     fields.push(statsField);
   }
 
-  // motivo de la actualizaciÛn
+  // motivo de la actualizaci√≥n
   if (reason) fields.push({ name: "Reason", value: "```" + reason + "```" });
 
   approvedEmbed.addFields(fields);
@@ -119,13 +119,13 @@ async function approveSuggestion(member, channel, messageId, reason) {
       approveChannel = guild.channels.cache.get(settings.suggestions.approved_channel);
     }
 
-    // el canal sugerencias-aprobar no est· configurado
+    // el canal sugerencias-aprobar no est√° configurado
     if (!approveChannel) {
       await message.edit({ embeds: [approvedEmbed], components: [buttonsRow] });
       await message.reactions.removeAll();
     }
 
-    // el canal sugerencias-aprobar est· configurado
+    // el canal sugerencias-aprobar est√° configurado
     else {
       const sent = await approveChannel.send({ embeds: [approvedEmbed], components: [buttonsRow] });
       doc.channel_id = approveChannel.id;
@@ -181,19 +181,19 @@ async function rejectSuggestion(member, channel, messageId, reason) {
 
   const fields = [];
 
-  // aÒadir estadÌsticas si no existen
+  // a√±adir estad√≠sticas si no existen
   const statsField = message.embeds[0].fields.find((field) => field.name === "Stats");
   if (!statsField) {
     const [upVotes, downVotes] = getStats(message);
     doc.stats.upvotes = upVotes;
     doc.stats.downvotes = downVotes;
-    fields.push({ name: "EstadÌsticas", value: getVotesMessage(upVotes, downVotes) });
+    fields.push({ name: "Estad√≠sticas", value: getVotesMessage(upVotes, downVotes) });
   } else {
     fields.push(statsField);
   }
 
-  // motivo de la actualizaciÛn
-  if (reason) fields.push({ name: "RazÛn", value: "```" + reason + "```" });
+  // motivo de la actualizaci√≥n
+  if (reason) fields.push({ name: "Raz√≥n", value: "```" + reason + "```" });
 
   rejectedEmbed.addFields(fields);
 
@@ -206,7 +206,7 @@ async function rejectSuggestion(member, channel, messageId, reason) {
       rejectChannel = guild.channels.cache.get(settings.suggestions.rejected_channel);
     }
 
-    // el canal sugerencias-rechazo no est· configurado
+    // el canal sugerencias-rechazo no est√° configurado
     if (!rejectChannel) {
       await message.edit({ embeds: [rejectedEmbed], components: [buttonsRow] });
       await message.reactions.removeAll();
@@ -224,7 +224,7 @@ async function rejectSuggestion(member, channel, messageId, reason) {
     return "Sugerencia rechazada";
   } catch (ex) {
     guild.client.logger.error("rejectSuggestion", ex);
-    return "No rechazÛ la sugerencia";
+    return "No rechaz√≥ la sugerencia";
   }
 }
 

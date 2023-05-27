@@ -62,20 +62,20 @@ module.exports = {
 
     if (sub === "list") {
       const target = (await message.guild.resolveMember(args[1], true)) || message.member;
-      if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[1]}`);
+      if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[1]}`);
       response = await listWarnings(target, message);
     }
 
     //
     else if (sub === "clear") {
       const target = await message.guild.resolveMember(args[1], true);
-      if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[1]}`);
+      if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[1]}`);
       response = await clearWarnings(target, message);
     }
 
     // else
     else {
-      response = `Subcomando no válido ${sub}`;
+      response = `Subcomando no vÃ¡lido ${sub}`;
     }
 
     await message.safeReply(response);
@@ -100,7 +100,7 @@ module.exports = {
 
     // else
     else {
-        response = `Subcomando no válido ${sub}`;
+        response = `Subcomando no vÃ¡lido ${sub}`;
     }
 
     await interaction.followUp(response);

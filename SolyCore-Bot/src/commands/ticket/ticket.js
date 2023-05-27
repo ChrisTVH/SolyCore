@@ -18,7 +18,7 @@ const { isTicketChannel, closeTicket, closeAllTickets } = require("@handlers/tic
  */
 module.exports = {
   name: "ticket",
-  description: "varios comandos de emisi髇 de billetes",
+  description: "varios comandos de creaci贸n de tickets",
   category: "TICKET",
   userPermissions: ["ManageGuild"],
   command: {
@@ -27,15 +27,15 @@ module.exports = {
     subcommands: [
       {
         trigger: "setup <#canal>",
-        description: "iniciar la configuraci髇 de un billete interactivo",
+        description: "iniciar la configuraci贸n de un billete interactivo",
       },
       {
         trigger: "log <#canal>",
         description: "configurar canal de registro para tickets",
       },
       {
-        trigger: "limit <n鷐ero>",
-        description: "establecer el n鷐ero m醲imo de tickets abiertos simult醤eamente",
+        trigger: "limit <n煤mero>",
+        description: "establecer el n煤mero m谩ximo de tickets abiertos simult谩neamente",
       },
       {
         trigger: "close",
@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         trigger: "add <usuarioId|rolId>",
-        description: "a馻dir usuario/rol al ticket",
+        description: "a帽adir usuario/rol al ticket",
       },
       {
         trigger: "remove <usuarioId|rolId>",
@@ -65,7 +65,7 @@ module.exports = {
         options: [
           {
             name: "channel",
-            description: "el canal al que debe enviarse el mensaje de creaci髇 de ticket",
+            description: "el canal al que debe enviarse el mensaje de creaci贸n de ticket",
             type: ApplicationCommandOptionType.Channel,
             channelTypes: [ChannelType.GuildText],
             required: true,
@@ -88,12 +88,12 @@ module.exports = {
       },
       {
         name: "limit",
-        description: "establecer el n鷐ero m醲imo de tickets abiertos simult醤eamente",
+        description: "establecer el n煤mero m谩ximo de tickets abiertos simult谩neamente",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "amount",
-            description: "n鷐ero m醲imo de tickets",
+            description: "n煤mero m谩ximo de tickets",
             type: ApplicationCommandOptionType.Integer,
             required: true,
           },
@@ -101,7 +101,7 @@ module.exports = {
       },
       {
         name: "close",
-        description: "cierra el ticket [s髄o se utiliza en el canal de tickets].",
+        description: "cierra el ticket [s贸lo se utiliza en el canal de tickets].",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
@@ -111,12 +111,12 @@ module.exports = {
       },
       {
         name: "add",
-        description: "a馻dir usuario al canal de tickets actual [s髄o se utiliza en el canal de tickets].",
+        description: "a帽adir usuario al canal de tickets actual [s贸lo se utiliza en el canal de tickets].",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "user_id",
-            description: "el id del usuario a a馻dir",
+            description: "el id del usuario a a帽adir",
             type: ApplicationCommandOptionType.String,
             required: true,
           },
@@ -124,7 +124,7 @@ module.exports = {
       },
       {
         name: "remove",
-        description: "eliminar al usuario del canal de tickets [s髄o se utiliza en el canal de tickets].",
+        description: "eliminar al usuario del canal de tickets [s贸lo se utiliza en el canal de tickets].",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -142,7 +142,7 @@ module.exports = {
     const input = args[0].toLowerCase();
     let response;
 
-    // Configurac髇
+    // Configurac贸n
     if (input === "setup") {
       if (!message.guild.members.me.permissions.has("ManageChannels")) {
         return message.safeReply("Me falta `Manejo de Canales` para crear canales de tickets");
@@ -158,15 +158,15 @@ module.exports = {
     else if (input === "log") {
       if (args.length < 2) return message.safeReply("Indique el canal al que deben enviarse los registros de tickets");
       const target = message.guild.findMatchingChannels(args[1]);
-      if (target.length === 0) return message.safeReply("No se ha encontrado ning鷑 canal coincidente");
+      if (target.length === 0) return message.safeReply("No se ha encontrado ning煤n canal coincidente");
       response = await setupLogChannel(target[0], data.settings);
     }
 
-    // Fijar l韒ite
+    // Fijar l铆mite
     else if (input === "limit") {
-      if (args.length < 2) return message.safeReply("Indique un n鷐ero");
+      if (args.length < 2) return message.safeReply("Indique un n煤mero");
       const limit = args[1];
-      if (isNaN(limit)) return message.safeReply("Por favor, introduzca un n鷐ero");
+      if (isNaN(limit)) return message.safeReply("Por favor, introduzca un n煤mero");
       response = await setupLimit(limit, data.settings);
     }
 
@@ -183,9 +183,9 @@ module.exports = {
       return sent.editable ? sent.edit(response) : message.channel.send(response);
     }
 
-    // A馻dir usuario al ticket
+    // A帽adir usuario al ticket
     else if (input === "add") {
-      if (args.length < 2) return message.safeReply("Por favor, indique un usuario o rol para a馻dir al ticket");
+      if (args.length < 2) return message.safeReply("Por favor, indique un usuario o rol para a帽adir al ticket");
       let inputId;
       if (message.mentions.users.size > 0) inputId = message.mentions.users.first().id;
       else if (message.mentions.roles.size > 0) inputId = message.mentions.roles.first().id;
@@ -203,7 +203,7 @@ module.exports = {
       response = await removeFromTicket(message, inputId);
     }
 
-    // Entrada no v醠ida
+    // Entrada no v谩lida
     else {
         return message.safeReply("Uso incorrecto de comandos");
     }
@@ -215,7 +215,7 @@ module.exports = {
     const sub = interaction.options.getSubcommand();
     let response;
 
-    // configuraci髇
+    // configuraci贸n
     if (sub === "setup") {
       const channel = interaction.options.getChannel("channel");
 
@@ -249,7 +249,7 @@ module.exports = {
       response = await closeAll(interaction, interaction.user);
     }
 
-    // A馻de a un tciket
+    // A帽ade a un tciket
     else if (sub === "add") {
       const inputId = interaction.options.getString("user_id");
       response = await addToTicket(interaction, inputId);
@@ -272,11 +272,11 @@ module.exports = {
  */
 async function ticketModalSetup({ guild, channel, member }, targetChannel, settings) {
   const buttonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("ticket_btnSetup").setLabel("Configuraci髇 de mensaje").setStyle(ButtonStyle.Primary)
+    new ButtonBuilder().setCustomId("ticket_btnSetup").setLabel("Configuraci贸n de mensaje").setStyle(ButtonStyle.Primary)
   );
 
   const sentMsg = await channel.safeSend({
-    content: "Haga clic en el siguiente bot髇 para configurar el mensaje de ticket",
+    content: "Haga clic en el siguiente bot贸n para configurar el mensaje de ticket",
     components: [buttonRow],
   });
 
@@ -290,13 +290,13 @@ async function ticketModalSetup({ guild, channel, member }, targetChannel, setti
     })
     .catch((ex) => {});
 
-  if (!btnInteraction) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraci髇", components: [] });
+  if (!btnInteraction) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraci贸n", components: [] });
 
-  // modo de visualizaci髇
+  // modo de visualizaci贸n
   await btnInteraction.showModal(
     new ModalBuilder({
       customId: "ticket-modalSetup",
-      title: "Configuraci髇 de tickets",
+      title: "Configuraci贸n de tickets",
       components: [
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
@@ -308,14 +308,14 @@ async function ticketModalSetup({ guild, channel, member }, targetChannel, setti
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("description")
-            .setLabel("Descripci髇 del embed")
+            .setLabel("Descripci贸n del embed")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(false)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("footer")
-            .setLabel("Pie de p醙ina del embed")
+            .setLabel("Pie de p谩gina del embed")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
         ),
@@ -338,7 +338,7 @@ async function ticketModalSetup({ guild, channel, member }, targetChannel, setti
     })
     .catch((ex) => {});
 
-  if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraci髇", components: [] });
+  if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraci贸n", components: [] });
 
   await modal.reply("Configurar mensaje de ticket ...");
   const title = modal.fields.getTextInputValue("title");
@@ -353,42 +353,42 @@ async function ticketModalSetup({ guild, channel, member }, targetChannel, setti
   const embed = new EmbedBuilder()
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setAuthor({ name: title || "Ticket de soporte" })
-    .setDescription(description || "Utilice el siguiente bot髇 para crear un ticket")
-    .setFooter({ text: footer || "S髄o puede tener 1 ticket abierto a la vez." });
+    .setDescription(description || "Utilice el siguiente bot贸n para crear un ticket")
+    .setFooter({ text: footer || "S贸lo puede tener 1 ticket abierto a la vez." });
 
   const tktBtnRow = new ActionRowBuilder().addComponents(
     new ButtonBuilder().setLabel("Abrir un ticket").setCustomId("TICKET_CREATE").setStyle(ButtonStyle.Success)
   );
 
-  // guardar configuraci髇
+  // guardar configuraci贸n
   settings.ticket.staff_roles = staffRoles;
   await settings.save();
 
   await targetChannel.send({ embeds: [embed], components: [tktBtnRow] });
   await modal.deleteReply();
-  await sentMsg.edit({ content: "isto! Mensaje de ticket creado", components: [] });
+  await sentMsg.edit({ content: "隆Listo! Mensaje de ticket creado", components: [] });
 }
 
 async function setupLogChannel(target, settings) {
-  if (!target.canSendEmbeds()) return `y! No tengo permiso para enviar un embed a ${target}`;
+  if (!target.canSendEmbeds()) return `隆Uy! No tengo permiso para enviar un embed a ${target}`;
 
   settings.ticket.log_channel = target.id;
   await settings.save();
 
-  return `onfiguraci髇 guardada! Los registros de tickets se enviar醤 a ${target.toString()}`;
+  return `隆Configuraci贸n guardada! Los registros de tickets se enviar谩n a ${target.toString()}`;
 }
 
 async function setupLimit(limit, settings) {
-  if (Number.parseInt(limit, 10) < 5) return "El l韒ite de tickets no puede ser inferior a 5";
+  if (Number.parseInt(limit, 10) < 5) return "El l铆mite de tickets no puede ser inferior a 5";
 
   settings.ticket.limit = limit;
   await settings.save();
 
-  return `Configuraci髇 guardada. Ahora puede tener un m醲imo de \`${limit}\` tickets abiertos`;
+  return `Configuraci贸n guardada. Ahora puede tener un m谩ximo de \`${limit}\` tickets abiertos`;
 }
 
 async function close({ channel }, author) {
-  if (!isTicketChannel(channel)) return "Este comando s髄o puede utilizarse en los canales de tickets";
+  if (!isTicketChannel(channel)) return "Este comando s贸lo puede utilizarse en los canales de tickets";
   const status = await closeTicket(channel, author, "Cerrado por un moderador");
   if (status === "MISSING_PERMISSIONS") return "No tengo permiso para cerrar tickets";
   if (status === "ERROR") return "Se ha producido un error al cerrar el ticket";
@@ -397,12 +397,12 @@ async function close({ channel }, author) {
 
 async function closeAll({ guild }, user) {
   const stats = await closeAllTickets(guild, user);
-  return `ompletado! 蓌ito: \`${stats[0]}\` Fallo: \`${stats[1]}\``;
+  return `隆Completado! 脡xito: \`${stats[0]}\` Fallo: \`${stats[1]}\``;
 }
 
 async function addToTicket({ channel }, inputId) {
-  if (!isTicketChannel(channel)) return "Este comando s髄o puede utilizarse en el canal de tickets";
-  if (!inputId || isNaN(inputId)) return "ps! Necesita introducir un usuarioId/rol-Id v醠ido";
+  if (!isTicketChannel(channel)) return "Este comando s贸lo puede utilizarse en el canal de tickets";
+  if (!inputId || isNaN(inputId)) return "隆Ups! Necesita introducir un usuarioId/rol-Id v谩lido";
 
   try {
     await channel.permissionOverwrites.create(inputId, {
@@ -412,13 +412,13 @@ async function addToTicket({ channel }, inputId) {
 
     return "Hecho";
   } catch (ex) {
-    return "Error al a馻dir usuarioId/rol-Id. 縃a proporcionado un ID v醠ido?";
+    return "Error al a帽adir usuarioId/rol-Id. 驴Ha proporcionado un ID v谩lido?";
   }
 }
 
 async function removeFromTicket({ channel }, inputId) {
-  if (!isTicketChannel(channel)) return "Este comando s髄o puede utilizarse en el canal de tickets";
-  if (!inputId || isNaN(inputId)) return "ps! Necesita introducir un usuarioId/rol-Id v醠ido";
+  if (!isTicketChannel(channel)) return "Este comando s贸lo puede utilizarse en el canal de tickets";
+  if (!inputId || isNaN(inputId)) return "隆Ups! Necesita introducir un usuarioId/rol-Id v谩lido";
 
   try {
     channel.permissionOverwrites.create(inputId, {
@@ -427,6 +427,6 @@ async function removeFromTicket({ channel }, inputId) {
     });
     return "Hecho";
   } catch (ex) {
-    return "No se ha podido eliminar el usuarioID/rol-Id. 縃a proporcionado un ID v醠ido?";
+    return "No se ha podido eliminar el usuarioID/rol-Id. 驴Ha proporcionado un ID v谩lido?";
   }
 }

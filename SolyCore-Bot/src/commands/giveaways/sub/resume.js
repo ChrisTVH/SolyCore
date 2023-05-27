@@ -3,11 +3,11 @@
  * @param {string} messageId
  */
 module.exports = async (member, messageId) => {
-  if (!messageId) return "Debe proporcionar un identificador de mensaje válido.";
+  if (!messageId) return "Debe proporcionar un identificador de mensaje vÃ¡lido.";
 
   // Permisos
   if (!member.permissions.has("ManageMessages")) {
-    return "Necesitas tener permisos de gestión de mensajes para gestionar sorteos.";
+    return "Necesitas tener permisos de gestiÃ³n de mensajes para gestionar sorteos.";
   }
 
   // Buscar con mensajeId
@@ -15,15 +15,15 @@ module.exports = async (member, messageId) => {
     (g) => g.messageId === messageId && g.guildId === member.guild.id
   );
 
-  // Si no se ha encontrado ningún sorteo
+  // Si no se ha encontrado ningÃºn sorteo
   if (!giveaway) return `No se puede encontrar un sorteo para mensajeId: ${messageId}`;
 
-  // Comprueba si el sorteo no está pausado
-  if (!giveaway.pauseOptions.isPaused) return "Este sorteo no está pausado.";
+  // Comprueba si el sorteo no estÃ¡ pausado
+  if (!giveaway.pauseOptions.isPaused) return "Este sorteo no estÃ¡ pausado.";
 
   try {
     await giveaway.unpause();
-    return "¡Éxito! ¡Sorteo reanudado!";
+    return "Â¡Ã‰xito! Â¡Sorteo reanudado!";
   } catch (error) {
     member.client.logger.error("Sorteo reanudado", error);
     return `Se ha producido un error al reanudar el sorteo: ${error.message}`;

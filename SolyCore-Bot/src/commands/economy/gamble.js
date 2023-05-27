@@ -110,7 +110,7 @@ async function gamble(user, betAmount) {
   const embed = new EmbedBuilder()
     .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
     .setColor(EMBED_COLORS.TRANSPARENT)
-    .setThumbnail("https://i.pinimg.com/originals/9a/f1/4e/9af14e0ae92487516894faa9ea2c35dd.gif")
+    .setThumbnail("https://cdn.discordapp.com/attachments/1038077615275266108/1111779060373262476/Gamble.png")
     .setDescription(str)
     .setFooter({ text: `${result}\nSaldo de Cartera actualizado: ${userDb?.coins}${ECONOMY.CURRENCY}` });
 

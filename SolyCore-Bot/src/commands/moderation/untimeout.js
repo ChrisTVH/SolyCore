@@ -13,7 +13,7 @@ module.exports = {
   command: {
     enabled: true,
     aliases: ["unmute"],
-    usage: "<ID|@miembro> [razón]",
+    usage: "<ID|@miembro> [razÃ³n]",
     minArgsCount: 1,
   },
   slashCommand: {
@@ -36,7 +36,7 @@ module.exports = {
 
   async messageRun(message, args) {
     const target = await message.guild.resolveMember(args[0], true);
-    if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[0]}`);
+    if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[0]}`);
     const reason = args.slice(1).join(" ").trim();
     const response = await untimeout(message.member, target, reason);
     await message.safeReply(response);
@@ -54,9 +54,9 @@ module.exports = {
 
 async function untimeout(issuer, target, reason) {
   const response = await unTimeoutTarget(issuer, target, reason);
-  if (typeof response === "boolean") return `¡Se elimina el tiempo de espera de ${target.user.tag}!`;
+  if (typeof response === "boolean") return `Â¡Se elimina el tiempo de espera de ${target.user.tag}!`;
   if (response === "BOT_PERM") return `No tengo permiso para eliminar el tiempo de espera de ${target.user.tag}`;
   else if (response === "MEMBER_PERM") return `Usted no tiene permiso para eliminar el tiempo de espera de ${target.user.tag}`;
-  else if (response === "NO_TIMEOUT") return `${target.user.tag} ¡no se ha agotado el tiempo!`;
+  else if (response === "NO_TIMEOUT") return `${target.user.tag} Â¡no se ha agotado el tiempo!`;
   else return `Error al eliminar el tiempo de espera de ${target.user.tag}`;
 }

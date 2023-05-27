@@ -43,7 +43,7 @@ module.exports = class BotClient extends Client {
     /**
      * @type {import('@structures/Command')[]}
      */
-    this.commands = []; // store actual command
+      this.commands = []; // almacenar comando actual
     this.commandIndex = new Collection(); // almacenar (alias, arrayIndex) par
 
     /**
@@ -55,7 +55,7 @@ module.exports = class BotClient extends Client {
      * @type {Collection<string, import('@structures/BaseContext')>}
      */
     this.contextMenus = new Collection(); // almacenar contextMenus
-    this.counterUpdateQueue = []; // almacenar guildId's que necesitan actualización del contador
+    this.counterUpdateQueue = []; // almacenar guildId que necesitan actualización del contador
 
     // inicializar el webhook para enviar los detalles de unión/abandono del guild
     this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
@@ -101,7 +101,7 @@ module.exports = class BotClient extends Client {
         success += 1;
       } catch (ex) {
         failed += 1;
-        this.logger.error(`loadEvent - ${file}`, ex);
+        this.logger.error(`cargarEvento - ${file}`, ex);
       }
     });
 

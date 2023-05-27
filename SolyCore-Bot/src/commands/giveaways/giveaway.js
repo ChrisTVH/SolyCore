@@ -73,7 +73,7 @@ module.exports = {
         options: [
           {
             name: "channel",
-            description: "el canal en el que se empezar· el sorteo",
+            description: "el canal en el que se empezar√° el sorteo",
             type: ApplicationCommandOptionType.Channel,
             channelTypes: [ChannelType.GuildText],
             required: true,
@@ -150,7 +150,7 @@ module.exports = {
           },
           {
             name: "add_duration",
-            description: "el n˙mero de minutos que hay que aÒadir a la duraciÛn del sorteo",
+            description: "el n√∫mero de minutos que hay que a√±adir a la duraci√≥n del sorteo",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -162,7 +162,7 @@ module.exports = {
           },
           {
             name: "new_winners",
-            description: "el nuevo n˙mero de ganadores",
+            description: "el nuevo n√∫mero de ganadores",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -177,9 +177,9 @@ module.exports = {
 
     //
     if (sub === "start") {
-      if (!args[1]) return message.safeReply("°Uso incorrecto! Por favor, proporcione un canal para iniciar el sorteo en");
+      if (!args[1]) return message.safeReply("¬°Uso incorrecto! Por favor, proporcione un canal para iniciar el sorteo en");
       const match = message.guild.findMatchingChannels(args[1]);
-      if (!match.length) return message.safeReply(`No se ha encontrado ning˙n canal que coincida ${args[1]}`);
+      if (!match.length) return message.safeReply(`No se ha encontrado ning√∫n canal que coincida ${args[1]}`);
       return await runModalSetup(message, match[0]);
     }
 
@@ -220,7 +220,7 @@ module.exports = {
     }
 
     //
-    else response = "No es un subcomando v·lido";
+    else response = "No es un subcomando v√°lido";
 
     await message.safeReply(response);
   },
@@ -270,7 +270,7 @@ module.exports = {
       const addDur = interaction.options.getInteger("add_duration");
       const addDurationMs = addDur ? ems(addDur) : null;
       if (!addDurationMs) {
-        return interaction.followUp("DuraciÛn no v·lida");
+        return interaction.followUp("Duraci√≥n no v√°lida");
       }
       const newPrize = interaction.options.getString("new_prize");
       const newWinnerCount = interaction.options.getInteger("new_winners");
@@ -278,13 +278,13 @@ module.exports = {
     }
 
     //
-    else response = "Subcomando no v·lido";
+    else response = "Subcomando no v√°lido";
 
     await interaction.followUp(response);
   },
 };
 
-// ConfiguraciÛn Modelo de sorteo
+// Configuraci√≥n Modelo de sorteo
 /**
  * @param {import('discord.js').Message|import('discord.js').CommandInteraction} args0
  * @param {import('discord.js').GuildTextBasedChannel} targetCh
@@ -293,19 +293,19 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
   const SETUP_PERMS = ["ViewChannel", "SendMessages", "EmbedLinks"];
 
   // validar los permisos del canal
-  if (!targetCh) return channel.safeSend("La configuraciÛn del sorteo ha sido cancelada. No ha mencionado un canal");
+  if (!targetCh) return channel.safeSend("La configuraci√≥n del sorteo ha sido cancelada. No ha mencionado un canal");
   if (!targetCh.type === ChannelType.GuildText && !targetCh.permissionsFor(guild.members.me).has(SETUP_PERMS)) {
     return channel.safeSend(
-      `Se ha cancelado la preparaciÛn del sorteo.\nYo necesito ${parsePermissions(SETUP_PERMS)} en ${targetCh}`
+      `Se ha cancelado la preparaci√≥n del sorteo.\nYo necesito ${parsePermissions(SETUP_PERMS)} en ${targetCh}`
     );
   }
 
   const buttonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("giveaway_btnSetup").setLabel("ConfiguraciÛn de Sorteo").setStyle(ButtonStyle.Primary)
+    new ButtonBuilder().setCustomId("giveaway_btnSetup").setLabel("Configuraci√≥n de Sorteo").setStyle(ButtonStyle.Primary)
   );
 
   const sentMsg = await channel.safeSend({
-    content: "Haga clic en el siguiente botÛn para configurar un nuevo sorteo",
+    content: "Haga clic en el siguiente bot√≥n para configurar un nuevo sorteo",
     components: [buttonRow],
   });
 
@@ -319,18 +319,18 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
     })
     .catch((ex) => {});
 
-  if (!btnInteraction) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraciÛn", components: [] });
+  if (!btnInteraction) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraci√≥n", components: [] });
 
   // display modal
   await btnInteraction.showModal(
     new ModalBuilder({
       customId: "giveaway-modalSetup",
-      title: "ConfiguraciÛn del sorteo",
+      title: "Configuraci√≥n del sorteo",
       components: [
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("duration")
-            .setLabel("øCu·l es la duraciÛn?")
+            .setLabel("¬øCu√°l es la duraci√≥n?")
             .setPlaceholder("1h / 1d / 1w")
             .setStyle(TextInputStyle.Short)
             .setRequired(true)
@@ -338,14 +338,14 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("prize")
-            .setLabel("øCu·l es el premio?")
+            .setLabel("¬øCu√°l es el premio?")
             .setStyle(TextInputStyle.Short)
             .setRequired(true)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("winners")
-                .setLabel("øN˙mero de ganadores?")
+                .setLabel("¬øN√∫mero de ganadores?")
             .setStyle(TextInputStyle.Short)
             .setRequired(true)
         ),
@@ -375,21 +375,21 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
     })
     .catch((ex) => {});
 
-  if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraciÛn", components: [] });
+  if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraci√≥n", components: [] });
 
   sentMsg.delete().catch(() => {});
   await modal.reply("Organizar el sorteo...");
 
-  // duraciÛn
+  // duraci√≥n
   const duration = ems(modal.fields.getTextInputValue("duration"));
-  if (isNaN(duration)) return modal.editReply("Se ha cancelado la instalaciÛn. No ha especificado una duraciÛn v·lida");
+  if (isNaN(duration)) return modal.editReply("Se ha cancelado la instalaci√≥n. No ha especificado una duraci√≥n v√°lida");
 
   // premiuo
   const prize = modal.fields.getTextInputValue("prize");
 
   // contador de ganadores
   const winners = parseInt(modal.fields.getTextInputValue("winners"));
-  if (isNaN(winners)) return modal.editReply("La configuraciÛn se ha cancelado. No ha especificado un recuento de ganadores v·lido");
+  if (isNaN(winners)) return modal.editReply("La configuraci√≥n se ha cancelado. No ha especificado un recuento de ganadores v√°lido");
 
   // roles
   const allowedRoles =
@@ -398,14 +398,14 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
       ?.split(",")
       ?.filter((roleId) => guild.roles.cache.get(roleId.trim())) || [];
 
-  // anfitriÛn
+  // anfitri√≥n
   const hostId = modal.fields.getTextInputValue("host");
   let host = null;
   if (hostId) {
     try {
       host = await guild.client.users.fetch(hostId);
     } catch (ex) {
-      return modal.editReply("La instalaciÛn se ha cancelado. Debe proporcionar un ID de usuario v·lido para el anfitriÛn");
+      return modal.editReply("La instalaci√≥n se ha cancelado. Debe proporcionar un ID de usuario v√°lido para el anfitri√≥n");
     }
   }
 
@@ -413,7 +413,7 @@ async function runModalSetup({ member, channel, guild }, targetCh) {
   await modal.editReply(response);
 }
 
-// ActualizaciÛn del sorteo interactivo
+// Actualizaci√≥n del sorteo interactivo
 /**
  * @param {import('discord.js').Message} message
  * @param {string} messageId
@@ -426,7 +426,7 @@ async function runModalEdit(message, messageId) {
   );
 
   const sentMsg = await channel.send({
-    content: "Haga clic en el botÛn de abajo para editar el sorteo",
+    content: "Haga clic en el bot√≥n de abajo para editar el sorteo",
     components: [buttonRow],
   });
 
@@ -438,18 +438,18 @@ async function runModalEdit(message, messageId) {
     })
     .catch((ex) => {});
 
-  if (!btnInteraction) return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualizaciÛn", components: [] });
+  if (!btnInteraction) return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualizaci√≥n", components: [] });
 
-  // modo de visualizaciÛn
+  // modo de visualizaci√≥n
   await btnInteraction.showModal(
     new ModalBuilder({
       customId: "giveaway-modalEdit",
-      title: "ActualizaciÛn del sorteo",
+      title: "Actualizaci√≥n del sorteo",
       components: [
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("duration")
-            .setLabel("DuraciÛn a aÒadir")
+            .setLabel("Duraci√≥n a a√±adir")
             .setPlaceholder("1h / 1d / 1se")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
@@ -457,14 +457,14 @@ async function runModalEdit(message, messageId) {
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("prize")
-            .setLabel("øCu·l es el nuevo premio?")
+            .setLabel("¬øCu√°l es el nuevo premio?")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("winners")
-            .setLabel("øN˙mero de ganadores?")
+            .setLabel("¬øN√∫mero de ganadores?")
             .setStyle(TextInputStyle.Short)
             .setRequired(false)
         ),
@@ -480,14 +480,14 @@ async function runModalEdit(message, messageId) {
     })
     .catch((ex) => {});
 
-  if (!modal) return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualizaciÛn", components: [] });
+  if (!modal) return sentMsg.edit({ content: "No se ha recibido respuesta, se cancela la actualizaci√≥n", components: [] });
 
   sentMsg.delete().catch(() => {});
   await modal.reply("Actualizando el sorteo...");
 
-  // duraciÛn
+  // duraci√≥n
   const addDuration = ems(modal.fields.getTextInputValue("duration"));
-  if (isNaN(addDuration)) return modal.editReply("Se ha cancelado la actualizaciÛn. No ha especificado una duraciÛn v·lida de la adiciÛn");
+  if (isNaN(addDuration)) return modal.editReply("Se ha cancelado la actualizaci√≥n. No ha especificado una duraci√≥n v√°lida de la adici√≥n");
 
   // premios
   const newPrize = modal.fields.getTextInputValue("prize");
@@ -495,7 +495,7 @@ async function runModalEdit(message, messageId) {
   // contador de ganadores
   const newWinnerCount = parseInt(modal.fields.getTextInputValue("winners"));
   if (isNaN(newWinnerCount)) {
-    return modal.editReply("La actualizaciÛn ha sido cancelada. No ha especificado un recuento de ganadores v·lido");
+    return modal.editReply("La actualizaci√≥n ha sido cancelada. No ha especificado un recuento de ganadores v√°lido");
   }
 
   const response = await edit(message.member, messageId, addDuration, newPrize, newWinnerCount);

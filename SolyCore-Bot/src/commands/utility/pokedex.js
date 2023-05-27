@@ -8,7 +8,7 @@ const { stripIndent } = require("common-tags");
  */
 module.exports = {
   name: "pokedex",
-  description: "muestra información pokemon",
+  description: "muestra información sobre un pokemon",
   category: "UTILITY",
   botPermissions: ["EmbedLinks"],
   cooldown: 5,

@@ -5,7 +5,7 @@ const userInfo = require("../shared/user");
  */
 module.exports = {
   name: "userinfo",
-  description: "muestra información sobre el usuario",
+  description: "muestra informaciÃ³n sobre el usuario",
   category: "INFORMATION",
   botPermissions: ["EmbedLinks"],
   command: {

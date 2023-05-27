@@ -40,7 +40,7 @@ module.exports = async (client, guild) => {
         inline: false,
       },
       {
-        name: "Dueño",
+        name: "DueÃ±o",
         value: `${ownerTag} [\`${ownerId}\`]`,
         inline: false,
       },

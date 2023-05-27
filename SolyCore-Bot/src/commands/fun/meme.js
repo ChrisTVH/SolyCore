@@ -138,7 +138,7 @@ async function getRandomEmbed(choice) {
     return new EmbedBuilder()
       .setAuthor({ name: memeTitle, url: memeUrl })
       .setImage(memeImage)
-      .setColor("Random")
+      .setColor("ff0088")
       .setFooter({ text: `👍 ${memeUpvotes} | 💬 ${memeNumComments}` });
   } catch (error) {
     return new EmbedBuilder().setColor(EMBED_COLORS.ERROR).setDescription("No se ha podido recuperar el meme. Inténtalo de nuevo.");

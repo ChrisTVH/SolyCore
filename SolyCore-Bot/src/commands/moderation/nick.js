@@ -67,7 +67,7 @@ module.exports = {
 
     if (sub === "set") {
       const target = await message.guild.resolveMember(args[1]);
-      if (!target) return message.safeReply("No se ha encontrado ningún miembro");
+      if (!target) return message.safeReply("No se ha encontrado ningÃºn miembro");
       const name = args.slice(2).join(" ");
       if (!name) return message.safeReply("Especifique un apodo");
 
@@ -78,7 +78,7 @@ module.exports = {
     //
     else if (sub === "reset") {
       const target = await message.guild.resolveMember(args[1]);
-      if (!target) return message.safeReply("No se ha encontrado ningún miembro");
+      if (!target) return message.safeReply("No se ha encontrado ningÃºn miembro");
 
       const response = await nickname(message, target);
       return message.safeReply(response);
@@ -96,16 +96,16 @@ module.exports = {
 
 async function nickname({ member, guild }, target, name) {
   if (!canModerate(member, target)) {
-      return `¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
+      return `Â¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
   }
   if (!canModerate(guild.members.me, target)) {
-      return `¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
+      return `Â¡Uy! No se puede gestionar el apodo de ${target.user.tag}`;
   }
 
   try {
     await target.setNickname(name);
-    return `Con éxito se ${name ? "cambio" : "restablecio"} el apodo de ${target.user.tag}`;
+    return `Con Ã©xito se ${name ? "cambio" : "restablecio"} el apodo de ${target.user.tag}`;
   } catch (ex) {
-    return `Fallo al ${name ? "cambiar" : "restablecer"} el apodo de ${target.displayName}. ¿Ha indicado un nombre válido?`;
+    return `Fallo al ${name ? "cambiar" : "restablecer"} el apodo de ${target.displayName}. Â¿Ha indicado un nombre vÃ¡lido?`;
   }
 }

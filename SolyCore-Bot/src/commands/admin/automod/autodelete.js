@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "autodelete",
-  description: "gestionar la configuraciÛn de autoborrado del servidor",
+  description: "gestionar la configuraci√≥n de autoborrado del servidor",
   category: "AUTOMOD",
   userPermissions: ["ManageGuild"],
   command: {
@@ -25,8 +25,8 @@ module.exports = {
         description: "permitir o no permitir enlaces en el mensaje",
       },
       {
-        trigger: "lÌneas m·ximas <n˙mero>",
-        description: "establece el m·ximo de lÌneas permitidas por mensaje [0 para desactivar].",
+        trigger: "l√≠neas m√°ximas <n√∫mero>",
+        description: "establece el m√°ximo de l√≠neas permitidas por mensaje [0 para desactivar].",
       },
     ],
   },
@@ -41,7 +41,7 @@ module.exports = {
         options: [
           {
             name: "status",
-            description: "estado de la configuraciÛn",
+            description: "estado de la configuraci√≥n",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -64,7 +64,7 @@ module.exports = {
         options: [
           {
             name: "status",
-            description: "estado de la configuraciÛn",
+            description: "estado de la configuraci√≥n",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -87,7 +87,7 @@ module.exports = {
         options: [
           {
             name: "status",
-            description: "estado de la configuraciÛn",
+            description: "estado de la configuraci√≥n",
             required: true,
             type: ApplicationCommandOptionType.String,
             choices: [
@@ -105,12 +105,12 @@ module.exports = {
       },
       {
         name: "maxlines",
-        description: "establece el m·ximo de lÌneas permitidas por mensaje",
+        description: "establece el m√°ximo de l√≠neas permitidas por mensaje",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "amount",
-            description: "cantidad de configuraciÛn (0 para desactivar)",
+            description: "cantidad de configuraci√≥n (0 para desactivar)",
             required: true,
             type: ApplicationCommandOptionType.Integer,
           },
@@ -126,21 +126,21 @@ module.exports = {
 
     if (sub == "attachments") {
       const status = args[1].toLowerCase();
-      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v·lido. El valor debe ser `on/off`");
+      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await antiAttachments(settings, status);
     }
 
     //
     else if (sub === "invites") {
       const status = args[1].toLowerCase();
-      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v·lido. El valor debe ser `on/off`");
+      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await antiInvites(settings, status);
     }
 
     //
     else if (sub == "links") {
       const status = args[1].toLowerCase();
-      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v·lido. El valor debe ser `on/off`");
+      if (!["on", "off"].includes(status)) return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await antilinks(settings, status);
     }
 
@@ -148,13 +148,13 @@ module.exports = {
     else if (sub === "maxlines") {
       const max = args[1];
       if (isNaN(max) || Number.parseInt(max) < 1) {
-          return message.safeReply("LÌneas maximas debe ser un n˙mero v·lido mayor que 0");
+          return message.safeReply("L√≠neas maximas debe ser un n√∫mero v√°lido mayor que 0");
       }
       response = await maxLines(settings, max);
     }
 
     //
-    else response = "°Uso de comando no v·lido!";
+    else response = "¬°Uso de comando no v√°lido!";
     await message.safeReply(response);
   },
 
@@ -168,7 +168,7 @@ module.exports = {
     } else if (sub === "invites") response = await antiInvites(settings, interaction.options.getString("status"));
     else if (sub == "links") response = await antilinks(settings, interaction.options.getString("status"));
     else if (sub === "maxlines") response = await maxLines(settings, interaction.options.getInteger("amount"));
-    else response = "°Uso de comando no v·lido!";
+    else response = "¬°Uso de comando no v√°lido!";
 
     await interaction.followUp(response);
   },
@@ -179,7 +179,7 @@ async function antiAttachments(settings, input) {
   settings.automod.anti_attachments = status;
   await settings.save();
   return `Messages ${
-    status ? "con archivos adjuntos se eliminar·n autom·ticamente" : "ahora no se filtrar·n los archivos adjuntos"
+    status ? "con archivos adjuntos se eliminar√°n autom√°ticamente" : "ahora no se filtrar√°n los archivos adjuntos"
   }`;
 }
 
@@ -188,7 +188,7 @@ async function antiInvites(settings, input) {
   settings.automod.anti_invites = status;
   await settings.save();
   return `Messages ${
-    status ? "con invitaciones de discord ahora se eliminar·n autom·ticamente" : "ahora no se filtrar·n las invitaciones de discord"
+    status ? "con invitaciones de discord ahora se eliminar√°n autom√°ticamente" : "ahora no se filtrar√°n las invitaciones de discord"
   }`;
 }
 
@@ -196,18 +196,18 @@ async function antilinks(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_links = status;
   await settings.save();
-  return `Messages ${status ? "con los enlaces se eliminar·n autom·ticamente" : "ahora no se filtrar·n los enlaces"}`;
+  return `Messages ${status ? "con los enlaces se eliminar√°n autom√°ticamente" : "ahora no se filtrar√°n los enlaces"}`;
 }
 
 async function maxLines(settings, input) {
   const lines = Number.parseInt(input);
-  if (isNaN(lines)) return "Por favor, introduzca un n˙mero v·lido";
+  if (isNaN(lines)) return "Por favor, introduzca un n√∫mero v√°lido";
 
   settings.automod.max_lines = lines;
   await settings.save();
   return `${
     input === 0
-      ? "El lÌmite m·ximo de lÌneas est· desactivado"
-      : `Mensajes superiores a \`${input}\` las lÌneas se borrar·n autom·ticamente`
+      ? "El l√≠mite m√°ximo de l√≠neas est√° desactivado"
+      : `Mensajes superiores a \`${input}\` las l√≠neas se borrar√°n autom√°ticamente`
   }`;
 }

@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "autorole",
-  description: "configuración del rol que se asignará cuando un miembro se una al servidor",
+  description: "configuraciÃ³n del rol que se asignarÃ¡ cuando un miembro se una al servidor",
   category: "ADMIN",
   userPermissions: ["ManageGuild"],
   command: {
@@ -52,7 +52,7 @@ module.exports = {
       response = await setAutoRole(message, null, data.settings);
     } else {
       const roles = message.guild.findMatchingRoles(input);
-      if (roles.length === 0) response = "No se han encontrado roles que coincidan con su búsqueda";
+      if (roles.length === 0) response = "No se han encontrado roles que coincidan con su bÃºsqueda";
       else response = await setAutoRole(message, roles[0], data.settings);
     }
 
@@ -71,7 +71,7 @@ module.exports = {
         if (!role_id) return interaction.followUp("Por favor, indique un rol o Id de rol");
 
         const roles = interaction.guild.findMatchingRoles(role_id);
-        if (roles.length === 0) return interaction.followUp("No se han encontrado roles que coincidan con su búsqueda");
+        if (roles.length === 0) return interaction.followUp("No se han encontrado roles que coincidan con su bÃºsqueda");
         role = roles[0];
       }
 
@@ -101,12 +101,12 @@ async function setAutoRole({ guild }, role, settings) {
     if (!guild.members.me.permissions.has("ManageRoles")) return "No tengo el permiso `ManageRoles`.";
     if (guild.members.me.roles.highest.position < role.position)
       return "No tengo permisos para asignar este rol";
-    if (role.managed) return "¡Uy! Esta función está gestionada por una integración";
+    if (role.managed) return "Â¡Uy! Esta funciÃ³n estÃ¡ gestionada por una integraciÃ³n";
   }
 
   if (!role) settings.autorole = null;
   else settings.autorole = role.id;
 
   await settings.save();
-  return `¡Configuración guardada! el Autorol es ${!role ? "disabled" : "setup"}`;
+  return `Â¡ConfiguraciÃ³n guardada! el Autorol es ${!role ? "deshabilitado" : "configurado"}`;
 }

@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         trigger: "desc <texto>",
-        description: "establecer la descripciÛn del embed",
+        description: "establecer la descripci√≥n del embed",
       },
       {
         trigger: "miniatura <ON|OFF>",
@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         trigger: "pie de pagina <texto>",
-        description: "Establecer el contenido del pie de p·gina del embed",
+        description: "Establecer el contenido del pie de p√°gina del embed",
       },
       {
         trigger: "imagen <url>",
@@ -96,12 +96,12 @@ module.exports = {
       },
       {
         name: "desc",
-        description: "seleccionar una descripciÛn para el embed",
+        description: "seleccionar una descripci√≥n para el embed",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "content",
-            description: "contenido de la descripciÛn",
+            description: "contenido de la descripci√≥n",
             type: ApplicationCommandOptionType.String,
             required: true,
           },
@@ -177,7 +177,7 @@ module.exports = {
     const settings = data.settings;
     let response;
 
-    // vista prevÌa
+    // vista prev√≠a
     if (type === "preview") {
       response = await sendPreview(settings, message.member);
     }
@@ -186,7 +186,7 @@ module.exports = {
     else if (type === "status") {
       const status = args[1]?.toUpperCase();
       if (!status || !["ON", "OFF"].includes(status))
-        return message.safeReply("Estado no v·lido. El valor debe ser `on/off`");
+        return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await setStatus(settings, status);
     }
 
@@ -198,7 +198,7 @@ module.exports = {
 
     // desc
     else if (type === "desc") {
-      if (args.length < 2) return message.safeReply("Argumentos insuficientes Por favor, aporte contenidos v·lidos");
+      if (args.length < 2) return message.safeReply("Argumentos insuficientes Por favor, aporte contenidos v√°lidos");
       const desc = args.slice(1).join(" ");
       response = await setDescription(settings, desc);
     }
@@ -207,20 +207,20 @@ module.exports = {
     else if (type === "thumbnail") {
       const status = args[1]?.toUpperCase();
       if (!status || !["ON", "OFF"].includes(status))
-        return message.safeReply("Estado no v·lido. El valor debe ser `on/off`");
+        return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await setThumbnail(settings, status);
     }
 
     // color
     else if (type === "color") {
       const color = args[1];
-      if (!color || !isHex(color)) return message.safeReply("Color no v·lido. El valor debe ser un color hexadecimal v·lido");
+      if (!color || !isHex(color)) return message.safeReply("Color no v√°lido. El valor debe ser un color hexadecimal v√°lido");
       response = await setColor(settings, color);
     }
 
     // pie de pagina
     else if (type === "footer") {
-      if (args.length < 2) return message.safeReply("Argumentos insuficientes Por favor, aporte contenidos v·lidos");
+      if (args.length < 2) return message.safeReply("Argumentos insuficientes Por favor, aporte contenidos v√°lidos");
       const content = args.slice(1).join(" ");
       response = await setFooter(settings, content);
     }
@@ -228,12 +228,12 @@ module.exports = {
     // imagen
     else if (type === "image") {
       const url = args[1];
-      if (!url) return message.safeReply("URL de imagen no v·lida. Por favor, proporcione una url v·lida");
+      if (!url) return message.safeReply("URL de imagen no v√°lida. Por favor, proporcione una url v√°lida");
       response = await setImage(settings, url);
     }
 
     //
-    else response = "°Uso de comando no v·lido!";
+    else response = "¬°Uso de comando no v√°lido!";
     return message.safeReply(response);
   },
 
@@ -276,7 +276,7 @@ module.exports = {
         break;
 
       default:
-        response = "Subcomando no v·lido";
+        response = "Subcomando no v√°lido";
     }
 
     return interaction.followUp(response);
@@ -287,7 +287,7 @@ async function sendPreview(settings, member) {
   if (!settings.welcome?.enabled) return "Mensaje de bienvenida no habilitado en este servidor";
 
   const targetChannel = member.guild.channels.cache.get(settings.welcome.channel);
-  if (!targetChannel) return "Ning˙n canal est· configurado para enviar mensajes de bienvenida";
+  if (!targetChannel) return "Ning√∫n canal est√° configurado para enviar mensajes de bienvenida";
 
   const response = await buildGreeting(member, "WELCOME", settings.welcome);
   await targetChannel.safeSend(response);
@@ -299,47 +299,47 @@ async function setStatus(settings, status) {
   const enabled = status.toUpperCase() === "ON" ? true : false;
   settings.welcome.enabled = enabled;
   await settings.save();
-  return `°ConfiguraciÛn guardada! Mensaje de bienvenida ${enabled ? "habilitado" : "deshabilitado"}`;
+  return `¬°Configuraci√≥n guardada! Mensaje de bienvenida ${enabled ? "habilitado" : "deshabilitado"}`;
 }
 
 async function setChannel(settings, channel) {
   if (!channel.canSendEmbeds()) {
     return (
-      "°Uf! øNo puedo enviar saludos a ese canal? Necesito los permisos `Write Messages` y `Embed Links` en " +
+      "¬°Uf! ¬øNo puedo enviar saludos a ese canal? Necesito los permisos `Write Messages` y `Embed Links` en " +
       channel.toString()
     );
   }
   settings.welcome.channel = channel.id;
   await settings.save();
-  return `°ConfiguraciÛn guardada! Se enviar· un mensaje de bienvenida a ${channel ? channel.toString() : "Not found"}`;
+  return `¬°Configuraci√≥n guardada! Se enviar√° un mensaje de bienvenida a ${channel ? channel.toString() : "Not found"}`;
 }
 
 async function setDescription(settings, desc) {
   settings.welcome.embed.description = desc;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de bienvenida actualizado";
+  return "Configuraci√≥n guardada Mensaje de bienvenida actualizado";
 }
 
 async function setThumbnail(settings, status) {
   settings.welcome.embed.thumbnail = status.toUpperCase() === "ON" ? true : false;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de bienvenida actualizado";
+  return "Configuraci√≥n guardada Mensaje de bienvenida actualizado";
 }
 
 async function setColor(settings, color) {
   settings.welcome.embed.color = color;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de bienvenida actualizado";
+  return "Configuraci√≥n guardada Mensaje de bienvenida actualizado";
 }
 
 async function setFooter(settings, content) {
   settings.welcome.embed.footer = content;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de bienvenida actualizado";
+  return "Configuraci√≥n guardada Mensaje de bienvenida actualizado";
 }
 
 async function setImage(settings, url) {
   settings.welcome.embed.image = url;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de bienvenida actualizado";
+  return "Configuraci√≥n guardada Mensaje de bienvenida actualizado";
 }

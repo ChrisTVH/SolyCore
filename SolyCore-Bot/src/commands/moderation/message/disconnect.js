@@ -10,13 +10,13 @@ module.exports = {
   userPermissions: ["MuteMembers"],
   command: {
     enabled: true,
-    usage: "<ID|@miembro> [razón]",
+    usage: "<ID|@miembro> [razÃ³n]",
     minArgsCount: 1,
   },
 
   async messageRun(message, args) {
     const target = await message.guild.resolveMember(args[0], true);
-    if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[0]}`);
+    if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[0]}`);
     const reason = message.content.split(args[0])[1].trim();
     const response = await disconnect(message, target, reason);
     await message.safeReply(response);

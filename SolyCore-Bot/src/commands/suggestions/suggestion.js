@@ -33,20 +33,20 @@ module.exports = {
         description: "configurar el canal de sugerencias rechazadas o desactivarlo",
       },
       {
-        trigger: "approve <canal> <mensajeId> [razÛn]",
+        trigger: "approve <canal> <mensajeId> [raz√≥n]",
         description: "aprobar una sugerencia",
       },
       {
-        trigger: "reject <canal> <mensajeId> [razÛn]",
+        trigger: "reject <canal> <mensajeId> [raz√≥n]",
         description: "rechazar una sugerencia",
       },
       {
         trigger: "staffadd <rolId>",
-        description: "aÒadir una funciÛn de personal",
+        description: "a√±adir una funci√≥n de personal",
       },
       {
         trigger: "staffremove <rolId>",
-          description: "eliminar una funciÛn del personal",
+          description: "eliminar una funci√≥n del personal",
       },
     ],
   },
@@ -84,7 +84,7 @@ module.exports = {
         options: [
           {
             name: "channel_name",
-            description: "el canal al que se enviar·n las sugerencias",
+            description: "el canal al que se enviar√°n las sugerencias",
             type: ApplicationCommandOptionType.Channel,
             channelTypes: [ChannelType.GuildText],
             required: false,
@@ -98,7 +98,7 @@ module.exports = {
         options: [
           {
             name: "channel_name",
-            description: "el canal al que se enviar·n las sugerencias aprobadas",
+            description: "el canal al que se enviar√°n las sugerencias aprobadas",
             type: ApplicationCommandOptionType.Channel,
             channelTypes: [ChannelType.GuildText],
             required: false,
@@ -112,7 +112,7 @@ module.exports = {
         options: [
           {
             name: "channel_name",
-            description: "el canal al que se enviar·n las sugerencias rechazadas",
+            description: "el canal al que se enviar√°n las sugerencias rechazadas",
             type: ApplicationCommandOptionType.Channel,
             channelTypes: [ChannelType.GuildText],
             required: false,
@@ -139,7 +139,7 @@ module.exports = {
           },
           {
             name: "reason",
-            description: "el motivo de la aprobaciÛn",
+            description: "el motivo de la aprobaci√≥n",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
@@ -173,12 +173,12 @@ module.exports = {
       },
       {
         name: "staffadd",
-        description: "aÒadir el rol staff",
+        description: "a√±adir el rol staff",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "role",
-            description: "el rol para aÒadir como staff",
+            description: "el rol para a√±adir como staff",
             type: ApplicationCommandOptionType.Role,
             required: true,
           },
@@ -208,7 +208,7 @@ module.exports = {
     if (sub == "status") {
       const status = args[1]?.toUpperCase();
       if (!status || !["ON", "OFF"].includes(status))
-        return message.safeReply("Estado no v·lido. El valor debe ser `on/off`");
+        return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await setStatus(data.settings, status);
     }
 
@@ -217,7 +217,7 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
       if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m·s especÌfico.`;
+      else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else response = await setChannel(data.settings, matched[0]);
     }
 
@@ -226,7 +226,7 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
       if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m·s especÌfico.`;
+      else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else response = await setApprovedChannel(data.settings, matched[0]);
     }
 
@@ -235,7 +235,7 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
         if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m·s especÌfico.`;
+        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else response = await setRejectedChannel(data.settings, matched[0]);
     }
 
@@ -244,7 +244,7 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
         if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m·s especÌfico.`;
+        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else {
         const messageId = args[2];
         const reason = args.slice(3).join(" ");
@@ -257,7 +257,7 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingChannels(input);
         if (matched.length == 0) response = `No se han encontrado canales para ${input}`;
-        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m·s especÌfico.`;
+        else if (matched.length > 1) response = `Se han encontrado varios canales para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else {
         const messageId = args[2];
         const reason = args.slice(3).join(" ");
@@ -265,12 +265,12 @@ module.exports = {
       }
     }
 
-    // aÒadir staff
+    // a√±adir staff
     else if (sub == "staffadd") {
       const input = args[1];
       let matched = message.guild.findMatchingRoles(input);
       if (matched.length == 0) response = `No se han encontrado roles coincidentes para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios roles para ${input}. Por favor, sea m·s especÌfico.`;
+      else if (matched.length > 1) response = `Se han encontrado varios roles para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else response = await addStaffRole(data.settings, matched[0]);
     }
 
@@ -279,12 +279,12 @@ module.exports = {
       const input = args[1];
       let matched = message.guild.findMatchingRoles(input);
       if (matched.length == 0) response = `No se han encontrado roles coincidentes para ${input}`;
-      else if (matched.length > 1) response = `Se han encontrado varios roles para ${input}. Por favor, sea m·s especÌfico.`;
+      else if (matched.length > 1) response = `Se han encontrado varios roles para ${input}. Por favor, sea m√°s espec√≠fico.`;
       else response = await removeStaffRole(data.settings, matched[0]);
     }
 
     // si no
-    else response = "No es un subcomando v·lido";
+    else response = "No es un subcomando v√°lido";
     await message.safeReply(response);
   },
 
@@ -304,7 +304,7 @@ module.exports = {
       response = await setChannel(data.settings, channel);
     }
 
-    // canal de aprovaciÛn
+    // canal de aprovaci√≥n
     else if (sub == "appch") {
       const channel = interaction.options.getChannel("channel_name");
       response = await setApprovedChannel(data.settings, channel);
@@ -330,7 +330,7 @@ module.exports = {
       response = await rejectSuggestion(interaction.member, channel, messageId);
     }
 
-    // aÒadir staff
+    // a√±adir staff
     else if (sub == "staffadd") {
       const role = interaction.options.getRole("role");
       response = await addStaffRole(data.settings, role);
@@ -343,7 +343,7 @@ module.exports = {
     }
 
     // si no
-    else response = "No es un subcomando v·lido";
+    else response = "No es un subcomando v√°lido";
     await interaction.followUp(response);
   },
 };
@@ -359,7 +359,7 @@ async function setChannel(settings, channel) {
   if (!channel) {
     settings.suggestions.channel_id = null;
     await settings.save();
-    return "El sistema de sugerencias est· desactivado";
+    return "El sistema de sugerencias est√° desactivado";
   }
 
   if (!channel.permissionsFor(channel.guild.members.me).has(CHANNEL_PERMS)) {
@@ -368,14 +368,14 @@ async function setChannel(settings, channel) {
 
   settings.suggestions.channel_id = channel.id;
   await settings.save();
-  return `Las sugerencias se enviar·n ahora a ${channel}`;
+  return `Las sugerencias se enviar√°n ahora a ${channel}`;
 }
 
 async function setApprovedChannel(settings, channel) {
   if (!channel) {
     settings.suggestions.approved_channel = null;
     await settings.save();
-    return "El canal de sugerencias aprobadas est· desactivado";
+    return "El canal de sugerencias aprobadas est√° desactivado";
   }
 
   if (!channel.permissionsFor(channel.guild.members.me).has(CHANNEL_PERMS)) {
@@ -384,14 +384,14 @@ async function setApprovedChannel(settings, channel) {
 
   settings.suggestions.approved_channel = channel.id;
   await settings.save();
-  return `Las sugerencias aprobadas se enviar·n ahora a ${channel}`;
+  return `Las sugerencias aprobadas se enviar√°n ahora a ${channel}`;
 }
 
 async function setRejectedChannel(settings, channel) {
   if (!channel) {
     settings.suggestions.rejected_channel = null;
     await settings.save();
-    return "El canal de sugerencias rechazadas est· ahora desactivado";
+    return "El canal de sugerencias rechazadas est√° ahora desactivado";
   }
 
   if (!channel.permissionsFor(channel.guild.members.me).has(CHANNEL_PERMS)) {
@@ -400,7 +400,7 @@ async function setRejectedChannel(settings, channel) {
 
   settings.suggestions.rejected_channel = channel.id;
   await settings.save();
-  return `Las sugerencias rechazadas se enviar·n ahora a ${channel}`;
+  return `Las sugerencias rechazadas se enviar√°n ahora a ${channel}`;
 }
 
 async function addStaffRole(settings, role) {

@@ -44,10 +44,10 @@ module.exports = {
 
 async function getRank({ guild }, member, settings) {
   const { user } = member;
-  if (!settings.stats.enabled) return "El seguimiento de estadísticas está desactivado en este servidor";
+  if (!settings.stats.enabled) return "El seguimiento de estadÃ­sticas estÃ¡ desactivado en este servidor";
 
   const memberStats = await getMemberStats(guild.id, user.id);
-  if (!memberStats.xp) return `${user.tag} ¡aún no está clasificado!`;
+  if (!memberStats.xp) return `${user.tag} Â¡aÃºn no estÃ¡ clasificado!`;
 
   const lb = await getXpLb(guild.id, 100);
   let pos = -1;

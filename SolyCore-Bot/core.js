@@ -20,7 +20,7 @@ client.loadContexts("src/contexts");
 client.loadEvents("src/events");
 
 // Encontrar rechazos de promesas no gestionados
-process.on("unhandledRejection", (err) => client.logger.error(`Excepción no controlada`, err));
+process.on("unhandledRejection", (err) => client.logger.error(`ExcepciÃ³n no controlada`, err));
 
 (async () => {
     // Buscar actualizaciones

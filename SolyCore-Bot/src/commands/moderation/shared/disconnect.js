@@ -12,7 +12,7 @@ module.exports = async ({ member }, target, reason) => {
     return `No tengo permiso para desconectar ${target.user.tag}`;
   }
   if (response === "NO_VOICE") {
-    return `${target.user.tag} no está en ningún canal de voz`;
+    return `${target.user.tag} no estÃ¡ en ningÃºn canal de voz`;
   }
   return `Error al desconectar ${target.user.tag}`;
 };

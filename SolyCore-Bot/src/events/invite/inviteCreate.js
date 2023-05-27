@@ -7,7 +7,7 @@ const { getInviteCache, cacheInvite } = require("@handlers/invite");
 module.exports = async (client, invite) => {
   const cachedInvites = getInviteCache(invite?.guild);
 
-  // Comprobar si la caché del servidor existe y luego añadirlo a la caché
+  // Comprobar si la cachÃ© del servidor existe y luego aÃ±adirlo a la cachÃ©
   if (cachedInvites) {
     cachedInvites.set(invite.code, cacheInvite(invite, false));
   }

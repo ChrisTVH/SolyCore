@@ -28,7 +28,7 @@ module.exports = async (client, message) => {
     }
   }
 
-  // gestor de estadísticas
+  // gestor de estadÃ­sticas
   if (settings.stats.enabled) await statsHandler.trackMessageStats(message, isCommand, settings);
 
   // si no es un comando

@@ -3,7 +3,7 @@ const { EMBED_COLORS } = require("@root/config");
 
 module.exports = (emoji) => {
   let custom = parseEmoji(emoji);
-  if (!custom.id) return "Este no es un emoji del servidor v·lido";
+  if (!custom.id) return "Este no es un emoji del servidor v√°lido";
 
   let url = `https://cdn.discordapp.com/emojis/${custom.id}.${custom.animated ? "gif?v=1" : "png"}`;
 

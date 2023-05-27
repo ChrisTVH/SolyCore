@@ -17,12 +17,12 @@ module.exports = {
   },
 
   async messageRun(message, args) {
-    await message.safeReply("**Inicio del juego de la serpiente**");
+    await message.safeReply("**Iniciando el juego de la serpiente**");
     await startSnakeGame(message);
   },
 
   async interactionRun(interaction) {
-    await interaction.followUp("**Comenzar el juego de la serpiente**");
+    await interaction.followUp("**El Juego de la serpiente**");
     await startSnakeGame(interaction);
   },
 };
@@ -32,7 +32,7 @@ async function startSnakeGame(data) {
     title: "El juego de la serpiente",
     color: "BLUE",
     timestamp: true,
-    gameOverTitle: "Se acabó el juego",
+    gameOverTitle: "Se acabÃ³ el juego",
   });
 
   await snakeGame.newGame(data);

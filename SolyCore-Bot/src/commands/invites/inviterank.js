@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "inviterank",
-  description: "configurar los rangos de invitación",
+  description: "configurar los rangos de invitaciÃ³n",
   category: "INVITE",
   userPermissions: ["ManageGuild"],
   command: {
@@ -15,11 +15,11 @@ module.exports = {
     subcommands: [
       {
         trigger: "add <roles> <invitaciones>",
-        description: "añadir auto-rango después de alcanzar un número determinado de invitaciones",
+        description: "aÃ±adir auto-rango despuÃ©s de alcanzar un nÃºmero determinado de invitaciones",
       },
       {
         trigger: "remove role",
-        description: "eliminar el rango de invitación configurado con ese rol",
+        description: "eliminar el rango de invitaciÃ³n configurado con ese rol",
       },
     ],
   },
@@ -29,18 +29,18 @@ module.exports = {
     options: [
       {
         name: "add",
-        description: "añadir un nuevo rango de invitación",
+        description: "aÃ±adir un nuevo rango de invitaciÃ³n",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "role",
-            description: "papel que debe desempeñar",
+            description: "papel que debe desempeÃ±ar",
             type: ApplicationCommandOptionType.Role,
             required: true,
           },
           {
             name: "invites",
-            description: "número de invitaciones necesarias para obtener el puesto",
+            description: "nÃºmero de invitaciones necesarias para obtener el puesto",
             type: ApplicationCommandOptionType.Integer,
             required: true,
           },
@@ -48,12 +48,12 @@ module.exports = {
       },
       {
         name: "remove",
-        description: "eliminar un rango de invitación previamente configurado",
+        description: "eliminar un rango de invitaciÃ³n previamente configurado",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "role",
-            description: "rol con rango de invitación configurado",
+            description: "rol con rango de invitaciÃ³n configurado",
             type: ApplicationCommandOptionType.Role,
             required: true,
           },
@@ -69,7 +69,7 @@ module.exports = {
       const query = args[1];
       const invites = args[2];
 
-      if (isNaN(invites)) return message.safeReply(`\`${invites}\` no es un número válido de invitaciones?`);
+      if (isNaN(invites)) return message.safeReply(`\`${invites}\` no es un nÃºmero vÃ¡lido de invitaciones?`);
       const role = message.guild.findMatchingRoles(query)[0];
       if (!role) return message.safeReply(`No se han encontrado roles que coincidan \`${query}\``);
 
@@ -113,7 +113,7 @@ module.exports = {
 };
 
 async function addInviteRank({ guild }, role, invites, settings) {
-  if (!settings.invite.tracking) return `El seguimiento de invitaciones está desactivado en este servidor`;
+  if (!settings.invite.tracking) return `El seguimiento de invitaciones estÃ¡ desactivado en este servidor`;
 
   if (role.managed) {
     return "No se puede asignar un rol de bot";
@@ -124,7 +124,7 @@ async function addInviteRank({ guild }, role, invites, settings) {
   }
 
   if (!role.editable) {
-    return "Me faltan permisos para mover miembros a ese rol. ¿Ese rol está por debajo de mi rol más alto?";
+    return "Me faltan permisos para mover miembros a ese rol. Â¿Ese rol estÃ¡ por debajo de mi rol mÃ¡s alto?";
   }
 
   const exists = settings.invite.ranks.find((obj) => obj._id === role.id);
@@ -132,16 +132,16 @@ async function addInviteRank({ guild }, role, invites, settings) {
   let msg = "";
   if (exists) {
     exists.invites = invites;
-    msg += "Configuración previa encontrada para este rol. Sobrescritura de datos\n";
+    msg += "ConfiguraciÃ³n previa encontrada para este rol. Sobrescritura de datos\n";
   }
 
   settings.invite.ranks.push({ _id: role.id, invites });
   await settings.save();
-  return `${msg}¡Éxito! Configuración guardada.`;
+  return `${msg}Â¡Ã‰xito! ConfiguraciÃ³n guardada.`;
 }
 
 async function removeInviteRank({ guild }, role, settings) {
-  if (!settings.invite.tracking) return `El seguimiento de invitaciones está desactivado en este servidor`;
+  if (!settings.invite.tracking) return `El seguimiento de invitaciones estÃ¡ desactivado en este servidor`;
 
   if (role.managed) {
     return "No se puede asignar un rol de bot";
@@ -152,16 +152,16 @@ async function removeInviteRank({ guild }, role, settings) {
   }
 
   if (!role.editable) {
-    return "Me faltan permisos para mover miembros de ese rol. ¿Ese rol está por debajo de mi rol más alto?";
+    return "Me faltan permisos para mover miembros de ese rol. Â¿Ese rol estÃ¡ por debajo de mi rol mÃ¡s alto?";
   }
 
   const exists = settings.invite.ranks.find((obj) => obj._id === role.id);
-  if (!exists) return "No se ha configurado ningún rango de invitación anterior para este rol";
+  if (!exists) return "No se ha configurado ningÃºn rango de invitaciÃ³n anterior para este rol";
 
   // eliminar elemento del array
   const i = settings.invite.ranks.findIndex((obj) => obj._id === role.id);
   if (i > -1) settings.invite.ranks.splice(i, 1);
 
   await settings.save();
-  return "¡Éxito! Configuración guardada.";
+  return "Â¡Ã‰xito! ConfiguraciÃ³n guardada.";
 }

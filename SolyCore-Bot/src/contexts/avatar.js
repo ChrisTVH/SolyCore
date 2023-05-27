@@ -27,7 +27,7 @@ function getAvatar(user) {
   const x2048 = user.displayAvatarURL({ extension: "png", size: 2048 });
 
   const embed = new EmbedBuilder()
-    .setTitle(`Perfil de ${user.username}`)
+    .setTitle(`Avatar de ${user.username}`)
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setImage(x256)
     .setDescription(

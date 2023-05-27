@@ -12,7 +12,7 @@ module.exports = class HttpUtils {
    */
   static async getJson(url, options) {
     try {
-      // con autenticación
+      // con autenticaciÃ³n
       const response = options ? await fetch(url, options) : await fetch(url);
       const json = await response.json();
       return {
@@ -54,7 +54,7 @@ module.exports = class HttpUtils {
   }
 
   /**
-   * Traduce el contenido proporcionado al código de idioma indicado.
+   * Traduce el contenido proporcionado al cÃ³digo de idioma indicado.
    * @param {string} content
    * @param {string} outputCode
    */

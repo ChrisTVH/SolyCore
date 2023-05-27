@@ -36,13 +36,13 @@ module.exports = {
   model: Model,
 
   cacheReactionRoles: async (client) => {
-    // borrar cachÈ anterior
+    // borrar cach√© anterior
     rrCache.clear();
 
     // cargar todos los documentos de la base de datos
     const docs = await Model.find().lean();
 
-    // validar y almacenar en cachÈ los documentos
+    // validar y almacenar en cach√© los documentos
     for (const doc of docs) {
       const guild = client.guilds.cache.get(doc.guild_id);
       if (!guild) {
@@ -63,7 +63,7 @@ module.exports = {
   addReactionRole: async (guildId, channelId, messageId, emote, roleId) => {
     const filter = { guild_id: guildId, channel_id: channelId, message_id: messageId };
 
-    // Tire si la configuraciÛn existente est· presente
+    // Tire si la configuraci√≥n existente est√° presente
     await Model.updateOne(filter, { $pull: { roles: { emote } } });
 
     const data = await Model.findOneAndUpdate(
@@ -76,7 +76,7 @@ module.exports = {
       { upsert: true, new: true }
     ).lean();
 
-    // actualizar cachÈ
+    // actualizar cach√©
     const key = getKey(guildId, channelId, messageId);
     rrCache.set(key, data.roles);
   },

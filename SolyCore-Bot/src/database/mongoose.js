@@ -5,14 +5,14 @@ mongoose.set("strictQuery", true);
 
 module.exports = {
   async initializeMongoose() {
-    log(`Conectando a MongoDb...`);
+    log(`Conectando a MongoDB...`);
 
     try {
       await mongoose.connect(process.env.MONGO_CONNECTION, {
         keepAlive: true,
       });
 
-      success("Mongoose: Conexión de base de datos establecida");
+      success("Mongoose: ConexiÃ³n de base de datos establecida");
 
       return mongoose.connection;
     } catch (err) {

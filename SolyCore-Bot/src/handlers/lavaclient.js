@@ -38,7 +38,7 @@ module.exports = (client) => {
   });
 
   lavaclient.on("nodeDebug", (node, message) => {
-    client.logger.debug(`Nodo "${node.id}" en modo de depuraci髇: ${message}`);
+    client.logger.debug(`Nodo "${node.id}" en modo de depuraci贸n: ${message}`);
   });
 
   lavaclient.on("nodeTrackStart", (_node, queue, song) => {
@@ -57,14 +57,14 @@ module.exports = (client) => {
     }
 
     fields.push({
-      name: "Duraci髇 de la canci髇",
+      name: "Duraci贸n de la canci贸n",
       value: "`" + prettyMs(song.length, { colonNotation: true }) + "`",
       inline: true,
     });
 
     if (queue.tracks.length > 0) {
       fields.push({
-        name: "Posici髇 en la cola",
+        name: "Posici贸n en la cola",
         value: (queue.tracks.length + 1).toString(),
         inline: true,
       });

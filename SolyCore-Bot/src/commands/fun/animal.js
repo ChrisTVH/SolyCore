@@ -16,7 +16,7 @@ module.exports = {
   botPermissions: ["EmbedLinks"],
   command: {
     enabled: true,
-    usage: "<type>",
+    usage: "<tipo>",
     minArgsCount: 1,
   },
   slashCommand: {
@@ -35,7 +35,7 @@ module.exports = {
   async messageRun(message, args) {
     const choice = args[0];
     if (!animals.includes(choice)) {
-      return message.safeReply(`Animal no v·lido seleccionado. Animales disponibles:\n${animals.join(", ")}`);
+      return message.safeReply(`Animal no v√°lido seleccionado. Animales disponibles:\n${animals.join(", ")}`);
     }
     const response = await getAnimal(message.author, choice);
     return message.safeReply(response);

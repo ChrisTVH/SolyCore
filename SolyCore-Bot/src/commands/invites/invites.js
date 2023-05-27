@@ -8,7 +8,7 @@ const { getMember } = require("@schemas/Member");
  */
 module.exports = {
   name: "invites",
-  description: "muestra el número de invitaciones en este servidor",
+  description: "muestra el nÃºmero de invitaciones en este servidor",
   category: "INVITE",
   botPermissions: ["EmbedLinks"],
   command: {
@@ -41,7 +41,7 @@ module.exports = {
 };
 
 async function getInvites({ guild }, user, settings) {
-  if (!settings.invite.tracking) return `El seguimiento de invitaciones está desactivado en este servidor`;
+  if (!settings.invite.tracking) return `El seguimiento de invitaciones estÃ¡ desactivado en este servidor`;
 
   const inviteData = (await getMember(guild.id, user.id)).invite_data;
 

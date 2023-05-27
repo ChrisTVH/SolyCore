@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "maxwarn",
-  description: "configurar advertencias m·ximas",
+  description: "configurar advertencias m√°ximas",
   category: "ADMIN",
   userPermissions: ["ManageGuild"],
   command: {
@@ -14,11 +14,11 @@ module.exports = {
     subcommands: [
       {
         trigger: "limite <number>",
-        description: "establecer el m·ximo de advertencias que puede recibir un miembro antes de emprender una acciÛn",
+        description: "establecer el m√°ximo de advertencias que puede recibir un miembro antes de emprender una acci√≥n",
       },
       {
-        trigger: "acciÛn <timeout|kick|ban>",
-        description: "establecer la acciÛn a realizar tras recibir el m·ximo de advertencias",
+        trigger: "acci√≥n <timeout|kick|ban>",
+        description: "establecer la acci√≥n a realizar tras recibir el m√°ximo de advertencias",
       },
     ],
   },
@@ -28,12 +28,12 @@ module.exports = {
     options: [
       {
         name: "limit",
-        description: "establecer el m·ximo de advertencias que puede recibir un miembro antes de emprender una acciÛn",
+        description: "establecer el m√°ximo de advertencias que puede recibir un miembro antes de emprender una acci√≥n",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "amount",
-            description: "n˙mero m·ximo de strikes",
+            description: "n√∫mero m√°ximo de strikes",
             type: ApplicationCommandOptionType.Integer,
             required: true,
           },
@@ -41,12 +41,12 @@ module.exports = {
       },
       {
         name: "action",
-        description: "establecer la acciÛn a realizar tras recibir el m·ximo de advertencias",
+        description: "establecer la acci√≥n a realizar tras recibir el m√°ximo de advertencias",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "action",
-            description: "acciÛn a realizar",
+            description: "acci√≥n a realizar",
             type: ApplicationCommandOptionType.String,
             required: true,
             choices: [
@@ -71,19 +71,19 @@ module.exports = {
 
   async messageRun(message, args, data) {
     const input = args[0].toLowerCase();
-    if (!["limit", "action"].includes(input)) return message.safeReply("Uso de comando no v·lido");
+    if (!["limit", "action"].includes(input)) return message.safeReply("Uso de comando no v√°lido");
 
     let response;
     if (input === "limit") {
       const max = parseInt(args[1]);
-      if (isNaN(max) || max < 1) return message.safeReply("Las advertencias m·ximas deben ser un n˙mero v·lido mayor que 0");
+      if (isNaN(max) || max < 1) return message.safeReply("Las advertencias m√°ximas deben ser un n√∫mero v√°lido mayor que 0");
       response = await setLimit(max, data.settings);
     }
 
     if (input === "action") {
       const action = args[1]?.toUpperCase();
       if (!action || !["TIMEOUT", "KICK", "BAN"].includes(action))
-        return message.safeReply("No es una acciÛn v·lida. La acciÛn puede ser `Timeout`/`Kick`/`Ban`");
+        return message.safeReply("No es una acci√≥n v√°lida. La acci√≥n puede ser `Timeout`/`Kick`/`Ban`");
       response = await setAction(message.guild, action, data.settings);
     }
 
@@ -109,7 +109,7 @@ module.exports = {
 async function setLimit(limit, settings) {
   settings.max_warn.limit = limit;
   await settings.save();
-  return `°ConfiguraciÛn guardada! Las advertencias m·ximas se fijan en ${limit}`;
+  return `¬°Configuraci√≥n guardada! Las advertencias m√°ximas se fijan en ${limit}`;
 }
 
 async function setAction(guild, action, settings) {
@@ -133,5 +133,5 @@ async function setAction(guild, action, settings) {
 
   settings.max_warn.action = action;
   await settings.save();
-  return `ConfiguraciÛn guardada. La acciÛn Automod est· ajustada a ${action}`;
+  return `Configuraci√≥n guardada. La acci√≥n Automod est√° ajustada a ${action}`;
 }

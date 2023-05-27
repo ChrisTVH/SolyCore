@@ -20,7 +20,7 @@ const parse = async (content, member, inviterData = {}) => {
         inviteData.name = inviter.username;
         inviteData.tag = inviter.tag;
       } catch (ex) {
-        member.client.logger.error(`Parsing inviterId: ${inviterId}`, ex);
+        member.client.logger.error(`Análisis del inviterId: ${inviterId}`, ex);
         inviteData.name = "NA";
         inviteData.tag = "NA";
       }

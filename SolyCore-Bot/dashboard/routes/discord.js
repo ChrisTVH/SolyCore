@@ -9,7 +9,7 @@ router.get("/login", async function (req, res) {
   if (!req.user || !req.user.id || !req.user.guilds) {
     // check if client user is ready
     if (!req.client.user?.id) {
-      req.client.logger.debug("El cliente no est· listo Redirigiendo a /login");
+      req.client.logger.debug("El cliente no est√° listo Redirigiendo a /login");
       return res.redirect("/login");
     }
 
@@ -27,7 +27,7 @@ router.get("/login", async function (req, res) {
 router.get("/callback", async (req, res) => {
   if (!req.query.code) {
     req.client.logger.debug({ query: req.query, body: req.body });
-    req.client.logger.error("No se ha podido iniciar sesiÛn en el panel de control. Compruebe la carpeta /logs para m·s detalles");
+    req.client.logger.error("No se ha podido iniciar sesi√≥n en el panel de control. Compruebe la carpeta /logs para m√°s detalles");
     return res.redirect(req.client.config.DASHBOARD.failureURL);
   }
   if (req.query.state && req.query.state.startsWith("invite")) {
@@ -55,7 +55,7 @@ router.get("/callback", async (req, res) => {
   // If the code isn't valid
   if (tokens.error || !tokens.access_token) {
     req.client.logger.debug(tokens);
-    req.client.logger.error("No se ha podido iniciar sesiÛn en el panel de control. Compruebe la carpeta /logs para m·s detalles");
+    req.client.logger.error("No se ha podido iniciar sesi√≥n en el panel de control. Compruebe la carpeta /logs para m√°s detalles");
     return res.redirect(`/api/login&state=${req.query.state}`);
   }
   const userData = {

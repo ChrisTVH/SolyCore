@@ -5,7 +5,7 @@ const channelInfo = require("../shared/channel");
  */
 module.exports = {
   name: "channelinfo",
-  description: "muestra información sobre un canal",
+  description: "muestra informaciÃ³n sobre un canal",
   category: "INFORMATION",
   botPermissions: ["EmbedLinks"],
   command: {

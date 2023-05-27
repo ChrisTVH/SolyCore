@@ -22,7 +22,7 @@ module.exports = {
     options: [
       {
         name: "user",
-        description: "obtener informaci髇 del usuario",
+        description: "obtener informaci贸n del usuario",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         name: "channel",
-        description: "obtener informaci髇 del canal",
+        description: "obtener informaci贸n del canal",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -48,17 +48,17 @@ module.exports = {
       },
       {
         name: "guild",
-        description: "obtener informaci髇 del servidor",
+        description: "obtener informaci贸n del servidor",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
         name: "bot",
-        description: "obtener informaci髇 del bot",
+        description: "obtener informaci贸n del bot",
         type: ApplicationCommandOptionType.Subcommand,
       },
       {
         name: "avatar",
-        description: "muestra informaci髇 sobre el avatar",
+        description: "muestra informaci贸n sobre el avatar",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -71,7 +71,7 @@ module.exports = {
       },
       {
         name: "emoji",
-        description: "muestra informaci髇 del emoji",
+        description: "muestra informaci贸n del emoji",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
@@ -87,7 +87,7 @@ module.exports = {
 
   async interactionRun(interaction) {
     const sub = interaction.options.getSubcommand();
-    if (!sub) return interaction.followUp("No es un subcomando v醠ido");
+    if (!sub) return interaction.followUp("No es un subcomando v谩lido");
     let response;
 
     // usuario

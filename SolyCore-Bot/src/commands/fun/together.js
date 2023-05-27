@@ -30,7 +30,7 @@ const discordTogether = [
  */
 module.exports = {
   name: "together",
-  description: "discord together",
+  description: "Discord Juntos",
   category: "FUN",
   botPermissions: ["EmbedLinks"],
   command: {
@@ -72,7 +72,7 @@ async function getTogetherInvite(member, choice) {
   if (!vc) return "Debes estar en un canal de voz para utilizar este comando.";
 
   if (!discordTogether.includes(choice)) {
-    return `Juego no v·lido.\nJuegos v·lidos: ${discordTogether.join(", ")}`;
+    return `Juego no v√°lido.\nJuegos v√°lidos: ${discordTogether.join(", ")}`;
   }
 
   const invite = await member.client.discordTogether.createTogetherCode(vc, choice);

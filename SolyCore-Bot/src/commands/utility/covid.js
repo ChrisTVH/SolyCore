@@ -8,7 +8,7 @@ const timestampToDate = require("timestamp-to-date");
  */
 module.exports = {
   name: "covid",
-  description: "obtener las estadísticas covid de un país",
+  description: "obtener las estadÃ­sticas covid de un paÃ­s",
   cooldown: 5,
   category: "UTILITY",
   botPermissions: ["EmbedLinks"],
@@ -22,7 +22,7 @@ module.exports = {
     options: [
       {
         name: "country",
-        description: "Nombre del país para el que se quieren obtener estadísticas covid",
+        description: "Nombre del paÃ­s para el que se quieren obtener estadÃ­sticas covid",
         type: ApplicationCommandOptionType.String,
         required: true,
       },
@@ -45,7 +45,7 @@ module.exports = {
 async function getCovid(country) {
   const response = await getJson(`https://disease.sh/v2/countries/${country}`);
 
-  if (response.status === 404) return "```css\nNo se encuentra el país con el nombre indicado```";
+  if (response.status === 404) return "```css\nNo se encuentra el paÃ­s con el nombre indicado```";
   if (!response.success) return MESSAGES.API_ERROR;
   const { data } = response;
 
@@ -86,22 +86,22 @@ async function getCovid(country) {
         inline: true,
       },
       {
-        name: "Críticos",
+        name: "CrÃ­ticos",
         value: data?.critical.toString(),
         inline: true,
       },
       {
-        name: "Casos por 1 millón",
+        name: "Casos por 1 millÃ³n",
         value: data?.casesPerOneMillion.toString(),
         inline: true,
       },
       {
-        name: "Muertes por 1 millón",
+        name: "Muertes por 1 millÃ³n",
         value: data?.deathsPerOneMillion.toString(),
         inline: true,
       }
     )
-    .setFooter({ text: `Última actualización en ${mg}` });
+    .setFooter({ text: `Ãšltima actualizaciÃ³n en ${mg}` });
 
   return { embeds: [embed] };
 }

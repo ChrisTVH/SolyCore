@@ -9,7 +9,7 @@ const channelPerms = ["EmbedLinks", "ReadMessageHistory", "AddReactions", "UseEx
  */
 module.exports = {
   name: "addrr",
-  description: "configurar la función de reacción para el mensaje especificado",
+  description: "configurar la funciÃ³n de reacciÃ³n para el mensaje especificado",
   category: "ADMIN",
   userPermissions: ["ManageGuild"],
   command: {
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         name: "message_id",
-        description: "Id de mensaje al que deben configurarse los roles de reacción",
+        description: "Id de mensaje al que deben configurarse los roles de reacciÃ³n",
         type: ApplicationCommandOptionType.String,
         required: true,
       },
@@ -42,7 +42,7 @@ module.exports = {
       },
       {
         name: "role",
-        description: "función que se dará al emoji seleccionado",
+        description: "funciÃ³n que se darÃ¡ al emoji seleccionado",
         type: ApplicationCommandOptionType.Role,
         required: true,
       },
@@ -84,7 +84,7 @@ async function addRR(guild, channel, messageId, reaction, role) {
   try {
     targetMessage = await channel.messages.fetch({ message: messageId });
   } catch (ex) {
-    return "No se ha podido recuperar el mensaje. ¿Ha proporcionado un mensajeId válido?";
+    return "No se ha podido recuperar el mensaje. Â¿Ha proporcionado un mensajeId vÃ¡lido?";
   }
 
   if (role.managed) {
@@ -96,7 +96,7 @@ async function addRR(guild, channel, messageId, reaction, role) {
   }
 
   if (guild.members.me.roles.highest.position < role.position) {
-    return "¡Uy! No puedo añadir/eliminar miembros en ese rol. ¿Ese rol es superior al mío?";
+    return "Â¡Uy! No puedo aÃ±adir/eliminar miembros en ese rol. Â¿Ese rol es superior al mÃ­o?";
   }
 
   const custom = parseEmoji(reaction);
@@ -106,7 +106,7 @@ async function addRR(guild, channel, messageId, reaction, role) {
   try {
     await targetMessage.react(emoji);
   } catch (ex) {
-    return `¡Uy! No he reaccionado. ¿Es este un emoji válido: ${reaction} ?`;
+    return `Â¡Uy! No he reaccionado. Â¿Es este un emoji vÃ¡lido: ${reaction} ?`;
   }
 
   let reply = "";
@@ -117,5 +117,5 @@ async function addRR(guild, channel, messageId, reaction, role) {
   }
 
   await addReactionRole(guild.id, channel.id, targetMessage.id, emoji, role.id);
-  return (reply += "¡Listo! Configuración guardada");
+  return (reply += "Â¡Listo! ConfiguraciÃ³n guardada");
 }

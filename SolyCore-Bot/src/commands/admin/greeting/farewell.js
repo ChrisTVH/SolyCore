@@ -7,7 +7,7 @@ const { ApplicationCommandOptionType, ChannelType } = require("discord.js");
  */
 module.exports = {
   name: "farewell",
-  description: "configuraciÛn del mensaje de despedida",
+  description: "configuraci√≥n del mensaje de despedida",
   category: "ADMIN",
   userPermissions: ["ManageGuild"],
   command: {
@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         trigger: "desc <texto>",
-        description: "selecciona una descripciÛn para el mensaje de despedida",
+        description: "selecciona una descripci√≥n para el mensaje de despedida",
       },
       {
         trigger: "mimiatura <ON|OFF>",
@@ -96,12 +96,12 @@ module.exports = {
       },
       {
         name: "desc",
-        description: "seleccionar descripciÛn del embed",
+        description: "seleccionar descripci√≥n del embed",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "content",
-            description: "contenido de la descripciÛn",
+            description: "contenido de la descripci√≥n",
             type: ApplicationCommandOptionType.String,
             required: true,
           },
@@ -186,7 +186,7 @@ module.exports = {
     else if (type === "status") {
       const status = args[1]?.toUpperCase();
       if (!status || !["ON", "OFF"].includes(status))
-        return message.safeReply("Invalid status. Value must be `on/off`");
+        return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await setStatus(settings, status);
     }
 
@@ -198,7 +198,7 @@ module.exports = {
 
     // desc
     else if (type === "desc") {
-      if (args.length < 2) return message.safeReply("Insufficient arguments! Please provide valid content");
+      if (args.length < 2) return message.safeReply("Argumentos insuficientes Por favor, aporte contenidos v√°lidos");
       const desc = args.slice(1).join(" ");
       response = await setDescription(settings, desc);
     }
@@ -207,20 +207,20 @@ module.exports = {
     else if (type === "thumbnail") {
       const status = args[1]?.toUpperCase();
       if (!status || !["ON", "OFF"].includes(status))
-        return message.safeReply("Invalid status. Value must be `on/off`");
+        return message.safeReply("Estado no v√°lido. El valor debe ser `on/off`");
       response = await setThumbnail(settings, status);
     }
 
     // color
     else if (type === "color") {
       const color = args[1];
-      if (!color || !isHex(color)) return message.safeReply("Invalid color. Value must be a valid hex color");
+      if (!color || !isHex(color)) return message.safeReply("Color no v√°lido. El valor debe ser un color hexadecimal v√°lido");
       response = await setColor(settings, color);
     }
 
     // pie de pagina
     else if (type === "footer") {
-      if (args.length < 2) return message.safeReply("Insufficient arguments! Please provide valid content");
+      if (args.length < 2) return message.safeReply("Argumentos insuficientes Por favor, aporte contenidos v√°lidos");
       const content = args.slice(1).join(" ");
       response = await setFooter(settings, content);
     }
@@ -228,12 +228,12 @@ module.exports = {
     // imagen
     else if (type === "image") {
       const url = args[1];
-      if (!url) return message.safeReply("Invalid image url. Please provide a valid url");
+      if (!url) return message.safeReply("URL de imagen no v√°lida. Por favor, proporcione una url v√°lida");
       response = await setImage(settings, url);
     }
 
     //
-    else response = "Invalid command usage!";
+    else response = "¬°Uso de comando no v√°lido!";
     return message.safeReply(response);
   },
 
@@ -276,7 +276,7 @@ module.exports = {
         break;
 
       default:
-        response = "Subcomando no v·lido";
+        response = "Subcomando no v√°lido";
     }
 
     return interaction.followUp(response);
@@ -287,59 +287,59 @@ async function sendPreview(settings, member) {
   if (!settings.farewell?.enabled) return "Mensaje de despedida no habilitado en este servidor";
 
   const targetChannel = member.guild.channels.cache.get(settings.farewell.channel);
-  if (!targetChannel) return "No hay ning˙n canal configurado para enviar mensajes de despedida";
+  if (!targetChannel) return "No hay ning√∫n canal configurado para enviar mensajes de despedida";
 
   const response = await buildGreeting(member, "FAREWELL", settings.farewell);
   await targetChannel.safeSend(response);
 
-  return `EnviÛ la vista previa de despedida a ${targetChannel.toString()}`;
+  return `Envi√≥ la vista previa de despedida a ${targetChannel.toString()}`;
 }
 
 async function setStatus(settings, status) {
   const enabled = status.toUpperCase() === "ON" ? true : false;
   settings.farewell.enabled = enabled;
   await settings.save();
-  return `°ConfiguraciÛn guardada! Mensaje de despedida ${status ? "habilitado" : "deshabilitado"}`;
+  return `¬°Configuraci√≥n guardada! Mensaje de despedida ${status ? "habilitado" : "deshabilitado"}`;
 }
 
 async function setChannel(settings, channel) {
   if (!channel.canSendEmbeds()) {
     return (
-      "°Uf! øNo puedo enviar despedidas a ese canal? Necesito los permisos `Write Messages` y `Embed Links` en " +
+      "¬°Uf! ¬øNo puedo enviar despedidas a ese canal? Necesito los permisos `Write Messages` y `Embed Links` en " +
       channel.toString()
     );
   }
   settings.farewell.channel = channel.id;
   await settings.save();
-  return `°ConfiguraciÛn guardada! Se enviar· un mensaje de despedida a ${channel ? channel.toString() : "Not found"}`;
+  return `¬°Configuraci√≥n guardada! Se enviar√° un mensaje de despedida a ${channel ? channel.toString() : "Not found"}`;
 }
 
 async function setDescription(settings, desc) {
   settings.farewell.embed.description = desc;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de despedida actualizado";
+  return "Configuraci√≥n guardada Mensaje de despedida actualizado";
 }
 
 async function setThumbnail(settings, status) {
   settings.farewell.embed.thumbnail = status.toUpperCase() === "ON" ? true : false;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de despedida actualizado";
+  return "Configuraci√≥n guardada Mensaje de despedida actualizado";
 }
 
 async function setColor(settings, color) {
   settings.farewell.embed.color = color;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de despedida actualizado";
+  return "Configuraci√≥n guardada Mensaje de despedida actualizado";
 }
 
 async function setFooter(settings, content) {
   settings.farewell.embed.footer = content;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de despedida actualizado";
+  return "Configuraci√≥n guardada Mensaje de despedida actualizado";
 }
 
 async function setImage(settings, url) {
   settings.farewell.embed.image = url;
   await settings.save();
-  return "ConfiguraciÛn guardada Mensaje de despedida actualizado";
+  return "Configuraci√≥n guardada Mensaje de despedida actualizado";
 }

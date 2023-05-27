@@ -19,7 +19,7 @@ const availableOverlays = [
  */
 module.exports = {
   name: "overlay",
-  description: "a馻dir superposici髇 sobre la imagen proporcionada",
+  description: "a帽adir superposici贸n sobre la imagen proporcionada",
   cooldown: 5,
   category: "IMAGE",
   botPermissions: ["EmbedLinks", "AttachFiles"],
@@ -32,20 +32,20 @@ module.exports = {
     options: [
       {
         name: "name",
-        description: "el tipo de superposici髇",
+        description: "el tipo de superposici贸n",
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: availableOverlays.map((overlay) => ({ name: overlay, value: overlay })),
       },
       {
         name: "user",
-        description: "el usuario a cuyo avatar debe aplicarse la superposici髇",
+        description: "el usuario a cuyo avatar debe aplicarse la superposici贸n",
         type: ApplicationCommandOptionType.User,
         required: false,
       },
       {
         name: "link",
-        description: "el enlace de la imagen a la que debe aplicarse la superposici髇",
+        description: "el enlace de la imagen a la que debe aplicarse la superposici贸n",
         type: ApplicationCommandOptionType.String,
         required: false,
       },
@@ -92,7 +92,7 @@ module.exports = {
       },
     });
 
-    if (!response.success) return interaction.followUp("Error al generar superposici髇 de im醙enes");
+    if (!response.success) return interaction.followUp("Error al generar superposici贸n de im谩genes");
 
     const attachment = new AttachmentBuilder(response.buffer, { name: "attachment.png" });
     const embed = new EmbedBuilder()

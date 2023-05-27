@@ -50,9 +50,9 @@ module.exports = {
   async messageRun(message, args, data) {
     const type = args[0].toUpperCase();
     if (!type || !["USERS", "MEMBERS", "BOTS"].includes(type)) {
-      return message.safeReply("¡Se pasan argumentos incorrectos! Tipos de contador: `users/members/bots`");
+      return message.safeReply("Â¡Se pasan argumentos incorrectos! Tipos de contador: `users/members/bots`");
     }
-    if (args.length < 2) return message.safeReply("¡Uso incorrecto! No ha indicado el nombre");
+    if (args.length < 2) return message.safeReply("Â¡Uso incorrecto! No ha indicado el nombre");
     args.shift();
     let channelName = args.join(" ");
 
@@ -113,5 +113,5 @@ async function setupCounter(guild, type, name, settings) {
   settings.data.bots = stats[1];
   await settings.save();
 
-  return "Configuración guardada Canal de contador creado";
+  return "ConfiguraciÃ³n guardada Canal de contador creado";
 }

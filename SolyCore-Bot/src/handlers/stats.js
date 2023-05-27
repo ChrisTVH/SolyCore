@@ -25,7 +25,7 @@ const parse = (content, member, level) => {
 
 module.exports = {
   /**
-   * Esta función guarda las estadísticas de un nuevo mensaje
+   * Esta funciÃ³n guarda las estadÃ­sticas de un nuevo mensaje
    * @param {import("discord.js").Message} message
    * @param {boolean} isCommand
    * @param {object} settings
@@ -37,7 +37,7 @@ module.exports = {
 
     // TODO: Ignorar posibles comandos bot
 
-    // Comprobación del enfriamiento para evitar el spam de mensajes
+    // ComprobaciÃ³n del enfriamiento para evitar el spam de mensajes
     const key = `${message.guildId}|${message.member.id}`;
     if (cooldownCache.has(key)) {
       const difference = (Date.now() - cooldownCache.get(key)) * 0.001;
@@ -106,7 +106,7 @@ module.exports = {
       voiceStates.set(member.id, Date.now());
     }
 
-    // Un miembro dejó un canal de voz
+    // Un miembro dejÃ³ un canal de voz
     if (oldChannel && !newChannel) {
       const statsDb = await getMemberStats(member.guild.id, member.id);
       if (voiceStates.has(member.id)) {

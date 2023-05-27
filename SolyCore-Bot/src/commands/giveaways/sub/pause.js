@@ -15,15 +15,15 @@ module.exports = async (member, messageId) => {
     (g) => g.messageId === messageId && g.guildId === member.guild.id
   );
 
-  // Si no se ha encontrado ningún sorteo
+  // Si no se ha encontrado ningÃºn sorteo
   if (!giveaway) return `No se puede encontrar un sorteo para mensajeId: ${messageId}`;
 
-  // Comprueba si el sorteo está en pausa
-  if (giveaway.pauseOptions.isPaused) return "Este sorteo ya está en pausa.";
+  // Comprueba si el sorteo estÃ¡ en pausa
+  if (giveaway.pauseOptions.isPaused) return "Este sorteo ya estÃ¡ en pausa.";
 
   try {
     await giveaway.pause();
-      return "¡Éxito! ¡Sorteo en pausa!";
+      return "Â¡Ã‰xito! Â¡Sorteo en pausa!";
   } catch (error) {
     member.client.logger.error("Pausa del sorteo", error);
     return `Se ha producido un error al pausar el sorteo: ${error.message}`;

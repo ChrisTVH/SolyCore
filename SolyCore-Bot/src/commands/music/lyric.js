@@ -9,13 +9,13 @@ const BASE_URL = "https://some-random-api.ml/lyrics";
  */
 module.exports = {
     name: "lyric",
-    description: "encontrar la letra de una canción",
+    description: "encontrar la letra de una canciÃ³n",
     category: "MUSIC",
     botPermissions: ["EmbedLinks"],
     command: {
         enabled: true,
         minArgsCount: 1,
-        usage: "<Título de la canción - cantante>",
+        usage: "<TÃ­tulo de la canciÃ³n - cantante>",
     },
     slashCommand: {
         enabled: true,
@@ -23,7 +23,7 @@ module.exports = {
             {
                 name: "query",
                 type: ApplicationCommandOptionType.String,
-                description: "encontrar la letra de la canción",
+                description: "encontrar la letra de la canciÃ³n",
                 required: true,
             },
         ],
@@ -32,7 +32,7 @@ module.exports = {
     async messageRun(message, args) {
         const choice = args.join(" ");
         if(!choice) {
-            return message.safeReply("Se ha seleccionado una letra no válida.");
+            return message.safeReply("Se ha seleccionado una letra no vÃ¡lida.");
         }
         const response = await getLyric(message.author, choice);
         return message.safeReply(response);

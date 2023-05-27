@@ -6,7 +6,7 @@ node_modules/
 .env
 bin/
 obj/
-docs/additional
+docs/additional/faq.md
 docs/commands
 docs/contexts.md
 docs/SUMMARY.md

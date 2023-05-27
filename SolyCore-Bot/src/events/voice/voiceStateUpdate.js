@@ -6,17 +6,17 @@ const { trackVoiceStats } = require("@handlers/stats");
  * @param {import('discord.js').VoiceState} newState
  */
 module.exports = async (client, oldState, newState) => {
-  // Seguimiento de las estadísticas de voz
+  // Seguimiento de las estadÃ­sticas de voz
   trackVoiceStats(oldState, newState);
 
   // Erela.js
   if (client.config.MUSIC.ENABLED) {
     const guild = oldState.guild;
 
-    // si nadie abandonó el canal en cuestión, volver.
+    // si nadie abandonÃ³ el canal en cuestiÃ³n, volver.
     if (oldState.channelId !== guild.members.me.voice.channelId || newState.channel) return;
 
-    // si no, comprueba cuántas personas hay ahora en el canal
+    // si no, comprueba cuÃ¡ntas personas hay ahora en el canal
     if (oldState.channel.members.size === 1) {
       setTimeout(() => {
         // si 1 (usted), espere 1 minuto

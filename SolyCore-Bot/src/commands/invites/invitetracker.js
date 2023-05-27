@@ -20,7 +20,7 @@ module.exports = {
     options: [
       {
         name: "status",
-        description: "estado de configuración",
+        description: "estado de configuraciÃ³n",
         required: true,
         type: ApplicationCommandOptionType.String,
         choices: [
@@ -39,7 +39,7 @@ module.exports = {
 
   async messageRun(message, args, data) {
     const status = args[0].toLowerCase();
-    if (!["on", "off"].includes(status)) return message.safeReply("Estado no válido. El valor debe ser `on/off`");
+    if (!["on", "off"].includes(status)) return message.safeReply("Estado no vÃ¡lido. El valor debe ser `on/off`");
     const response = await setStatus(message, status, data.settings);
     await message.safeReply(response);
   },
@@ -56,7 +56,7 @@ async function setStatus({ guild }, input, settings) {
 
   if (status) {
     if (!guild.members.me.permissions.has(["ManageGuild", "ManageChannels"])) {
-      return "¡Ups! Me faltan los permisos `Gestionar servidor` y `Gestionar canales`.\nNo puedo rastrear las invitaciones";
+      return "Â¡Ups! Me faltan los permisos `Gestionar servidor` y `Gestionar canales`.\nNo puedo rastrear las invitaciones";
     }
 
     const channelMissing = guild.channels.cache
@@ -77,5 +77,5 @@ async function setStatus({ guild }, input, settings) {
   settings.invite.tracking = status;
   await settings.save();
 
-  return `¡Configuración guardada! El seguimiento de invitaciones es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `Â¡ConfiguraciÃ³n guardada! El seguimiento de invitaciones es ahora ${status ? "habilitado" : "deshabilitado"}`;
 }

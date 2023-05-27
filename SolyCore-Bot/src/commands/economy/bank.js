@@ -21,7 +21,7 @@ module.exports = {
         description: "consultar el saldo",
       },
       {
-        trigger: "depósito <monedas>",
+        trigger: "depÃ³sito <monedas>",
         description: "ingresar monedas en su cuenta bancaria",
       },
       {
@@ -57,7 +57,7 @@ module.exports = {
         options: [
           {
             name: "coins",
-            description: "número de monedas a depositar",
+            description: "nÃºmero de monedas a depositar",
             type: ApplicationCommandOptionType.Integer,
             required: true,
           },
@@ -70,7 +70,7 @@ module.exports = {
         options: [
           {
             name: "coins",
-            description: "número de monedas a retirar",
+            description: "nÃºmero de monedas a retirar",
             type: ApplicationCommandOptionType.Integer,
             required: true,
           },
@@ -110,30 +110,30 @@ module.exports = {
     //
     else if (sub === "deposit") {
       const coins = args.length && parseInt(args[1]);
-      if (isNaN(coins)) return message.safeReply("Indique un número válido de monedas que desea depositar");
+      if (isNaN(coins)) return message.safeReply("Indique un nÃºmero vÃ¡lido de monedas que desea depositar");
       response = await deposit(message.author, coins);
     }
 
     //
     else if (sub === "withdraw") {
       const coins = args.length && parseInt(args[1]);
-      if (isNaN(coins)) return message.safeReply("Indique un número válido de monedas que desea retirar");
+      if (isNaN(coins)) return message.safeReply("Indique un nÃºmero vÃ¡lido de monedas que desea retirar");
       response = await withdraw(message.author, coins);
     }
 
     //
     else if (sub === "transfer") {
-      if (args.length < 3) return message.safeReply("Proporcionar un usuario válido y monedas para transferir");
+      if (args.length < 3) return message.safeReply("Proporcionar un usuario vÃ¡lido y monedas para transferir");
       const target = await message.guild.resolveMember(args[1], true);
-      if (!target) return message.safeReply("Proporcionar un usuario válido al que transferir monedas");
+      if (!target) return message.safeReply("Proporcionar un usuario vÃ¡lido al que transferir monedas");
       const coins = parseInt(args[2]);
-      if (isNaN(coins)) return message.safeReply("Indique un número válido de monedas que desea transferir");
+      if (isNaN(coins)) return message.safeReply("Indique un nÃºmero vÃ¡lido de monedas que desea transferir");
       response = await transfer(message.author, target.user, coins);
     }
 
     //
     else {
-      return message.safeReply("Utilización de comando no válida");
+      return message.safeReply("UtilizaciÃ³n de comando no vÃ¡lida");
     }
 
     await message.safeReply(response);

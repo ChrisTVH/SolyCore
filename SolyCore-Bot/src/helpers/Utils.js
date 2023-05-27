@@ -15,7 +15,7 @@ module.exports = class Utils {
   }
 
   /**
-   * Comprueba si una cadena es una invitaciÛn a la discord v·lida
+   * Comprueba si una cadena es una invitaci√≥n a la discord v√°lida
    * @param {string} text
    */
   static containsDiscordInvite(text) {
@@ -25,7 +25,7 @@ module.exports = class Utils {
   }
 
   /**
-   * Devuelve un n˙mero aleatorio por debajo de un m·ximo
+   * Devuelve un n√∫mero aleatorio por debajo de un m√°ximo
    * @param {number} max
    */
   static getRandomInt(max) {
@@ -33,7 +33,7 @@ module.exports = class Utils {
   }
 
   /**
-   * Comprueba si una cadena es un color Hex v·lido
+   * Comprueba si una cadena es un color Hex v√°lido
    * @param {string} text
    */
   static isHex(text) {
@@ -41,7 +41,7 @@ module.exports = class Utils {
   }
 
   /**
-   * Comprueba si una cadena es un color Hex v·lido
+   * Comprueba si una cadena es un color Hex v√°lido
    * @param {string} text
    */
   static isValidColor(text) {
@@ -62,7 +62,7 @@ module.exports = class Utils {
   }
 
   /**
-   * Devuelve el tiempo restante en dÌas, horas, minutos y segundos
+   * Devuelve el tiempo restante en d√≠as, horas, minutos y segundos
    * @param {number} timeInSeconds
    */
   static timeformat(timeInSeconds) {
@@ -79,7 +79,7 @@ module.exports = class Utils {
   }
 
   /**
-   * Convierte la duraciÛn en milisegundos
+   * Convierte la duraci√≥n en milisegundos
    * @param {string} duration
    */
   static durationToMillis(duration) {

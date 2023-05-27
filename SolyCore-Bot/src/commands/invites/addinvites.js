@@ -8,13 +8,13 @@ const { getMember } = require("@schemas/Member");
  */
 module.exports = {
   name: "addinvites",
-    description: "añadir invitaciones a un miembro",
+    description: "aÃ±adir invitaciones a un miembro",
   category: "INVITE",
   userPermissions: ["ManageGuild"],
   botPermissions: ["EmbedLinks"],
   command: {
     enabled: true,
-    usage: "<@miembro|id> <invitación>",
+    usage: "<@miembro|id> <invitaciÃ³n>",
     minArgsCount: 2,
   },
   slashCommand: {
@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         name: "invites",
-        description: "el número de invitaciones a dar",
+        description: "el nÃºmero de invitaciones a dar",
         type: ApplicationCommandOptionType.Integer,
         required: true,
       },
@@ -40,7 +40,7 @@ module.exports = {
     const amount = parseInt(args[1]);
 
     if (!target) return message.safeReply("Sintaxis incorrecta. Debe mencionar un objetivo");
-    if (isNaN(amount)) return message.safeReply("El importe de la invitación debe ser un número");
+    if (isNaN(amount)) return message.safeReply("El importe de la invitaciÃ³n debe ser un nÃºmero");
 
     const response = await addInvites(message, target.user, parseInt(amount));
     await message.safeReply(response);
@@ -55,14 +55,14 @@ module.exports = {
 };
 
 async function addInvites({ guild }, user, amount) {
-  if (user.bot) return "¡Uy! No se pueden añadir invitaciones a bots";
+  if (user.bot) return "Â¡Uy! No se pueden aÃ±adir invitaciones a bots";
 
   const memberDb = await getMember(guild.id, user.id);
   memberDb.invite_data.added += amount;
   await memberDb.save();
 
   const embed = new EmbedBuilder()
-    .setAuthor({ name: `Invitaciones añadidas a ${user.username}` })
+    .setAuthor({ name: `Invitaciones aÃ±adidas a ${user.username}` })
     .setThumbnail(user.displayAvatarURL())
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setDescription(`${user.tag} ahora tiene ${getEffectiveInvites(memberDb.invite_data)} invitaciones`);

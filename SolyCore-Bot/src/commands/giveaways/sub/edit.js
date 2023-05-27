@@ -6,11 +6,11 @@
  * @param {number} newWinnerCount
  */
 module.exports = async (member, messageId, addDuration, newPrize, newWinnerCount) => {
-  if (!messageId) return "Debe proporcionar un identificador de mensaje válido.";
+  if (!messageId) return "Debe proporcionar un identificador de mensaje vÃ¡lido.";
 
   // Permisos
   if (!member.permissions.has("ManageMessages")) {
-      return "Necesitas tener permisos de gestión de mensajes para iniciar sorteos.";
+      return "Necesitas tener permisos de gestiÃ³n de mensajes para iniciar sorteos.";
   }
 
   // Buscar con mensajeId
@@ -18,7 +18,7 @@ module.exports = async (member, messageId, addDuration, newPrize, newWinnerCount
     (g) => g.messageId === messageId && g.guildId === member.guild.id
   );
 
-  // Si no se ha encontrado ningún sorteo
+  // Si no se ha encontrado ningÃºn sorteo
   if (!giveaway) return `No se ha podido encontrar un sorteo para mensajeId: ${messageId}`;
 
   try {
@@ -28,9 +28,9 @@ module.exports = async (member, messageId, addDuration, newPrize, newWinnerCount
       newWinnerCount: newWinnerCount || giveaway.winnerCount,
     });
 
-    return `¡Actualizado con éxito el sorteo!`;
+    return `Â¡Actualizado con Ã©xito el sorteo!`;
   } catch (error) {
-    member.client.logger.error("Edición del sorteo", error);
+    member.client.logger.error("EdiciÃ³n del sorteo", error);
     return `Se ha producido un error al actualizar el sorteo: ${error.message}`;
   }
 };

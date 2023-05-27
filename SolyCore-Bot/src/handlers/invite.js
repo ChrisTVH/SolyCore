@@ -18,7 +18,7 @@ const cacheInvite = (invite, isVanity) => ({
 });
 
 /**
- * Esta funciÛn almacena en cachÈ todas las invitaciones para el servidor proporcionado
+ * Esta funci√≥n almacena en cach√© todas las invitaciones para el servidor proporcionado
  * @param {import("discord.js").Guild} guild
  */
 async function cacheGuildInvites(guild) {
@@ -36,7 +36,7 @@ async function cacheGuildInvites(guild) {
 }
 
 /**
- * AÒadir roles a inviter en funciÛn del n˙mero de invitaciones
+ * A√±adir roles a inviter en funci√≥n del n√∫mero de invitaciones
  * @param {import("discord.js").Guild} guild
  * @param {Object} inviterData
  * @param {boolean} isAdded
@@ -61,7 +61,7 @@ const checkInviteRewards = async (guild, inviterData = {}, isAdded) => {
 };
 
 /**
- * Rastrear al invitante comparando las nuevas invitaciones con las almacenadas en cachÈ
+ * Rastrear al invitante comparando las nuevas invitaciones con las almacenadas en cach√©
  * @param {import("discord.js").GuildMember} member
  */
 async function trackJoinedMember(member) {
@@ -72,7 +72,7 @@ async function trackJoinedMember(member) {
   const cachedInvites = inviteCache.get(guild.id);
   const newInvites = await cacheGuildInvites(guild);
 
-  // devolver si no hay datos en cachÈ
+  // devolver si no hay datos en cach√©
   if (!cachedInvites) return {};
   let usedInvite;
 
@@ -81,16 +81,16 @@ async function trackJoinedMember(member) {
     (inv) => inv.uses !== 0 && cachedInvites.get(inv.code) && cachedInvites.get(inv.code).uses < inv.uses
   );
 
-  // Caso especial: La invitaciÛn se borrÛ despuÈs de la llegada del miembro y
+  // Caso especial: La invitaci√≥n se borr√≥ despu√©s de la llegada del miembro y
   // justo antes de GUILD_MEMBER_ADD (https://github.com/Androz2091/discord-invites-tracker/blob/29202ee8e85bb1651f19a466e2c0721b2373fefb/index.ts#L46)
   if (!usedInvite) {
     cachedInvites
       .sort((a, b) => (a.deletedTimestamp && b.deletedTimestamp ? b.deletedTimestamp - a.deletedTimestamp : 0))
       .forEach((invite) => {
         if (
-          !newInvites.get(invite.code) && // Si la invitaciÛn ya no existe
-          invite.maxUses > 0 && // Si la invitaciÛn era realmente una invitaciÛn con un n˙mero limitado de usos
-          invite.uses === invite.maxUses - 1 // øY si la invitaciÛn estuviera a punto de alcanzar el n˙mero m·ximo de usos
+          !newInvites.get(invite.code) && // Si la invitaci√≥n ya no existe
+          invite.maxUses > 0 && // Si la invitaci√≥n era realmente una invitaci√≥n con un n√∫mero limitado de usos
+          invite.uses === invite.maxUses - 1 // ¬øY si la invitaci√≥n estuviera a punto de alcanzar el n√∫mero m√°ximo de usos
         ) {
           usedInvite = invite;
         }
@@ -101,7 +101,7 @@ async function trackJoinedMember(member) {
   if (usedInvite) {
     const inviterId = usedInvite.code === guild.vanityURLCode ? "VANITY" : usedInvite.inviterId;
 
-    // registrar datos de invitaciÛn
+    // registrar datos de invitaci√≥n
     const memberDb = await getMember(guild.id, member.id);
     memberDb.invite_data.inviter = inviterId;
     memberDb.invite_data.code = usedInvite.code;
@@ -119,7 +119,7 @@ async function trackJoinedMember(member) {
 }
 
 /**
- * ObtenciÛn de datos de la base de datos
+ * Obtenci√≥n de datos de la base de datos
  * @param {import("discord.js").Guild} guild
  * @param {import("discord.js").User} user
  */

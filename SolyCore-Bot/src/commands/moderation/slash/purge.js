@@ -30,7 +30,7 @@ module.exports = {
           },
           {
             name: "amount",
-            description: "número de mensajes a borrar (máx. 99)",
+            description: "nÃºmero de mensajes a borrar (mÃ¡x. 99)",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -50,7 +50,7 @@ module.exports = {
           },
           {
             name: "amount",
-            description: "número de mensajes a borrar (máx. 99)",
+            description: "nÃºmero de mensajes a borrar (mÃ¡x. 99)",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -70,7 +70,7 @@ module.exports = {
           },
           {
             name: "amount",
-            description: "número de mensajes a borrar (máx. 99)",
+            description: "nÃºmero de mensajes a borrar (mÃ¡x. 99)",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -90,7 +90,7 @@ module.exports = {
           },
           {
             name: "amount",
-            description: "número de mensajes a borrar (máx. 99)",
+            description: "nÃºmero de mensajes a borrar (mÃ¡x. 99)",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -116,7 +116,7 @@ module.exports = {
           },
           {
             name: "amount",
-            description: "número de mensajes a borrar (máx. 99)",
+            description: "nÃºmero de mensajes a borrar (mÃ¡x. 99)",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -142,7 +142,7 @@ module.exports = {
           },
           {
             name: "amount",
-            description: "número de mensajes a borrar (máx. 99)",
+            description: "nÃºmero de mensajes a borrar (mÃ¡x. 99)",
             type: ApplicationCommandOptionType.Integer,
             required: false,
           },
@@ -158,7 +158,7 @@ module.exports = {
     const channel = options.getChannel("channel");
     const amount = options.getInteger("amount") || 99;
 
-    if (amount > 100) return interaction.followUp("La cantidad máxima de mensajes que puedo borrar es 99");
+    if (amount > 100) return interaction.followUp("La cantidad mÃ¡xima de mensajes que puedo borrar es 99");
 
     let response;
     switch (sub) {
@@ -191,12 +191,12 @@ module.exports = {
       }
 
       default:
-        return interaction.followUp("¡Ups! No es una selección de comando válida");
+        return interaction.followUp("Â¡Ups! No es una selecciÃ³n de comando vÃ¡lida");
     }
 
     // Exito
     if (typeof response === "number") {
-      return interaction.followUp(`Limpiado con éxito ${response} mensajes en ${channel}`);
+      return interaction.followUp(`Limpiado con Ã©xito ${response} mensajes en ${channel}`);
     }
 
     // Permisos no concedidos al miembro

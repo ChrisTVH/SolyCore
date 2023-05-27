@@ -52,7 +52,7 @@ module.exports = {
       });
     }
 
-    // Corrección temporal para los usuarios añadidos a la base de datos antes de la versión 5.0.0
+    // CorrecciÃ³n temporal para los usuarios aÃ±adidos a la base de datos antes de la versiÃ³n 5.0.0
     // Actualizar nombre de usuario y discriminador en BD anterior
     else if (!userDb.username || !userDb.discriminator) {
       userDb.username = user.username;

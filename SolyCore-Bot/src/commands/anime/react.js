@@ -4,7 +4,7 @@ const { EMBED_COLORS } = require("@root/config");
 const NekosLife = require("nekos.life");
 const neko = new NekosLife();
 
-const choices = ["hug", "kiss", "cuddle", "feed", "pat", "poke", "slap", "smug", "tickle", "wink"];
+const choices = ["hug", "kiss", "cuddle", "feed", "pat", "poke", "slap", "smug", "tickle", "waifu"];
 
 /**
  * @type {import("@structures/Command")}
@@ -18,14 +18,14 @@ module.exports = {
   command: {
     enabled: true,
     minArgsCount: 1,
-    usage: "[reacci髇]",
+    usage: "[reacci贸n]",
   },
   slashCommand: {
     enabled: true,
     options: [
       {
         name: "category",
-        description: "tipo de reacci髇",
+        description: "tipo de reacci贸n",
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: choices.map((ch) => ({ name: ch, value: ch })),
@@ -36,7 +36,7 @@ module.exports = {
   async messageRun(message, args) {
     const category = args[0].toLowerCase();
     if (!choices.includes(category)) {
-      return message.safeReply(`Elecci髇 no v醠ida: \`${category}\`.\nAvailable reactions: ${choices.join(", ")}`);
+      return message.safeReply(`Elecci贸n no v谩lida: \`${category}\`.\nReacciones disponibles: ${choices.join(", ")}`);
     }
 
     const embed = await genReaction(category, message.author);
@@ -55,8 +55,8 @@ const genReaction = async (category, user) => {
     let imageUrl;
 
     // alguna api aleatoria
-    if (category === "wink") {
-      const response = await getJson("https://some-random-api.ml/animu/wink");
+    if (category === "waifu") {
+      const response = await getJson("https://nekos.life/api/v2/img/waifu");
       if (!response.success) throw new Error("Error de la API");
       imageUrl = response.data.link;
     }
@@ -68,12 +68,12 @@ const genReaction = async (category, user) => {
 
     return new EmbedBuilder()
       .setImage(imageUrl)
-      .setColor("Aleatorio")
+      .setColor("Random")
       .setFooter({ text: `Solicitado por ${user.tag}` });
   } catch (ex) {
     return new EmbedBuilder()
       .setColor(EMBED_COLORS.ERROR)
-      .setDescription("No se ha podido recuperar el meme. Int閚talo de nuevo.")
+      .setDescription("No se ha podido recuperar la reacci贸n. Int茅ntalo de nuevo.")
       .setFooter({ text: `Solicitado por ${user.tag}` });
   }
 };

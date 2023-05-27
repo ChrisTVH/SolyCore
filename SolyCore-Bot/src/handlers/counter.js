@@ -1,7 +1,7 @@
 const { getSettings } = require("@schemas/Guild");
 
 /**
- * Actualiza el canal contador para todos los guildId presentes en la cola de actualización.
+ * Actualiza el canal contador para todos los guildId presentes en la cola de actualizaciÃ³n.
  * @param {import('@src/structures').BotClient} client
  */
 async function updateCounterChannels(client) {
@@ -31,7 +31,7 @@ async function updateCounterChannels(client) {
     } catch (ex) {
       client.logger.error(`Error updating counter channels for guildId: ${guildId}`, ex);
     } finally {
-      // eliminar guildId de la caché
+      // eliminar guildId de la cachÃ©
       const i = client.counterUpdateQueue.indexOf(guild.id);
       if (i > -1) client.counterUpdateQueue.splice(i, 1);
     }
@@ -50,7 +50,7 @@ async function init(guild, settings) {
     await settings.save();
   }
 
-  // calendario de actualización
+  // calendario de actualizaciÃ³n
   if (!guild.client.counterUpdateQueue.includes(guild.id)) guild.client.counterUpdateQueue.push(guild.id);
   return true;
 }

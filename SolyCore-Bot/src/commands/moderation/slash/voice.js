@@ -11,7 +11,7 @@ const { ApplicationCommandOptionType, ChannelType } = require("discord.js");
  */
 module.exports = {
   name: "voice",
-  description: "comandos de moderaci髇 de voz",
+  description: "comandos de moderaci贸n de voz",
   category: "MODERATION",
   userPermissions: ["MuteMembers", "MoveMembers", "DeafenMembers"],
   botPermissions: ["MuteMembers", "MoveMembers", "DeafenMembers"],
@@ -34,7 +34,7 @@ module.exports = {
           },
           {
             name: "reason",
-            description: "raz髇 para silenciar",
+            description: "raz贸n para silenciar",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
@@ -53,7 +53,7 @@ module.exports = {
           },
           {
             name: "reason",
-            description: "motivo de la anulaci髇 del silencio",
+            description: "motivo de la anulaci贸n del silencio",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
@@ -91,7 +91,7 @@ module.exports = {
           },
           {
             name: "reason",
-            description: "raz髇 del ensordecimiento",
+            description: "raz贸n del ensordecimiento",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
@@ -110,7 +110,7 @@ module.exports = {
           },
           {
             name: "reason",
-            description: "raz髇 para silenciar",
+            description: "raz贸n para silenciar",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
@@ -136,7 +136,7 @@ module.exports = {
           },
           {
             name: "reason",
-            description: "raz髇 del silencio",
+            description: "raz贸n del silencio",
             type: ApplicationCommandOptionType.String,
             required: false,
           },

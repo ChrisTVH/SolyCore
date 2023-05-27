@@ -8,7 +8,7 @@ const { stripIndent } = require("common-tags");
  */
 module.exports = {
   name: "github",
-  description: "muestra las estadísticas de github de un usuario",
+  description: "muestra las estadÃ­sticas de github de un usuario",
   cooldown: 10,
   category: "UTILITY",
   botPermissions: ["EmbedLinks"],
@@ -47,7 +47,7 @@ const websiteProvided = (text) => (text.startsWith("http://") ? true : text.star
 
 async function getGithubUser(target, author) {
   const response = await getJson(`https://api.github.com/users/${target}`);
-  if (response.status === 404) return "```No se ha encontrado ningún usuario con ese nombre```";
+  if (response.status === 404) return "```No se ha encontrado ningÃºn usuario con ese nombre```";
   if (!response.success) return MESSAGES.API_ERROR;
 
   const json = response.data;
@@ -75,16 +75,16 @@ async function getGithubUser(target, author) {
     })
     .addFields(
       {
-        name: "Información del usuario",
+        name: "InformaciÃ³n del usuario",
         value: stripIndent`
         **Nombre Real**: *${name || "No proporcionado"}*
-        **Ubicación**: *${location}*
+        **UbicaciÃ³n**: *${location}*
         **GitHub ID**: *${githubId}*
-        **Página web**: *${website}*\n`,
+        **PÃ¡gina web**: *${website}*\n`,
         inline: true,
       },
       {
-        name: "Estadísticas sociales",
+        name: "EstadÃ­sticas sociales",
         value: `**Seguidores**: *${followers}*\n**Siguiendo**: *${following}*`,
         inline: true,
       }

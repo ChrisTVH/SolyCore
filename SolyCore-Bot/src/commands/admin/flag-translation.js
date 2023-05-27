@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "flagtranslation",
-  description: "configurar la traducción de banderas en el servidor",
+  description: "configurar la traducciÃ³n de banderas en el servidor",
   category: "ADMIN",
   userPermissions: ["ManageGuild"],
   command: {
@@ -39,7 +39,7 @@ module.exports = {
 
   async messageRun(message, args, data) {
     const status = args[0].toLowerCase();
-    if (!["on", "off"].includes(status)) return message.safeReply("Estado no válido. El valor debe ser `on/off`");
+    if (!["on", "off"].includes(status)) return message.safeReply("Estado no vÃ¡lido. El valor debe ser `on/off`");
 
     const response = await setFlagTranslation(status, data.settings);
     await message.safeReply(response);
@@ -57,5 +57,5 @@ async function setFlagTranslation(input, settings) {
   settings.flag_translation.enabled = status;
   await settings.save();
 
-  return `¡Configuración guardada! La traducción de la bandera es ahora ${status ? "habilitado" : "deshabilitado"}`;
+  return `Â¡ConfiguraciÃ³n guardada! La traducciÃ³n de la bandera es ahora ${status ? "habilitado" : "deshabilitado"}`;
 }

@@ -6,13 +6,13 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "ban",
-  description: "prohíbe el acceso al miembro especificado",
+  description: "prohÃ­be el acceso al miembro especificado",
   category: "MODERATION",
   botPermissions: ["BanMembers"],
   userPermissions: ["BanMembers"],
   command: {
     enabled: true,
-    usage: "<ID|@miembro> [razón]",
+    usage: "<ID|@miembro> [razÃ³n]",
     minArgsCount: 1,
   },
   slashCommand: {
@@ -26,7 +26,7 @@ module.exports = {
       },
       {
         name: "reason",
-        description: "razón de la prohibición",
+        description: "razÃ³n de la prohibiciÃ³n",
         type: ApplicationCommandOptionType.String,
         required: false,
       },
@@ -36,7 +36,7 @@ module.exports = {
   async messageRun(message, args) {
     const match = await message.client.resolveUsers(args[0], true);
     const target = match[0];
-    if (!target) return message.safeReply(`No se ha encontrado ningún usuario que coincida ${args[0]}`);
+    if (!target) return message.safeReply(`No se ha encontrado ningÃºn usuario que coincida ${args[0]}`);
     const reason = message.content.split(args[0])[1].trim();
     const response = await ban(message.member, target, reason);
     await message.safeReply(response);
@@ -58,8 +58,8 @@ module.exports = {
  */
 async function ban(issuer, target, reason) {
   const response = await banTarget(issuer, target, reason);
-  if (typeof response === "boolean") return `${target.tag} ¡está prohibido!`;
+  if (typeof response === "boolean") return `${target.tag} Â¡estÃ¡ prohibido!`;
   if (response === "BOT_PERM") return `No tengo permiso para prohibir ${target.tag}`;
   else if (response === "MEMBER_PERM") return `No tiene permiso para prohibir ${target.tag}`;
-  else return `Prohibición fallida ${target.tag}`;
+  else return `ProhibiciÃ³n fallida ${target.tag}`;
 }

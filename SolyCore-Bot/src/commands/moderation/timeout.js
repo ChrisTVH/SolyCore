@@ -14,7 +14,7 @@ module.exports = {
   command: {
     enabled: true,
     aliases: ["mute"],
-    usage: "<ID|@miembro> <duraci髇> [raz髇]",
+    usage: "<ID|@miembro> <duraci贸n> [raz贸n]",
     minArgsCount: 2,
   },
   slashCommand: {
@@ -43,11 +43,11 @@ module.exports = {
 
   async messageRun(message, args) {
     const target = await message.guild.resolveMember(args[0], true);
-    if (!target) return message.safeReply(`No se ha encontrado ning鷑 usuario que coincida ${args[0]}`);
+    if (!target) return message.safeReply(`No se ha encontrado ning煤n usuario que coincida ${args[0]}`);
 
-    // tiempo de an醠isis
+    // tiempo de an谩lisis
     const ms = ems(args[1]);
-    if (!ms) return message.safeReply("Indique una duraci髇 v醠ida. Ejemplo: 1d/1h/1m/1s");
+    if (!ms) return message.safeReply("Indique una duraci贸n v谩lida. Ejemplo: 1d/1h/1m/1s");
 
     const reason = args.slice(2).join(" ").trim();
     const response = await timeout(message.member, target, ms, reason);
@@ -57,10 +57,10 @@ module.exports = {
   async interactionRun(interaction) {
     const user = interaction.options.getUser("user");
 
-    // tiempo de an醠isis
+    // tiempo de an谩lisis
     const duration = interaction.options.getString("duration");
     const ms = ems(duration);
-    if (!ms) return interaction.followUp("Indique una duraci髇 v醠ida. Ejemplo: 1d/1h/1m/1s");
+    if (!ms) return interaction.followUp("Indique una duraci贸n v谩lida. Ejemplo: 1d/1h/1m/1s");
 
     const reason = interaction.options.getString("reason");
     const target = await interaction.guild.members.fetch(user.id);
@@ -71,7 +71,7 @@ module.exports = {
 };
 
 async function timeout(issuer, target, ms, reason) {
-  if (isNaN(ms)) return "Indique una duraci髇 v醠ida. Ejemplo: 1d/1h/1m/1s";
+  if (isNaN(ms)) return "Indique una duraci贸n v谩lida. Ejemplo: 1d/1h/1m/1s";
   const response = await timeoutTarget(issuer, target, ms, reason);
   if (typeof response === "boolean") return `${target.user.tag} se ha agotado el tiempo.`;
   if (response === "BOT_PERM") return `No tengo permiso para el tiempo de espera ${target.user.tag}`;

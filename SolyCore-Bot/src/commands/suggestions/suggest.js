@@ -55,10 +55,10 @@ module.exports = {
  * @param {object} settings
  */
 async function suggest(member, suggestion, settings) {
-  if (!settings.suggestions.enabled) return "El sistema de sugerencias está desactivado.";
-  if (!settings.suggestions.channel_id) return "¡Canal de sugerencias no configurado!";
+  if (!settings.suggestions.enabled) return "El sistema de sugerencias estÃ¡ desactivado.";
+  if (!settings.suggestions.channel_id) return "Â¡Canal de sugerencias no configurado!";
   const channel = member.guild.channels.cache.get(settings.suggestions.channel_id);
-  if (!channel) return "¡Canal de sugerencias no encontrado!";
+  if (!channel) return "Â¡Canal de sugerencias no encontrado!";
 
   const embed = new EmbedBuilder()
     .setAuthor({ name: "Nueva sugerencia" })
@@ -75,9 +75,9 @@ async function suggest(member, suggestion, settings) {
     .setTimestamp();
 
   let buttonsRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("SUGGEST_APPROVE").setLabel("Approve").setStyle(ButtonStyle.Success),
-    new ButtonBuilder().setCustomId("SUGGEST_REJECT").setLabel("Reject").setStyle(ButtonStyle.Danger),
-    new ButtonBuilder().setCustomId("SUGGEST_DELETE").setLabel("Delete").setStyle(ButtonStyle.Secondary)
+    new ButtonBuilder().setCustomId("SUGGEST_APPROVE").setLabel("Aprobar").setStyle(ButtonStyle.Success),
+    new ButtonBuilder().setCustomId("SUGGEST_REJECT").setLabel("Rechazar").setStyle(ButtonStyle.Danger),
+    new ButtonBuilder().setCustomId("SUGGEST_DELETE").setLabel("Borrar").setStyle(ButtonStyle.Secondary)
   );
 
   try {

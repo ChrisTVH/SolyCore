@@ -20,7 +20,7 @@ module.exports = {
     const guild = message.client.guilds.cache.get(input);
     if (!guild) {
       return message.safeReply(
-        `No se ha encontrado ningún servidor. Por favor, proporcione una Id de servidor válida.
+        `No se ha encontrado ningÃºn servidor. Por favor, proporcione una Id de servidor vÃ¡lida.
         Puede utilizar ${data.prefix}findserver/${data.prefix}listservers para encontrar el id del servidor`
       );
     }
@@ -28,7 +28,7 @@ module.exports = {
     const name = guild.name;
     try {
       await guild.leave();
-      return message.safeReply(`Abandonado con éxito \`${name}\``);
+      return message.safeReply(`Abandonado con Ã©xito \`${name}\``);
     } catch (err) {
       message.client.logger.error("Servidor Abandonado", err);
       return message.safeReply(`Fallo al abandonar \`${name}\``);

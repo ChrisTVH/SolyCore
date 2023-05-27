@@ -42,12 +42,12 @@ module.exports = {
 
   async messageRun(message, args) {
     const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
-      if (!channel) return message.reply("Indique un canal válido");
-      if (channel.type !== ChannelType.GuildText) return message.reply("Indique un canal válido");
+      if (!channel) return message.reply("Indique un canal vÃ¡lido");
+      if (channel.type !== ChannelType.GuildText) return message.reply("Indique un canal vÃ¡lido");
     if (!channel.canSendEmbeds()) {
       return message.reply("No tengo permiso para enviar embeds en ese canal");
     }
-      message.reply(`La configuración del Embed se inició en ${channel}`);
+      message.reply(`La configuraciÃ³n del Embed se iniciÃ³ en ${channel}`);
     await embedSetup(channel, message.member);
   },
 
@@ -56,7 +56,7 @@ module.exports = {
     if (!channel.canSendEmbeds()) {
       return interaction.followUp("No tengo permiso para enviar embeds en ese canal");
     }
-    interaction.followUp(`La configuración del Embed se inició en ${channel}`);
+    interaction.followUp(`La configuraciÃ³n del Embed se iniciÃ³ en ${channel}`);
     await embedSetup(channel, interaction.member);
   },
 };
@@ -67,10 +67,10 @@ module.exports = {
  */
 async function embedSetup(channel, member) {
   const sentMsg = await channel.send({
-    content: "Haga clic en el botón de abajo para empezar",
+    content: "Haga clic en el botÃ³n de abajo para empezar",
     components: [
       new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId("EMBED_ADD").setLabel("Create Embed").setStyle(ButtonStyle.Primary)
+        new ButtonBuilder().setCustomId("EMBED_ADD").setLabel("Crear un Embed").setStyle(ButtonStyle.Primary)
       ),
     ],
   });
@@ -107,7 +107,7 @@ async function embedSetup(channel, member) {
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("description")
-            .setLabel("Descripción del embed")
+            .setLabel("DescripciÃ³n del embed")
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(false)
         ),
@@ -137,7 +137,7 @@ async function embedSetup(channel, member) {
     })
     .catch((ex) => {});
 
-    if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuración", components: [] });
+    if (!modal) return sentMsg.edit({ content: "No se recibe respuesta, se cancela la configuraciÃ³n", components: [] });
 
   modal.reply({ content: "Embed enviado", ephemeral: true }).catch((ex) => {});
 
@@ -148,7 +148,7 @@ async function embedSetup(channel, member) {
   const color = modal.fields.getTextInputValue("color");
 
   if (!title && !author && !description && !footer)
-    return sentMsg.edit({ content: "No se puede enviar un embed vacío.", components: [] });
+    return sentMsg.edit({ content: "No se puede enviar un embed vacÃ­o.", components: [] });
 
   const embed = new EmbedBuilder();
   if (title) embed.setTitle(title);
@@ -157,15 +157,15 @@ async function embedSetup(channel, member) {
   if (footer) embed.setFooter({ text: footer });
   if ((color && isValidColor(color)) || (color && isHex(color))) embed.setColor(color);
 
-  // botón añadir/eliminar campo
+  // botÃ³n aÃ±adir/eliminar campo
   const buttonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("EMBED_FIELD_ADD").setLabel("Añadir campo").setStyle(ButtonStyle.Success),
+    new ButtonBuilder().setCustomId("EMBED_FIELD_ADD").setLabel("AÃ±adir campo").setStyle(ButtonStyle.Success),
     new ButtonBuilder().setCustomId("EMBED_FIELD_REM").setLabel("Borrar campo").setStyle(ButtonStyle.Danger),
     new ButtonBuilder().setCustomId("EMBED_FIELD_DONE").setLabel("Hecho").setStyle(ButtonStyle.Primary)
   );
 
   await sentMsg.edit({
-    content: "Por favor, añada campos utilizando los botones de abajo. Haga clic en Hecho cuando haya terminado.",
+    content: "Por favor, aÃ±ada campos utilizando los botones de abajo. Haga clic en Hecho cuando haya terminado.",
     embeds: [embed],
     components: [buttonRow],
   });
@@ -182,7 +182,7 @@ async function embedSetup(channel, member) {
       await interaction.showModal(
         new ModalBuilder({
           customId: "EMBED_ADD_FIELD_MODAL",
-          title: "Añadir campo",
+          title: "AÃ±adir campo",
           components: [
             new ActionRowBuilder().addComponents(
               new TextInputBuilder()
@@ -201,7 +201,7 @@ async function embedSetup(channel, member) {
             new ActionRowBuilder().addComponents(
               new TextInputBuilder()
                 .setCustomId("inline")
-                .setLabel("¿En la línea? (true/false)")
+                .setLabel("Â¿En la lÃ­nea? (true/false)")
                 .setStyle(TextInputStyle.Short)
                 .setValue("true")
                 .setRequired(true)
@@ -220,7 +220,7 @@ async function embedSetup(channel, member) {
 
       if (!modal) return sentMsg.edit({ components: [] });
 
-      modal.reply({ content: "Campo añadido", ephemeral: true }).catch((ex) => {});
+      modal.reply({ content: "Campo aÃ±adido", ephemeral: true }).catch((ex) => {});
 
       const name = modal.fields.getTextInputValue("name");
       const value = modal.fields.getTextInputValue("value");

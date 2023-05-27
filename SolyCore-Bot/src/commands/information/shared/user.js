@@ -13,7 +13,7 @@ module.exports = (member) => {
 
   const embed = new EmbedBuilder()
     .setAuthor({
-      name: `Información del usuario para ${member.displayName}`,
+      name: `InformaciÃ³n del usuario para ${member.displayName}`,
       iconURL: member.user.displayAvatarURL(),
     })
     .setThumbnail(member.user.displayAvatarURL())

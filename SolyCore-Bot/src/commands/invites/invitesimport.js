@@ -6,7 +6,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
  */
 module.exports = {
   name: "invitesimport",
-  description: "añadir invitaciones del servidor existentes a los usuarios",
+  description: "aÃ±adir invitaciones del servidor existentes a los usuarios",
   category: "INVITE",
   botPermissions: ["ManageGuild"],
   userPermissions: ["ManageGuild"],
@@ -40,11 +40,11 @@ module.exports = {
 };
 
 async function importInvites({ guild }, user) {
-  if (user && user.bot) return "¡Ups! No se pueden importar invitaciones a los bots";
+  if (user && user.bot) return "Â¡Ups! No se pueden importar invitaciones a los bots";
 
   const invites = await guild.invites.fetch({ cache: false });
 
-  // almacén temporal para invitaciones
+  // almacÃ©n temporal para invitaciones
   const tempMap = new Map();
 
   for (const invite of invites.values()) {
@@ -63,5 +63,5 @@ async function importInvites({ guild }, user) {
     await memberDb.save();
   }
 
-  return `Listo Invitaciones anteriores añadidas a ${user ? user.tag : "todos los miembros"}`;
+  return `Listo Invitaciones anteriores aÃ±adidas a ${user ? user.tag : "todos los miembros"}`;
 }

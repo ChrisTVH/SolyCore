@@ -18,18 +18,18 @@ module.exports = {
   async messageRun(message, args) {
     const amount = args[0];
 
-    if (isNaN(amount)) return message.safeReply("Sólo se admiten números");
-    if (parseInt(amount) > 99) return message.safeReply("La cantidad máxima de mensajes que puedo borrar es 99");
+    if (isNaN(amount)) return message.safeReply("SÃ³lo se admiten nÃºmeros");
+    if (parseInt(amount) > 99) return message.safeReply("La cantidad mÃ¡xima de mensajes que puedo borrar es 99");
 
     const { channel } = message;
     const response = await purgeMessages(message.member, channel, "ALL", amount);
 
     if (typeof response === "number") {
-      return channel.safeSend(`${response} mensajes eliminados con éxito`, 5);
+      return channel.safeSend(`${response} mensajes eliminados con Ã©xito`, 5);
     } else if (response === "BOT_PERM") {
-      return message.safeReply("No tengo `Leer historial de mensajes` y `Gestión de mensajes` para borrar mensajes", 5);
+      return message.safeReply("No tengo `Leer historial de mensajes` y `GestiÃ³n de mensajes` para borrar mensajes", 5);
     } else if (response === "MEMBER_PERM") {
-      return message.safeReply("No tienes el permiso `Lectura del historial de mensajes` y `Gestión de mensajes` para borrar mensajes", 5);
+      return message.safeReply("No tienes el permiso `Lectura del historial de mensajes` y `GestiÃ³n de mensajes` para borrar mensajes", 5);
     } else if (response === "NO_MESSAGES") {
       return channel.safeSend("No se han encontrado mensajes que se puedan limpiar", 5);
     } else {

@@ -7,7 +7,7 @@ const { checkInviteRewards } = require("@handlers/invite");
  */
 module.exports = {
   name: "resetinvites",
-  description: "borrar las invitaciones añadidas por un usuario",
+  description: "borrar las invitaciones aÃ±adidas por un usuario",
   category: "INVITE",
   userPermissions: ["ManageGuild"],
   botPermissions: ["EmbedLinks"],

@@ -5,7 +5,7 @@ const { ApplicationCommandOptionType, ChannelType } = require("discord.js");
  */
 module.exports = {
   name: "modlog",
-  description: "activar o desactivar los registros de moderación",
+  description: "activar o desactivar los registros de moderaciÃ³n",
   category: "ADMIN",
   userPermissions: ["ManageGuild"],
   command: {
@@ -50,14 +50,14 @@ module.exports = {
 
 async function setChannel(targetChannel, settings) {
   if (!targetChannel && !settings.modlog_channel) {
-    return "Ya está desactivado";
+    return "Ya estÃ¡ desactivado";
   }
 
   if (targetChannel && !targetChannel.canSendEmbeds()) {
-    return "¡Uf! ¿No puedo enviar logs a ese canal? Necesito los permisos `Write Messages` y `Embed Links` en ese canal.";
+    return "Â¡Uf! Â¿No puedo enviar logs a ese canal? Necesito los permisos `Write Messages` y `Embed Links` en ese canal.";
   }
 
   settings.modlog_channel = targetChannel?.id;
   await settings.save();
-  return `¡Configuración guardada! Canal Modlog ${targetChannel ? "updated" : "removed"}`;
+  return `Â¡ConfiguraciÃ³n guardada! Canal Modlog ${targetChannel ? "updated" : "removed"}`;
 }

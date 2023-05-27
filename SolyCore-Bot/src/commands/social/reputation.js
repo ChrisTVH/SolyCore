@@ -8,7 +8,7 @@ const { EMBED_COLORS } = require("@root/config");
  */
 module.exports = {
   name: "rep",
-  description: "dar reputaci髇 a un usuario",
+  description: "dar reputaci贸n a un usuario",
   category: "SOCIAL",
   botPermissions: ["EmbedLinks"],
   command: {
@@ -18,11 +18,11 @@ module.exports = {
     subcommands: [
       {
         trigger: "view [usuario]",
-        description: "ver la reputaci髇 de un usuario",
+        description: "ver la reputaci贸n de un usuario",
       },
       {
         trigger: "give [usuario]",
-        description: "dar reputaci髇 a un usuario",
+        description: "dar reputaci贸n a un usuario",
       },
     ],
   },
@@ -31,12 +31,12 @@ module.exports = {
     options: [
       {
         name: "view",
-        description: "ver la reputaci髇 de un usuario",
+        description: "ver la reputaci贸n de un usuario",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "user",
-            description: "que el usuario compruebe la reputaci髇 de",
+            description: "que el usuario compruebe la reputaci贸n de",
             type: ApplicationCommandOptionType.User,
             required: false,
           },
@@ -44,12 +44,12 @@ module.exports = {
       },
       {
         name: "give",
-        description: "dar reputaci髇 a un usuario",
+        description: "dar reputaci贸n a un usuario",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "user",
-            description: "que el usuario compruebe la reputaci髇 de",
+            description: "que el usuario compruebe la reputaci贸n de",
             type: ApplicationCommandOptionType.User,
             required: true,
           },
@@ -75,13 +75,13 @@ module.exports = {
     // dar
     else if (sub === "give") {
       const target = await message.guild.resolveMember(args[1]);
-      if (!target) return message.safeReply("Por favor, indique un usuario v醠ido al que dar reputaci髇");
+      if (!target) return message.safeReply("Por favor, indique un usuario v谩lido al que dar reputaci贸n");
       response = await giveReputation(message.author, target.user);
     }
 
     //
     else {
-      response = "Utilizaci髇 incorrecta del comando";
+      response = "Utilizaci贸n incorrecta del comando";
     }
 
     await message.safeReply(response);
@@ -109,10 +109,10 @@ module.exports = {
 
 async function viewReputation(target) {
   const userData = await getUser(target);
-  if (!userData) return `${target.tag} a鷑 no tiene reputaci髇`;
+  if (!userData) return `${target.tag} a煤n no tiene reputaci贸n`;
 
   const embed = new EmbedBuilder()
-    .setAuthor({ name: `Reputaci髇 de ${target.username}` })
+    .setAuthor({ name: `Reputaci贸n de ${target.username}` })
     .setColor(EMBED_COLORS.BOT_EMBED)
     .setThumbnail(target.displayAvatarURL())
     .addFields(
@@ -132,8 +132,8 @@ async function viewReputation(target) {
 }
 
 async function giveReputation(user, target) {
-  if (target.bot) return "No se puede dar reputaci髇 a los bots";
-  if (target.id === user.id) return "No puedes darte reputaci髇 a ti mismo";
+  if (target.bot) return "No se puede dar reputaci贸n a los bots";
+  if (target.id === user.id) return "No puedes darte reputaci贸n a ti mismo";
 
   const userData = await getUser(user);
   if (userData && userData.reputation.timestamp) {

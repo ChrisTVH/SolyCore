@@ -19,7 +19,7 @@ module.exports = async (client, message) => {
     if (!logChannel) return;
 
     const embed = new EmbedBuilder()
-      .setAuthor({ name: "Mención fantasma detectada" })
+      .setAuthor({ name: "MenciÃ³n fantasma detectada" })
       .setDescription(
         `**Mensaje:**\n${message.content}\n\n` +
           `**Autor:** ${message.author.tag} \`${message.author.id}\`\n` +
@@ -37,7 +37,7 @@ module.exports = async (client, message) => {
           inline: true,
         },
         {
-          name: "Todo el mundo?",
+          name: "Everyone?",
           value: everyone ? "Si" : "No",
           inline: true,
         }

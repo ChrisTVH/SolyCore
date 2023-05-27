@@ -54,7 +54,7 @@ module.exports = {
     const sub = args[0].toLowerCase();
 
     if (sub === "coin") {
-      const items = ["HEAD", "TAIL"];
+      const items = ["Corona", "Estrella"];
       const toss = items[Math.floor(Math.random() * items.length)];
 
       message.channel.send({ embeds: [firstEmbed(message.author)] }).then((coin) => {
@@ -85,7 +85,7 @@ module.exports = {
     const sub = interaction.options.getSubcommand("type");
 
     if (sub === "coin") {
-      const items = ["HEAD", "TAIL"];
+      const items = ["Corona", "Estrella"];
       const toss = items[Math.floor(Math.random() * items.length)];
       await interaction.followUp({ embeds: [firstEmbed(interaction.user)] });
 
@@ -107,14 +107,14 @@ module.exports = {
 };
 
 const firstEmbed = (user) =>
-  new EmbedBuilder().setColor(EMBED_COLORS.TRANSPARENT).setDescription(`${user.username}, comenzó un lanzamiento de moneda`);
+  new EmbedBuilder().setColor(EMBED_COLORS.TRANSPARENT).setDescription(`${user.username}, comenzó el lanzamiento de la moneda`);
 
-const secondEmbed = () => new EmbedBuilder().setDescription("La moneda está en el aire");
+const secondEmbed = () => new EmbedBuilder().setDescription("¡La moneda está en el aire!");
 
 const resultEmbed = (toss) =>
   new EmbedBuilder()
-    .setDescription(`>> **${toss} Wins** <<`)
-    .setImage(toss === "HEAD" ? "https://i.imgur.com/HavOS7J.png" : "https://i.imgur.com/u1pmQMV.png");
+    .setDescription(`>> **Ha salido la ${toss}** <<`)
+    .setImage(toss === "Corona" ? "https://cdn.discordapp.com/attachments/1038077615275266108/1111701932822761644/coin1.png" : "https://cdn.discordapp.com/attachments/1038077615275266108/1111701955987902534/coin2.png");
 
 async function flipText(text) {
   let builder = "";
